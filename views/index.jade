@@ -2,28 +2,27 @@ extends layout
 
 block content
   h1= title
-  p You're more than welcome to Alan's second #{title}
-  p here's a test from Eoghan and james
-  p here's some more from james
+  p(id="name") You're more than welcome to Alan's second #{title}
 
-  div(class="fb-like", data-share="true", data-width="450", data-show-faces="true")
+  div(style="padding:20px")
+    button(onclick='getInfo()') Some Facebook Facts
+  div
+
+
+  img(id='profileImage', style="padding: 20px")
+
+  div(id="fb-root")
+  div(class="fb-login-button", data-max-rows="1", data-size="large",
+  data-show-faces="false", data-auto-logout-link="false")
+
 
   script.
-    window.fbAsyncInit = function () {
-      FB.init({
-        appId: '153007398411777',
-        xfbml: true,
-        version: 'v2.5'
+    function getInfo() {
+      FB.api('/me', 'GET', {fields: 'last_name, name, id, sports, location, picture.width(150).height(150)'}, function (response) {
+        if (response && !response.error) {
+          document.getElementById("profileImage").setAttribute("src", response.picture.data.url);
+          document.getElementById("name").innerHTML = "What's up "+response.name+"!";
+        }
       });
-    };
+    }
 
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
