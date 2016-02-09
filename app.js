@@ -4,6 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+
+
+var User = require('./models/user');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,6 +30,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/home', home);
+
+// Database configuration:
+//  mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda
+var mongodbUri = 'mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda';
+mongoose.connect(mongodbUri);
+
+
+var newUser = User({
+  facebook_id: '1234',
+  classes: ['abc'],
+  questions: ['first question'],
+  anonymous: true,
+  auth: 'green',
+  gmail: 'kfraser@tcd.ie'
+});
+
+newUser.save(function(err){
+  if(err) throw err;
+  console.log('User Created!');
+});
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
