@@ -3,11 +3,11 @@ extends layout
 block content
   h1= title
   p(id="name") You're more than welcome to Laurence's second #{title}
-
+  my-app Loading...
   div(style="padding:20px")
     button(onclick='getInfo()') Some Facebook Facts
   div
-  form(action="http://qandadev.azurewebsites.net/home")
+  form(action="/home")
     input(type="submit", value="Home")
 
 

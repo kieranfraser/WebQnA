@@ -1,8 +1,25 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src='/javascript/fb_login.js')
+      title= title
+      link(rel='stylesheet', href='/stylesheets/style.css')
+      script(src='/javascript/fb_login.js')
+      script(src="dist/lib/angular2-polyfills.js")
+      script(src="dist/lib/system.src.js")
+      script(src="dist/lib/Rx.js")
+      script( src="dist/lib/angular2.dev.js")
+      script.
+          System.config({
+              packages: {
+                  dist: {
+                      format: 'register',
+                      defaultExtension: 'js'
+                  }
+              }
+          });
+          System.import('dist/main')
+                  .then(null, console.error.bind(console));
+
+
   body
     block content
