@@ -1,30 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p(id="name") You're more than welcome to Laurence's second #{title}
-  my-app Loading...
-  div(style="padding:20px")
-    button(onclick='getInfo()') Some Facebook Facts
-  div
-  form(action="/home")
-    input(type="submit", value="Home")
 
+  app Loading...
 
-  img(id='profileImage', style="padding: 20px")
-
-  div(id="fb-root")
-  div(class="fb-login-button", data-max-rows="1", data-size="large",
-  data-show-faces="false", data-auto-logout-link="false")
-
-
-  script.
-    function getInfo() {
-      FB.api('/me', 'GET', {fields: 'last_name, name, id, sports, location, picture.width(150).height(150)'}, function (response) {
-        if (response && !response.error) {
-          document.getElementById("profileImage").setAttribute("src", response.picture.data.url);
-          document.getElementById("name").innerHTML = "What's up "+response.name+"!";
-        }
-      });
-    }
 

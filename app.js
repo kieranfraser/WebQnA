@@ -15,6 +15,13 @@ var home = require('./routes/home');
 
 var app = express();
 
+// Auth0 configuration for express
+var jwt = require('express-jwt');
+var jwtCheck = jwt({
+  secret: new Buffer('W-KHkgITXLdjtdUC8eWaL2vD5fD1ib6IRkNhKLRk5XmEHDQvCLGiFX65tUZXb87O', 'base64'),
+  audience: 'deuLbU0yLQDPCVHPaDrT8cA61JB8PCZ5'
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -27,7 +34,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use('/dash', jwtCheck);
 app.use('/', routes);
+app.use('/dash', home);
+
 app.use('/users', users);
 app.use('/home', home);
 

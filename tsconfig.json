@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "public/dist/app",
-    "target": "es5",
+    "target": "ES5",
     "module": "system",
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
+    "noImplicitAny": false
   },
   "exclude": [
     "node_modules"

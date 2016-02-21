@@ -10,8 +10,8 @@ const reload = browserSync.reload;
 const paths = {
     dist: 'public/dist',
     distFiles: 'public/dist/**/*',
-    srcFiles: 'app/**/*',
-    srcTsFiles: 'app/**/*.ts'
+    srcFiles: 'dev/**/*',
+    srcTsFiles: 'dev/**/*.ts'
 }
 
 // clean the contents of the distribution directory
@@ -29,9 +29,16 @@ gulp.task('copy:assets', ['clean'], function() {
 gulp.task('copy:libs', ['clean'], function() {
     return gulp.src([
             'node_modules/angular2/bundles/angular2-polyfills.js',
-            'node_modules/systemjs/dist/system.src.js',
+            'node_modules/systemjs/dist/system.js',
             'node_modules/rxjs/bundles/Rx.js',
-            'node_modules/angular2/bundles/angular2.dev.js'
+            'node_modules/es6-shim/es6-shim.min.js',
+            'node_modules/systemjs/dist/system-polyfills.js',
+            'node_modules/angular2/bundles/angular2-polyfills.js',
+            'node_modules/rxjs/bundles/Rx.js',
+            'node_modules/angular2/bundles/angular2.dev.js',
+            'node_modules/angular2/bundles/router.dev.js',
+            'node_modules/angular2/bundles/http.js',
+            'node_modules/angular2-jwt/angular2-jwt.js'
         ])
         .pipe(gulp.dest('public/dist/lib'))
 });
