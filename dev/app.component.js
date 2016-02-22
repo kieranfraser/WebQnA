@@ -47,23 +47,23 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                 AppComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     //this.lock.show(this.options);
-                    if (!this.loggedIn()) {
-                        this.lock.show(this.options, function (err, profile, id_token) {
-                            if (err) {
-                                throw new Error(err);
-                            }
-                            localStorage.setItem('profile', JSON.stringify(profile));
-                            localStorage.setItem('id_token', id_token);
-                            console.log(_this.jwtHelper.decodeToken(id_token), _this.jwtHelper.getTokenExpirationDate(id_token));
-                            console.log(JSON.stringify(profile));
-                            _this._router.navigate(['Dashboard', { token: id_token }]);
-                            /*this.authHttp.get('/dash').subscribe(
-                                data => this.thing = data,
-                                err => console.log(err),
-                                () => console.log('Request Complete')
-                            );*/
-                        });
-                    }
+                    //if(!this.loggedIn()){
+                    this.lock.show(this.options, function (err, profile, id_token) {
+                        if (err) {
+                            throw new Error(err);
+                        }
+                        localStorage.setItem('profile', JSON.stringify(profile));
+                        localStorage.setItem('id_token', id_token);
+                        console.log(_this.jwtHelper.decodeToken(id_token), _this.jwtHelper.getTokenExpirationDate(id_token));
+                        console.log(JSON.stringify(profile));
+                        _this._router.navigate(['Dashboard', { token: id_token }]);
+                        /*this.authHttp.get('/dash').subscribe(
+                            data => this.thing = data,
+                            err => console.log(err),
+                            () => console.log('Request Complete')
+                        );*/
+                    });
+                    //}
                 };
                 /*  Pop Up Log in
                  ngOnInit(){
@@ -117,20 +117,21 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                     });
                 };
                 AppComponent.prototype.loggedIn = function () {
-                    var token = localStorage.getItem('id_token');
-                    if (token != null) {
-                        if (this.jwtHelper.isTokenExpired(token)) {
-                            console.log("false");
-                            return false;
-                        }
-                        else {
-                            console.log("true");
-                            return true;
-                        }
-                    }
-                    else {
-                        return false;
-                    }
+                    /* var token    = localStorage.getItem('id_token')
+                     if(token != null){
+                         if(this.jwtHelper.isTokenExpired(token)){
+                             console.log("false");
+                             return false;
+                         }
+                         else{
+                             console.log("true");
+                             return true;
+                         }
+                     }
+                     else{
+                         return false;
+                     }*/
+                    return angular2_jwt_1.tokenNotExpired();
                 };
                 AppComponent.prototype.getThing = function () {
                     this.http.get('http://localhost:3001/ping')
