@@ -71,6 +71,6 @@ gulp.task('serve', ['build'], function() {
     gulp.watch(paths.srcFiles, ['buildAndReload']);
 });
 
-gulp.task('build', ['tslint', 'clean', 'compile', 'copy:libs', 'copy:assets']);
+gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);
