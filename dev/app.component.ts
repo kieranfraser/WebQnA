@@ -137,7 +137,7 @@ export class AppComponent {
 
     loggedIn() {
 
-        var token    = localStorage.getItem('id_token')
+       /* var token    = localStorage.getItem('id_token')
         if(token != null){
             if(this.jwtHelper.isTokenExpired(token)){
                 console.log("false");
@@ -150,7 +150,8 @@ export class AppComponent {
         }
         else{
             return false;
-        }
+        }*/
+        return tokenNotExpired();
 
 
 
