@@ -1,7 +1,48 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+      base(href='/')
+      title = title
+      meta(name='viewport', content='width=device-width, initial-scale=1')
+      script(src="//cdn.auth0.com/js/lock-8.2.min.js")
+
+      // 1. Load libraries
+      // IE required polyfills, in this exact order
+
+
+body
     block content
+
+script(src='dist/lib/es6-shim.min.js')
+script(src='dist/lib/es6-shim.min.js.map')
+script(src='dist/lib/system-polyfills.js')
+script(src='dist/lib/angular2-polyfills.js')
+script(src='dist/lib/angular2-polyfills.js.map')
+script(src='dist/lib/system.js')
+script(src='dist/lib/system.js.map')
+
+// 2. Configure SystemJS
+script.
+    System.config({
+        defaultJSExtensions: true,
+        packages: {
+            dist: {
+                format: 'register',
+                defaultExtension: 'js'
+            }
+        },
+        map: {
+            "angular2-jwt": "dist/lib/angular2-jwt"
+        }
+    });
+
+script(src = 'dist/lib/Rx.js')
+script(src = 'dist/lib/angular2.dev.js')
+//script(src = 'dist/lib/angular2-jwt.js')
+script(src = 'dist/lib/router.dev.js')
+script(src = 'dist/lib/http.js')
+
+script.
+    System.import('dist/boot')
+            .then(null, console.error.bind(console));
+
