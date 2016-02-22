@@ -45,7 +45,7 @@ export class AppComponent {
 
     ngOnInit(){
         //this.lock.show(this.options);
-        if(!this.loggedIn()){
+        //if(!this.loggedIn()){
             this.lock.show(this.options,(err: string, profile: string, id_token: string) => {
 
                 if (err) {
@@ -67,7 +67,7 @@ export class AppComponent {
                     () => console.log('Request Complete')
                 );*/
             });
-        }
+        //}
     }
 
     /*  Pop Up Log in
