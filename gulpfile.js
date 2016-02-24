@@ -9,10 +9,11 @@ const reload = browserSync.reload;
 
 const paths = {
     dist: 'public/dist/app',
+    distview: 'public/views',
     distFiles: 'public/dist/**/*',
     srcFiles: 'dev/**/*',
     srcTsFiles: 'dev/**/*.ts',
-    srcHTML: 'dev/views/**/**.html'
+    srcHTML: 'deviews/**/**.html'
 }
 
 // clean the contents of the distribution directory
@@ -22,8 +23,14 @@ gulp.task('clean', function () {
 
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('copy:assets', ['clean'], function() {
-    return gulp.src([paths.srcFiles, '!' + paths.srcTsFiles, paths.srcHTML])
+    return gulp.src([paths.srcFiles, '!' + paths.srcTsFiles])
         .pipe(gulp.dest(paths.dist))
+});
+
+// copy static angular html templates
+gulp.task('copy:assets', ['clean'], function() {
+    return gulp.src([paths.srcHTML])
+        .pipe(gulp.dest(paths.distview))
 });
 
 // copy dependencies
