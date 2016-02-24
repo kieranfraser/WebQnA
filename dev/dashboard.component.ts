@@ -5,13 +5,11 @@ import {CanActivate} from "angular2/router";
 import {OnInit} from "angular2/core";
 import {RouteParams} from "angular2/router";
 import {Router} from "angular2/router";
+import {CORE_DIRECTIVES} from "angular2/common";
 
 @Component({
     selector: 'dashboard',
-    template: `
-    <h1>This is the User Dashboard (Only visible after log in!)</h1>
-    <hr>
-  `
+    templateUrl: 'views/dashboard.html'
 })
 
 @CanActivate(() => tokenNotExpired())

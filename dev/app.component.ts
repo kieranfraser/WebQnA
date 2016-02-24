@@ -1,195 +1,52 @@
+/// <reference path="../typings/browser/definitions/moment/moment.d.ts" />
+
 import {DashboardComponent} from "./dashboard.component";
-import {Component, View, provide} from 'angular2/core';
+import {Component, View, provide, OnInit} from 'angular2/core';
 import {RouteConfig, Router, APP_BASE_HREF, ROUTER_PROVIDERS, ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
-import {AuthHttp, AuthConfig, tokenNotExpired, JwtHelper} from 'angular2-jwt';
-import {OnInit} from "angular2/core";
-import {error} from "util";
 import {LoginComponent} from "./login.component";
+import {LandingComponent} from "./landing.component";
+import {tokenNotExpired} from 'angular2-jwt';
+import {AboutComponent} from "./about.component";
 
-declare var Auth0Lock;
 
 @Component({
-    selector: 'app',
-    directives: [ ROUTER_DIRECTIVES, DashboardComponent ],
-    template: `
-    <h1>Qanda</h1>
-    <div id="root" style="width: 280px; margin: 40px auto; padding: 10px; border-width: 1px;">
-        embeded area
-    </div>
-    <div class="main">
-        <button *ngIf="loggedIn()" (click)="logout()">Logout</button>
-        <router-outlet></router-outlet>
-    </div>
-  `
+    selector: 'app'
+})
+
+@View({
+    directives: [ ROUTER_DIRECTIVES],
+    templateUrl: 'views/app.html'
 })
 
 @RouteConfig([
-    {path: '/', name:'Login', component: LoginComponent},
-    {path: '/dash/:token', name:'Dashboard', component: DashboardComponent}
+    {path: '/', name: 'Landing', component: LandingComponent, useAsDefault: true},
+    {path: '/login/...', name: 'Login', component: LoginComponent},
+    {path: '/about', name: 'About', component: AboutComponent}
 ])
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-    options = {
-        container: 'root',
-        responseType: 'token'
-    };
+    public  userLoggedIn = false;
 
-    lock = new Auth0Lock('deuLbU0yLQDPCVHPaDrT8cA61JB8PCZ5', 'qanda.eu.auth0.com');
-    hash = this.lock.parseHash();
-    jwtHelper: JwtHelper = new JwtHelper();
-    thing: string;
+    constructor(private _router:Router, public http: Http) {}
 
-    constructor(private _router:Router,public http: Http, public authHttp: AuthHttp) {}
-
-    ngOnInit(){
-        //this.lock.show(this.options);
-        //if(!this.loggedIn()){
-            this.lock.show(this.options,(err: string, profile: string, id_token: string) => {
-
-                if (err) {
-                    throw new Error(err);
-                }
-
-                localStorage.setItem('profile', JSON.stringify(profile));
-                localStorage.setItem('id_token', id_token);
-                console.log(
-                    this.jwtHelper.decodeToken(id_token),
-                    this.jwtHelper.getTokenExpirationDate(id_token)
-                );
-                console.log(JSON.stringify(profile));
-
-                this._router.navigate(['Dashboard', {token: id_token}]);
-                /*this.authHttp.get('/dash').subscribe(
-                    data => this.thing = data,
-                    err => console.log(err),
-                    () => console.log('Request Complete')
-                );*/
-            });
-        //}
+    ngOnInit() {
+        console.log('Checking if the user is logged in on init.');
+        if(tokenNotExpired()){
+            this.userLoggedIn = true;
+        }
     }
 
-    /*  Pop Up Log in
-     ngOnInit(){
-     //this.lock.show(this.options);
-     if (this.hash) {
-     if (this.hash.error) {
-     console.log("There was an error logging in", this.hash.error);
-     } else {
-     this.lock.getProfile(this.hash.id_token, function(err, profile) {
-     if (err) {
-     console.log('Cannot get user :(', err);
-     return;
-     }
-     console.log("Hey dude", profile);
-     });
-     }
-     }
-     this.lock.show(this.options);
-     }*/
-
-
-    login() {
-        this.lock.show(this.options,(err: string, profile: string, id_token: string) => {
-
-            if (err) {
-                throw new Error(err);
-            }
-
-            localStorage.setItem('profile', JSON.stringify(profile));
-            localStorage.setItem('id_token', id_token);
-            console.log(
-                this.jwtHelper.decodeToken(id_token),
-                this.jwtHelper.getTokenExpirationDate(id_token)
-            );
-            console.log(JSON.stringify(profile));
-
-        });
+    login(){
+        this._router.navigate(['Login']);
     }
 
     logout() {
+        console.log('User has logged out. Redirect to landing page.');
         localStorage.removeItem('profile');
         localStorage.removeItem('id_token');
-        this._router.navigate(['Login']);
-        this.lock.show(this.options,(err: string, profile: string, id_token: string) => {
-
-            if (err) {
-                throw new Error(err);
-            }
-
-            localStorage.setItem('profile', JSON.stringify(profile));
-            localStorage.setItem('id_token', id_token);
-            console.log(
-                this.jwtHelper.decodeToken(id_token),
-                this.jwtHelper.getTokenExpirationDate(id_token)
-            );
-            console.log(JSON.stringify(profile));
-
-            this._router.navigate(['Dashboard', {token: id_token}]);
-            /*this.authHttp.get('/dash').subscribe(
-             data => this.thing = data,
-             err => console.log(err),
-             () => console.log('Request Complete')
-             );*/
-        });
-    }
-
-    loggedIn() {
-
-       /* var token    = localStorage.getItem('id_token')
-        if(token != null){
-            if(this.jwtHelper.isTokenExpired(token)){
-                console.log("false");
-                return false;
-            }
-            else{
-                console.log("true");
-                return true;
-            }
-        }
-        else{
-            return false;
-        }*/
-        return tokenNotExpired();
-
-
-
-    }
-
-    getThing() {
-        this.http.get('http://localhost:3001/ping')
-            .subscribe(
-                data => console.log(data.json()),
-                err => console.log(err),
-                () => console.log('Complete')
-            );
-    }
-
-    getSecretThing() {
-        this.authHttp.get('http://localhost:3001/secured/ping')
-            .subscribe(
-                data => console.log(data.json()),
-                err => console.log(err),
-                () => console.log('Complete')
-            );
-    }
-
-    tokenSubscription() {
-        this.authHttp.tokenStream.subscribe(
-            data => console.log(data),
-            err => console.log(err),
-            () => console.log('Complete')
-        );
-    }
-
-    useJwtHelper() {
-        var token = localStorage.getItem('id_token');
-
-        console.log(
-            this.jwtHelper.decodeToken(token),
-            this.jwtHelper.getTokenExpirationDate(token),
-            this.jwtHelper.isTokenExpired(token)
-        );
+        this.userLoggedIn = false;
+        this._router.navigate(['Landing']);
     }
 }

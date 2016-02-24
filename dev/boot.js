@@ -1,5 +1,5 @@
 System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router', 'angular2/http', 'angular2-jwt', "./app.component"], function(exports_1) {
-    var browser_1, core_1, router_1, http_1, angular2_jwt_1, app_component_1;
+    var browser_1, core_1, router_1, http_1, angular2_jwt_1, app_component_1, router_2;
     return {
         setters:[
             function (browser_1_1) {
@@ -10,6 +10,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+                router_2 = router_1_1;
             },
             function (http_1_1) {
                 http_1 = http_1_1;
@@ -30,7 +31,8 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
                     },
                     deps: [http_1.Http]
                 }),
-                core_1.provide(router_1.APP_BASE_HREF, { useValue: '/' })
+                core_1.provide(router_1.APP_BASE_HREF, { useValue: '/' }),
+                core_1.provide(router_2.LocationStrategy, { useClass: router_2.PathLocationStrategy })
             ]);
         }
     }

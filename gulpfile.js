@@ -8,10 +8,11 @@ const tslint = require('gulp-tslint');
 const reload = browserSync.reload;
 
 const paths = {
-    dist: 'public/dist',
+    dist: 'public/dist/app',
     distFiles: 'public/dist/**/*',
     srcFiles: 'dev/**/*',
-    srcTsFiles: 'dev/**/*.ts'
+    srcTsFiles: 'dev/**/*.ts',
+    srcHTML: 'dev/views/**/**.html'
 }
 
 // clean the contents of the distribution directory
@@ -21,7 +22,7 @@ gulp.task('clean', function () {
 
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('copy:assets', ['clean'], function() {
-    return gulp.src([paths.srcFiles, '!' + paths.srcTsFiles])
+    return gulp.src([paths.srcFiles, '!' + paths.srcTsFiles, paths.srcHTML])
         .pipe(gulp.dest(paths.dist))
 });
 
@@ -38,7 +39,9 @@ gulp.task('copy:libs', ['clean'], function() {
             'node_modules/angular2/bundles/angular2.dev.js',
             'node_modules/angular2/bundles/router.dev.js',
             'node_modules/angular2/bundles/http.js',
-            'node_modules/angular2-jwt/angular2-jwt.js'
+            'node_modules/angular2-jwt/angular2-jwt.js',
+            'node_modules/moment/moment.js',
+            'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.min.js'
         ])
         .pipe(gulp.dest('public/dist/lib'))
 });
@@ -70,6 +73,7 @@ gulp.task('serve', ['build'], function() {
 
     gulp.watch(paths.srcFiles, ['buildAndReload']);
 });
+
 
 gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets']);
 gulp.task('buildAndReload', ['build'], reload);

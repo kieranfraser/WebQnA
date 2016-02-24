@@ -36,7 +36,7 @@ System.register(['angular2/core', 'angular2-jwt', "angular2/router"], function(e
                 DashboardComponent = __decorate([
                     core_1.Component({
                         selector: 'dashboard',
-                        template: "\n    <h1>This is the User Dashboard (Only visible after log in!)</h1>\n    <hr>\n  "
+                        templateUrl: 'views/dashboard.html'
                     }),
                     router_1.CanActivate(function () { return angular2_jwt_1.tokenNotExpired(); }), 
                     __metadata('design:paramtypes', [router_3.Router, router_2.RouteParams])

@@ -4,6 +4,7 @@ import {RouteConfig, Router, APP_BASE_HREF, ROUTER_PROVIDERS, ROUTER_DIRECTIVES,
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 import {AuthHttp, AuthConfig, tokenNotExpired, JwtHelper} from 'angular2-jwt';
 import {AppComponent} from "./app.component";
+import {PathLocationStrategy, LocationStrategy} from 'angular2/router';
 
 
 
@@ -16,5 +17,7 @@ bootstrap(AppComponent, [
     },
     deps: [Http]
   }),
-  provide(APP_BASE_HREF, {useValue:'/'})
+  provide(APP_BASE_HREF, {useValue:'/'}),
+  provide(LocationStrategy, { useClass: PathLocationStrategy })
+
 ]);
