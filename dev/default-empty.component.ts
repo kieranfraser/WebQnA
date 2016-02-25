@@ -8,4 +8,8 @@ import {Component} from 'angular2/core';
     template: ''
 })
 
+/**
+ * This is a default component - intentionally empty (including the
+ * html) as it's needed when a child must have a terminal state.
+ */
 export class DefaultEmptyComponent{}

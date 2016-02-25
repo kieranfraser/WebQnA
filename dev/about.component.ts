@@ -8,4 +8,8 @@ import {Component} from 'angular2/core';
     templateUrl: 'views/about.html'
 })
 
+/**
+ * This is the component used for the about section of the application
+ * ToDo: add stuff to about.html
+ */
 export class AboutComponent{}

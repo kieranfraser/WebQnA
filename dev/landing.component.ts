@@ -13,4 +13,8 @@ import {Component, View, provide} from 'angular2/core';
     templateUrl: 'views/landing.html'
 })
 
+/**
+ * Component for the landing page - seen first by the user (set as useAsDefault)
+ * ToDo: Must add stuff to the landing.html
+ */
 export class LandingComponent {}

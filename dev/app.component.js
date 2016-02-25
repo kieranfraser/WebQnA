@@ -1,4 +1,8 @@
-/// <reference path="../typings/browser/definitions/moment/moment.d.ts" />
+/**
+ * Important! - when using ng2-bootstrap library, this reference path
+ * tag must be added to the top of the component implementing the feature
+ * in order for the typescript to compile. (Gulp will throw an error otherwise).
+ */
 System.register(['angular2/core', 'angular2/router', 'angular2/http', "./login.component", "./landing.component", 'angular2-jwt', "./about.component"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -39,17 +43,36 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', "./login.c
                 function AppComponent(_router, http) {
                     this._router = _router;
                     this.http = http;
+                    /**
+                     * The boolean which controls the login/logout button on the nav bar
+                     * @type {boolean}
+                     */
                     this.userLoggedIn = false;
                 }
+                /**
+                 * On init must check if the user is logged in:
+                 * ToDo: redirect to the dashboard if the user is already logged in.
+                 *
+                 */
                 AppComponent.prototype.ngOnInit = function () {
                     console.log('Checking if the user is logged in on init.');
                     if (angular2_jwt_1.tokenNotExpired()) {
                         this.userLoggedIn = true;
                     }
                 };
+                /**
+                 * Function fired when the login button is pressed.
+                 * Redirects to the login route which contains the auth0
+                 * api interface.
+                 */
                 AppComponent.prototype.login = function () {
                     this._router.navigate(['Login']);
                 };
+                /**
+                 * Function fired when the logout button is pressed. Deletes the user's JWT
+                 * and profile from local storage, sets the logged in boolean as false so the
+                 * login button is redisplayed and redirects to the landing page of the site.
+                 */
                 AppComponent.prototype.logout = function () {
                     console.log('User has logged out. Redirect to landing page.');
                     localStorage.removeItem('profile');
@@ -57,6 +80,10 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', "./login.c
                     this.userLoggedIn = false;
                     this._router.navigate(['Landing']);
                 };
+                /**
+                 * Checks whether or not the user is logged in.
+                 * @returns {boolean}
+                 */
                 AppComponent.prototype.checkUserLoggedIn = function () {
                     if (this.userLoggedIn) {
                         return true;
@@ -65,6 +92,11 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', "./login.c
                         return false;
                     }
                 };
+                /**
+                 * Utility function to change the state of the userLoggedIn
+                 * boolean which controls the state of the Login/Logout buttons
+                 * on the nav bar. This function is used in child components.
+                 */
                 AppComponent.prototype.changeUserLogInState = function () {
                     if (this.userLoggedIn) {
                         this.userLoggedIn = false;

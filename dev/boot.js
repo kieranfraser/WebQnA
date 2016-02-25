@@ -22,6 +22,11 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
                 app_component_1 = app_component_1_1;
             }],
         execute: function() {
+            /**
+             * Loads the root component (AppComponent).
+             * Sets the base url as '/'
+             * and the directives used?
+             */
             browser_1.bootstrap(app_component_1.AppComponent, [
                 http_1.HTTP_PROVIDERS,
                 router_1.ROUTER_PROVIDERS,
