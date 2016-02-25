@@ -57,12 +57,28 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', "./login.c
                     this.userLoggedIn = false;
                     this._router.navigate(['Landing']);
                 };
+                AppComponent.prototype.checkUserLoggedIn = function () {
+                    if (this.userLoggedIn) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                };
+                AppComponent.prototype.changeUserLogInState = function () {
+                    if (this.userLoggedIn) {
+                        this.userLoggedIn = false;
+                    }
+                    else {
+                        this.userLoggedIn = true;
+                    }
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'app'
                     }),
                     core_1.View({
-                        directives: [router_1.ROUTER_DIRECTIVES],
+                        directives: [router_1.ROUTER_DIRECTIVES, login_component_1.LoginComponent],
                         templateUrl: 'views/app.html'
                     }),
                     router_1.RouteConfig([

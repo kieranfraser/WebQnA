@@ -15,7 +15,7 @@ import {AboutComponent} from "./about.component";
 })
 
 @View({
-    directives: [ ROUTER_DIRECTIVES],
+    directives: [ ROUTER_DIRECTIVES, LoginComponent],
     templateUrl: 'views/app.html'
 })
 
@@ -48,5 +48,23 @@ export class AppComponent implements OnInit {
         localStorage.removeItem('id_token');
         this.userLoggedIn = false;
         this._router.navigate(['Landing']);
+    }
+
+    checkUserLoggedIn(){
+        if(this.userLoggedIn){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    changeUserLogInState(){
+        if(this.userLoggedIn){
+            this.userLoggedIn = false;
+        }
+        else{
+            this.userLoggedIn = true;
+        }
     }
 }

@@ -3,7 +3,7 @@
  */
 import {DashboardComponent} from "./dashboard.component";
 import { CORE_DIRECTIVES } from 'angular2/common';
-import {Component, View, provide} from 'angular2/core';
+import {Component, View, provide, Inject, forwardRef} from 'angular2/core';
 import {RouteConfig, Router, APP_BASE_HREF, ROUTER_PROVIDERS, ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 import {AuthHttp, AuthConfig, tokenNotExpired, JwtHelper} from 'angular2-jwt';
@@ -11,6 +11,7 @@ import {OnInit} from "angular2/core";
 import {error} from "util";
 import {Alert} from "ng2-bootstrap/ng2-bootstrap"
 import {DefaultEmptyComponent} from "./default-empty.component";
+import {AppComponent} from "./app.component";
 
 declare var Auth0Lock;
 
@@ -25,7 +26,7 @@ declare var Auth0Lock;
 
 @RouteConfig([
     {path: '/', name: 'Default', component: DefaultEmptyComponent, useAsDefault: true},
-    {path: '/login/dash', name: 'Dashboard', component: DashboardComponent}
+    {path: '/dash', name: 'Dashboard', component: DashboardComponent}
 ])
 
 export class LoginComponent {
@@ -40,10 +41,18 @@ export class LoginComponent {
     jwtHelper: JwtHelper = new JwtHelper();
     thing: string;
 
-    constructor(private _router:Router,public http: Http, public authHttp: AuthHttp) {}
+    //constructor(private _router:Router,public http: Http, public authHttp: AuthHttp) {}
+
+    constructor(@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent,
+                private _router:Router,public http: Http, public authHttp: AuthHttp) {
+        console.log(_parent.userLoggedIn);
+        _parent.changeUserLogInState();
+    }
+
 
     ngOnInit(){
         console.log("Initializing the Auth0 form.");
+        //this._parent.userLoggedIn = true;
         this.lock.show(this.options,(err: string, profile: string, id_token: string) => {
             if (err) {
                 throw new Error(err);
@@ -58,7 +67,7 @@ export class LoginComponent {
             console.log(JSON.stringify(profile));
 
             console.log("Login successful, redirecting to the dashboard.");
-            this._router.navigate(['Dashboard', {token: id_token}]);
+            this._router.navigate(['Dashboard']);
             /*this.authHttp.get('/dash').subscribe(
              data => this.thing = data,
              err => console.log(err),
