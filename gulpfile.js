@@ -13,7 +13,7 @@ const paths = {
     distFiles: 'public/dist/**/*',
     srcFiles: 'dev/**/*',
     srcTsFiles: 'dev/**/*.ts',
-    srcHTML: 'deviews/**/**.html'
+    srcHTML: 'dev/views/**/**.html'
 }
 
 // clean the contents of the distribution directory
@@ -28,7 +28,7 @@ gulp.task('copy:assets', ['clean'], function() {
 });
 
 // copy static angular html templates
-gulp.task('copy:assets', ['clean'], function() {
+gulp.task('copy:views', ['clean'], function() {
     return gulp.src([paths.srcHTML])
         .pipe(gulp.dest(paths.distview))
 });
@@ -82,6 +82,6 @@ gulp.task('serve', ['build'], function() {
 });
 
 
-gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets']);
+gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);
