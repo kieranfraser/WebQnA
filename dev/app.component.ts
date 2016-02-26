@@ -48,6 +48,7 @@ export class AppComponent implements OnInit {
      * @type {boolean}
      */
     public  userLoggedIn = false;
+    public userprofile;
 
     constructor(private _router:Router, public http: Http) {}
 
@@ -89,15 +90,14 @@ export class AppComponent implements OnInit {
      * Checks whether or not the user is logged in.
      * @returns {boolean}
      */
-    checkUserLoggedIn(){
-        if(this.userLoggedIn){
+    checkUserLoggedIn() {
+        if (this.userLoggedIn) {
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
-
     /**
      * Utility function to change the state of the userLoggedIn
      * boolean which controls the state of the Login/Logout buttons
@@ -108,7 +108,9 @@ export class AppComponent implements OnInit {
             this.userLoggedIn = false;
         }
         else{
-            this.userLoggedIn = true;
+            this.userLoggedIn = true
+
+
         }
     }
 }

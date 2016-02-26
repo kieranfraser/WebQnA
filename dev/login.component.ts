@@ -110,7 +110,7 @@ export class LoginComponent {
      * Non-Authenticated api request example
      */
     getThing() {
-        this.http.get('http://localhost:3001/ping')
+        this.http.get('/ping')
             .subscribe(
                 data => console.log(data.json()),
                 err => console.log(err),
@@ -123,7 +123,7 @@ export class LoginComponent {
      * ToDo: Save the user's id in the database - api request to express route
      */
     getSecretThing() {
-        this.authHttp.get('http://localhost:3001/secured/ping')
+        this.authHttp.get('/secured/ping')
             .subscribe(
                 data => console.log(data.json()),
                 err => console.log(err),
@@ -158,11 +158,14 @@ export class LoginComponent {
         );
     }
 
+
     /**
      * Method used to change the state of the log-in/log-out buttons in the
      * app.component. (Used by child components - propogates changes upwards)
      */
     changeUserLogInState(){
+        //TODO picture only adds when image is in localstorage
+        this._parent.userprofile  = JSON.parse(localStorage.getItem('profile')).picture;
         this._parent.changeUserLogInState();
     }
 }

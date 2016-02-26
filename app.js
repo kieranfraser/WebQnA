@@ -45,8 +45,8 @@ app.use('/home', home);
 
 // Database configuration:
 //  mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda
-var mongodbUri = 'mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda';
-mongoose.connect(mongodbUri);
+//var mongodbUri = 'mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda';
+//mongoose.connect(mongodbUri);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
