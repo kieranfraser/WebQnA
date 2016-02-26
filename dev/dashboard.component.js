@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2-jwt', "angular2/router", "angular2/common", "./login.component"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2-jwt', "angular2/router", "./app.component", "ng2-bootstrap/ng2-bootstrap"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-jwt', "angular2/r
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, angular2_jwt_1, router_2, common_1, login_component_1;
+    var core_1, router_1, angular2_jwt_1, router_2, app_component_1, ng2_bootstrap_1;
     var DashboardComponent;
     return {
         setters:[
@@ -27,11 +27,11 @@ System.register(['angular2/core', 'angular2/router', 'angular2-jwt', "angular2/r
             function (router_2_1) {
                 router_2 = router_2_1;
             },
-            function (common_1_1) {
-                common_1 = common_1_1;
+            function (app_component_1_1) {
+                app_component_1 = app_component_1_1;
             },
-            function (login_component_1_1) {
-                login_component_1 = login_component_1_1;
+            function (ng2_bootstrap_1_1) {
+                ng2_bootstrap_1 = ng2_bootstrap_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
@@ -43,8 +43,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2-jwt', "angular2/r
                  */
                 function DashboardComponent(_parent) {
                     this._parent = _parent;
-                    console.log("changing the login button state");
-                    _parent.changeUserLogInState();
+                    console.log("Set user as logged in (button state)");
+                    _parent.setLoggedIn();
                 }
                 /**
                  * This is called in child component instead of onInit because
@@ -54,7 +54,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-jwt', "angular2/r
                  * @param next
                  * @param prev
                  */
-                DashboardComponent.prototype.routerOnActivate = function (next, prev) {
+                DashboardComponent.prototype.ngOnInit = function () {
                     console.log("Navigated to dashboard");
                     this.id_token = localStorage.getItem('id_token');
                 };
@@ -64,11 +64,11 @@ System.register(['angular2/core', 'angular2/router', 'angular2-jwt', "angular2/r
                     }),
                     core_1.View({
                         templateUrl: 'views/dashboard.html',
-                        directives: [router_1.ROUTER_DIRECTIVES, DashboardComponent, common_1.CORE_DIRECTIVES]
+                        directives: [router_1.ROUTER_DIRECTIVES, DashboardComponent, ng2_bootstrap_1.Alert]
                     }),
                     router_2.CanActivate(function () { return angular2_jwt_1.tokenNotExpired(); }),
-                    __param(0, core_1.Inject(core_1.forwardRef(function () { return login_component_1.LoginComponent; }))), 
-                    __metadata('design:paramtypes', [login_component_1.LoginComponent])
+                    __param(0, core_1.Inject(core_1.forwardRef(function () { return app_component_1.AppComponent; }))), 
+                    __metadata('design:paramtypes', [app_component_1.AppComponent])
                 ], DashboardComponent);
                 return DashboardComponent;
             })();

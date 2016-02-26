@@ -7,7 +7,8 @@
             <li class="active"><a [routerLink]="['About']">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li  *ngIf="userLoggedIn === true" ><a (click)="logout()"><img class="img-circle" src="{{userprofile}}" alt="Logout"></a></li>
+            <li  *ngIf="userLoggedIn === true" ><img class="img-circle" src="{{userProfile}}" alt="Profiler"></li>
+            <li  *ngIf="userLoggedIn === true" ><a (click)="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             <li  *ngIf="userLoggedIn === false" ><a (click)="login()"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
     </div>

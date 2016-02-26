@@ -1,12 +1,12 @@
-import {Component, View, Inject, forwardRef} from 'angular2/core';
+import {Component, View, Inject, forwardRef, OnInit} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {tokenNotExpired} from 'angular2-jwt';
 import {CanActivate} from "angular2/router";
-import {OnActivate, ComponentInstruction} from "angular2/router";
 import {RouteParams} from "angular2/router";
 import {Router} from "angular2/router";
 import {CORE_DIRECTIVES} from "angular2/common";
-import {LoginComponent} from "./login.component";
+import {AppComponent} from "./app.component";
+import {Alert} from "ng2-bootstrap/ng2-bootstrap";
 
 @Component({
     selector: 'dashboard'
@@ -14,7 +14,7 @@ import {LoginComponent} from "./login.component";
 
 @View({
     templateUrl: 'views/dashboard.html',
-    directives: [ ROUTER_DIRECTIVES, DashboardComponent, CORE_DIRECTIVES]
+    directives: [ ROUTER_DIRECTIVES, DashboardComponent, Alert]
 })
 
 /**
@@ -29,7 +29,7 @@ import {LoginComponent} from "./login.component";
  * Here the comment feed is visible to the logged in user.
  * The user can post comments, answer questions, join classes etc.
  */
-export class DashboardComponent implements OnActivate {
+export class DashboardComponent implements OnInit {
 
     /**
      * This is the JWT for the user's authentication
@@ -42,9 +42,9 @@ export class DashboardComponent implements OnActivate {
      * the login/logout button in this case)
      * @param _parent
      */
-    constructor(@Inject(forwardRef(() => LoginComponent)) private _parent:LoginComponent) {
-        console.log("changing the login button state");
-        _parent.changeUserLogInState();
+    constructor(@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) {
+        console.log("Set user as logged in (button state)");
+        _parent.setLoggedIn();
     }
 
     /**
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnActivate {
      * @param next
      * @param prev
      */
-    routerOnActivate(next: ComponentInstruction, prev: ComponentInstruction) {
+    ngOnInit() {
         console.log("Navigated to dashboard");
         this.id_token = localStorage.getItem('id_token');
     }
