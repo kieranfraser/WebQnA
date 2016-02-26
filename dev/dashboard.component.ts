@@ -4,9 +4,11 @@ import {tokenNotExpired} from 'angular2-jwt';
 import {CanActivate} from "angular2/router";
 import {RouteParams} from "angular2/router";
 import {Router} from "angular2/router";
-import {CORE_DIRECTIVES} from "angular2/common";
+import {CORE_DIRECTIVES, FORM_DIRECTIVES } from "angular2/common";
 import {AppComponent} from "./app.component";
-import {Alert} from "ng2-bootstrap/ng2-bootstrap";
+import {Alert, Collapse} from "ng2-bootstrap/ng2-bootstrap";
+import {QuestionFeedComponent} from "./question-feed.component";
+import {QuestionInputFormComponent} from "./question-form.component";
 
 @Component({
     selector: 'dashboard'
@@ -14,7 +16,7 @@ import {Alert} from "ng2-bootstrap/ng2-bootstrap";
 
 @View({
     templateUrl: 'views/dashboard.html',
-    directives: [ ROUTER_DIRECTIVES, DashboardComponent, Alert]
+    directives: [ ROUTER_DIRECTIVES, Alert, QuestionFeedComponent, QuestionInputFormComponent, Collapse]
 })
 
 /**
@@ -22,7 +24,7 @@ import {Alert} from "ng2-bootstrap/ng2-bootstrap";
  * it hasn't expired yet. Not too sure how to refresh this and manage the lifecycle
  * (could be checking if a JWT is in localStorage? must confirm)
  */
-@CanActivate(() => tokenNotExpired())
+//@CanActivate(() => tokenNotExpired())
 
 /**
  * This is the main class for application - the dashboard.
@@ -36,6 +38,9 @@ export class DashboardComponent implements OnInit {
      */
     id_token: string;
 
+    public classes:string[] = ["CS0123", "CS445", "Computer Networks - CS445"];
+
+    public isCollapsed:boolean = true;
     /**
      * For the constructor must inject the parent "loginComponent" as
      * need to change parent variables which control button states (e.g.

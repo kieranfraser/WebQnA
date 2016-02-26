@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row pad-top pad-bottom">
+        <div>
+            <div class="chat-box-div">
+                <div class="chat-box-head">
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="fa fa-cogs"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#"><span class="fa fa-map-marker"></span>&nbsp;Anonymous</a></li>
+                            <li><a href="#"><span class="fa fa-comments-o"></span>&nbsp;Not Anonymous</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body chat-box-main">
+
+                    <div class="well well-lg">
+                        <div class="chat-box-left">
+                            {{comment.question}}
+                        </div>
+                        <div class="chat-box-name-left">
+                            <img class="img-circle" src="{{userProfile}}" alt="Profiler">
+                            -  {{comment.author}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
