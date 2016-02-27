@@ -3,7 +3,7 @@
  * tag must be added to the top of the component implementing the feature
  * in order for the typescript to compile. (Gulp will throw an error otherwise).
  */
-System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'angular2/http', "./landing.component", "./about.component", 'angular2-jwt', 'ng2-bootstrap/ng2-bootstrap'], function(exports_1) {
+System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'angular2/http', "./landing.component", "./about.component", 'angular2-jwt', 'ng2-bootstrap/ng2-bootstrap', "./services/http-service"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13,7 +13,7 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var dashboard_component_1, core_1, router_1, http_1, landing_component_1, about_component_1, angular2_jwt_1, ng2_bootstrap_1;
+    var dashboard_component_1, core_1, router_1, http_1, landing_component_1, about_component_1, angular2_jwt_1, ng2_bootstrap_1, http_service_1;
     var AppComponent;
     return {
         setters:[
@@ -40,13 +40,17 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
             },
             function (ng2_bootstrap_1_1) {
                 ng2_bootstrap_1 = ng2_bootstrap_1_1;
+            },
+            function (http_service_1_1) {
+                http_service_1 = http_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_router, http, authHttp) {
+                function AppComponent(_router, http, authHttp, httpService) {
                     this._router = _router;
                     this.http = http;
                     this.authHttp = authHttp;
+                    this.httpService = httpService;
                     /**
                      * Using the Lock interface with these options means it's embeddable in the page. The
                      * other option is the show() the Lock interface as a pop-up.
@@ -106,7 +110,9 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                         localStorage.setItem('profile', JSON.stringify(profile));
                         localStorage.setItem('id_token', id_token);
                         console.log(_this.jwtHelper.decodeToken(id_token), _this.jwtHelper.getTokenExpirationDate(id_token));
-                        console.log(JSON.stringify(profile));
+                        var userId = JSON.parse(localStorage.getItem('profile')).user_id;
+                        // Get user details (joined classes, questions asked) from database
+                        _this.httpService.getUserDetails(userId).subscribe(function (data) { return localStorage.setItem('user', JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("get user details success"); });
                         console.log("Login successful, redirecting to the dashboard.");
                         _this._router.navigate(['Dashboard']);
                     });
@@ -173,7 +179,8 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                 };
                 AppComponent = __decorate([
                     core_1.Component({
-                        selector: 'app'
+                        selector: 'app',
+                        providers: [http_service_1.HTTPService]
                     }),
                     core_1.View({
                         directives: [router_1.ROUTER_DIRECTIVES, dashboard_component_1.DashboardComponent, ng2_bootstrap_1.Alert],
@@ -184,7 +191,7 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                         { path: '/about', name: 'About', component: about_component_1.AboutComponent },
                         { path: '/dash', name: 'Dashboard', component: dashboard_component_1.DashboardComponent }
                     ]), 
-                    __metadata('design:paramtypes', [router_1.Router, http_1.Http, angular2_jwt_1.AuthHttp])
+                    __metadata('design:paramtypes', [router_1.Router, http_1.Http, angular2_jwt_1.AuthHttp, http_service_1.HTTPService])
                 ], AppComponent);
                 return AppComponent;
             })();

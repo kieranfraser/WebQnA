@@ -7,10 +7,9 @@ var Schema = mongoose.Schema;
 
 var lectureSchema = Schema({
     name: String,
-    participants: [Schema.Types.ObjectId],
+    participants: [String],
     questions: [Schema.Types.ObjectId]
 });
-
 
 var Lecture = mongoose.model('lectures', lectureSchema);
 

@@ -9,17 +9,22 @@ import {AppComponent} from "./app.component";
 import {Alert, Collapse} from "ng2-bootstrap/ng2-bootstrap";
 import {QuestionFeedComponent} from "./question-feed.component";
 import {QuestionInputFormComponent} from "./question-form.component";
+import {ClassInputComponent} from "./class-input.component";
+import {HTTPService} from "./services/http-service";
 
 @Component({
-    selector: 'dashboard'
+    selector: 'dashboard',
+    providers: [HTTPService]
 })
 
 @View({
     templateUrl: 'views/dashboard.html',
-    directives: [ ROUTER_DIRECTIVES, Alert, QuestionFeedComponent, QuestionInputFormComponent, Collapse]
+    directives: [ ROUTER_DIRECTIVES, Alert, QuestionFeedComponent,
+        ClassInputComponent , QuestionInputFormComponent, Collapse]
 })
 
 /**
+ *
  * This means the user can only navigate to this route if they have a JWT and
  * it hasn't expired yet. Not too sure how to refresh this and manage the lifecycle
  * (could be checking if a JWT is in localStorage? must confirm)
@@ -38,16 +43,20 @@ export class DashboardComponent implements OnInit {
      */
     id_token: string;
 
-    public classes:string[] = ["CS0123", "CS445", "Computer Networks - CS445"];
+    public classes:string[] = [];
+    public userQuestionIds: string[];
+    public selectedClass:string;
 
-    public isCollapsed:boolean = true;
+    public isCollapsedQuestion:boolean = true;
+    public isCollapsedClass:boolean = true;
     /**
      * For the constructor must inject the parent "loginComponent" as
      * need to change parent variables which control button states (e.g.
      * the login/logout button in this case)
      * @param _parent
      */
-    constructor(@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent) {
+    constructor(@Inject(forwardRef(() => AppComponent)) private _parent:AppComponent,
+                private httpService: HTTPService) {
         console.log("Set user as logged in (button state)");
         _parent.setLoggedIn();
     }
@@ -63,5 +72,33 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         console.log("Navigated to dashboard");
         this.id_token = localStorage.getItem('id_token');
+
+        // populate the class dropdown box
+        this.getClassList();
+
+        // get all user questions
+        this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;
+    }
+
+    classChange(value:string){
+        this.selectedClass = value;
+    }
+
+    getClassList(){
+        var classListArray = [];
+        this.httpService.getAllClasses().subscribe(
+            data => classListArray = JSON.parse(JSON.stringify(data)),
+            error => alert(error),
+            () => this.populateClassDropdown(classListArray)
+        );
+    }
+
+    populateClassDropdown(classListArray:JSON[]){
+        this.classes = [];
+        for(var item of classListArray){
+            console.log(item);
+            console.log(JSON.parse(JSON.stringify(item)).name);
+            this.classes.push(JSON.parse(JSON.stringify(item)).name);
+        }
     }
 }

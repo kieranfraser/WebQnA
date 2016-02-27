@@ -3,6 +3,7 @@
  */
 export class Question {
     constructor(
+        public classid: string,
         public question: string,
         public summary: string,
         public choices: string[],

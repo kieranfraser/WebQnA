@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-sm-4 col-centered">
         <div class="btn-group">
-            <select class="form-control" id="sel1">
-                <option *ngFor="#class of classes" >
+            <select class="form-control" id="sel1" (change)="classChange($event.target.value)">
+                <option *ngFor="#class of classes" [value]="class">
                     {{class}}
                 </option>
             </select>
@@ -14,15 +14,21 @@
     <!-- Optional: clear the XS cols if their content doesn't match in height -->
     <div class="clearfix visible-xs-block"></div>
     <div class="col-sm-4 col-centered">
-        <button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed">Ask Question</button>
+        <button type="button" class="btn btn-primary" (click)="isCollapsedClass = !isCollapsedClass">Add Class</button>
+        <button type="button" class="btn btn-primary" (click)="isCollapsedQuestion = !isCollapsedQuestion">Ask Question</button>
     </div>
 </div>
 
-<div [collapse]="isCollapsed" class="card card-block card-header">
+<div [collapse]="isCollapsedQuestion" class="card card-block card-header">
     <div class="well well-lg">
         <question-input-form></question-input-form>
     </div>
 </div>
+<div [collapse]="isCollapsedClass" class="card card-block card-header">
+    <div class="well well-lg">
+        <class-input></class-input>
+    </div>
+</div>
 
 
-<question-feed>Loading...</question-feed>
+<question-feed [classValue]="selectedClass">Loading...</question-feed>

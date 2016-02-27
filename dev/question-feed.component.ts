@@ -6,7 +6,8 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Alert, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 
 @Component({
-    selector: 'question-feed'
+    selector: 'question-feed',
+    inputs: ['classValue']
 })
 
 @View({
@@ -23,23 +24,13 @@ export class QuestionFeedComponent implements OnInit {
 
     public comment = { question: "this is a question", author: "Kieran"};
 
+    // Input from the dashboard component, used to filter the comment feed
+    classValue: string;
+
     constructor() {}
 
     ngOnInit() {
         console.log("Feed Loaded");
     }
 
-    private disabled:boolean = false;
-    private status:{isopen:boolean} = {isopen: false};
-    private items:Array<string> = ['The first choice!', 'And another choice for you.', 'but wait! A third!'];
-
-    private toggled(open:boolean):void {
-        console.log('Dropdown is now: ', open);
-    }
-
-    private toggleDropdown($event:MouseEvent):void {
-        $event.preventDefault();
-        $event.stopPropagation();
-        this.status.isopen = !this.status.isopen;
-    }
 }

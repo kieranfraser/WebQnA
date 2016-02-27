@@ -9,9 +9,10 @@ var User = require('./models/user');
 var Lecture = require('./models/lecture');
 var Question = require('./models/question');
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var users = require('./routes/users');
 var home = require('./routes/home');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -35,18 +36,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(__dirname + '/public'));
 
-
-app.use('/dash', jwtCheck);
-app.use('/', routes);
-app.use('/dash', home);
-
-app.use('/users', users);
-app.use('/home', home);
+app.use('/', index);
 
 // Database configuration:
 //  mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda
-//var mongodbUri = 'mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda';
-//mongoose.connect(mongodbUri);
+var mongodbUri = 'mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda';
+mongoose.connect(mongodbUri);
+
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

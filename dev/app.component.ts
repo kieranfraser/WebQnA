@@ -14,6 +14,7 @@ import {LandingComponent} from "./landing.component";
 import {AboutComponent} from "./about.component";
 import {AuthHttp, AuthConfig, tokenNotExpired, JwtHelper} from 'angular2-jwt';
 import {Alert} from 'ng2-bootstrap/ng2-bootstrap';
+import {HTTPService} from "./services/http-service";
 
 /**
  * Auth0Lock provided by Auth0. Controls the user interface for SSO.
@@ -22,7 +23,8 @@ import {Alert} from 'ng2-bootstrap/ng2-bootstrap';
 declare var Auth0Lock;
 
 @Component({
-    selector: 'app'
+    selector: 'app',
+    providers: [HTTPService]
 })
 
 @View({
@@ -77,7 +79,8 @@ export class AppComponent implements OnInit {
     public  userLoggedIn = false;
     public userProfile;
 
-    constructor(private _router:Router, public http: Http, public authHttp: AuthHttp) {}
+    constructor(private _router:Router, public http: Http, public authHttp: AuthHttp,
+                private httpService: HTTPService) {}
 
     /**
      * On init must check if the user is logged in:
@@ -116,7 +119,15 @@ export class AppComponent implements OnInit {
                 this.jwtHelper.decodeToken(id_token),
                 this.jwtHelper.getTokenExpirationDate(id_token)
             );
-            console.log(JSON.stringify(profile));
+            var userId: string = JSON.parse(localStorage.getItem('profile')).user_id;
+
+            // Get user details (joined classes, questions asked) from database
+            this.httpService.getUserDetails(userId).subscribe(
+                data => localStorage.setItem('user', JSON.stringify(data)),
+                error => alert(error),
+                () => console.log("get user details success")
+            );
+
             console.log("Login successful, redirecting to the dashboard.");
             this._router.navigate(['Dashboard']);
         });

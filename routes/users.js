@@ -6,16 +6,16 @@ var Users = require('../models/user');
 router.post('/register', function(req, res, next) {
 
   /*var newUser = User({
-    facebook_id: '1234',
-    anonymous: true,
-    auth: 'green',
-    gmail: 'kfraser@tcd.ie'
-  });
+   facebook_id: '1234',
+   anonymous: true,
+   auth: 'green',
+   gmail: 'kfraser@tcd.ie'
+   });
 
-  newUser.save(function(err){
-    if(err) throw err;
-    console.log('User Created!');
-  });*/
+   newUser.save(function(err){
+   if(err) throw err;
+   console.log('User Created!');
+   });*/
   log.info(req.body.username);
 
   res.render('home', { title: 'This is the Home Page' });

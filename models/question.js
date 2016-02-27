@@ -6,17 +6,20 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var questionSchema = Schema({
+    classid: String,
     question: String,
+    summary: String,
+    choices: [String],
     answers: [{
         answer: String,
         user: String,
-        date: Date,
-        anonymous: Boolean
+        date: String,
+        anonymous: String
     }],
-    user: String,
-    date: Date,
+    userid: String,
+    date: String,
     type: String,
-    anonymous: Boolean
+    anonymous: String
 });
 
 var Question = mongoose.model('questions', questionSchema);

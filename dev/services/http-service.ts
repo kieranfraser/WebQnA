@@ -1,0 +1,51 @@
+/**
+ * Created by kfraser on 27/02/2016.
+ */
+import {Injectable} from 'angular2/core';
+import {Http, Response, Headers, URLSearchParams} from 'angular2/http';
+import 'rxjs/add/operator/map';
+
+@Injectable()
+export class HTTPService {
+    constructor(private http: Http){}
+
+    getQuestion(){
+        return this.http.get('http://cookie.jsontest.com/')
+        .map(res => res.json());
+    }
+
+    postNewQuestion(json: string){
+
+        var headers = new Headers();
+        headers.append('Content-Type',
+        'application/json');
+
+        return this.http.post('/api/addquestion',
+        json, {
+                headers: headers
+            }).map( res => res.json());
+    }
+
+    getUserDetails(userId: string){
+        let queryString = '?userid='+userId;
+        return this.http.get('/api/getuser'+queryString)
+        .map(res => res.json());
+    }
+
+    addClass(json: string){
+        var headers = new Headers();
+        headers.append('Content-Type',
+            'application/json');
+
+        return this.http.post('/api/addclass',
+            json, {
+                headers: headers
+            }).map( res => res.json());
+    }
+
+    getAllClasses(){
+        return this.http.get('/api/getclasses')
+            .map(res => res.json());
+    }
+
+}
