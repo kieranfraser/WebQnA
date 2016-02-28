@@ -12,7 +12,8 @@ import {DatePipe} from "angular2/common";
 
 @Component({
     selector: 'question-input-form',
-    providers: [HTTPService]
+    providers: [HTTPService],
+    inputs: ['selectedClass']
 })
 
 @View({
@@ -23,13 +24,22 @@ import {DatePipe} from "angular2/common";
 /**
  * This is a default component - intentionally empty (including the
  * html) as it's needed when a child must have a terminal state.
+ * TODO: get user id from user when user model is updated
  */
 export class QuestionInputFormComponent{
 
-    public classes:string[] = ["Select a Class","CS1234", "CS56456"];
     public types:string[] = ["Free-text", "Multi-choice"];
     public today:Date = new Date();
-    questionModel = new Question(this.classes[1], "", "", [], "", this.today.toDateString(), this.types[0], "");
+    selectedClass: string;
+
+    questionModel = new Question(this.selectedClass,
+        "",
+        "",
+        [],
+        JSON.parse(localStorage.getItem('profile')).user_id,
+        this.today.toDateString(),
+        this.types[0],
+        "");
 
 
     constructor(private http: Http, private httpService: HTTPService){}
@@ -39,14 +49,28 @@ export class QuestionInputFormComponent{
     onSubmit(){
         this.submitted = true;
 
+        this.today = new Date();
+        console.log(this.questionModel);
+        console.log(this.selectedClass);
+        this.questionModel.classid = this.selectedClass;
+
         var json = JSON.stringify(this.questionModel);
-        this.httpService.postNewQuestion(json).subscribe(
+        console.log(json);
+        this.httpService.addQuestion(json).subscribe(
             data => console.log(JSON.stringify(data)),
             error => alert(error),
             () => console.log("post question success")
         );
         console.log(JSON.stringify(this.questionModel));
-        this.questionModel = new Question("", "", "", [], "", "", "", "");
+
+        this.questionModel = new Question(this.selectedClass,
+            "",
+            "",
+            [],
+            JSON.parse(localStorage.getItem('profile')).user_id,
+            this.today.toDateString(),
+            this.types[0],
+            "");
     }
 
 }

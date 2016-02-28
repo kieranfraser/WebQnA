@@ -14,7 +14,13 @@ export class HTTPService {
         .map(res => res.json());
     }
 
-    postNewQuestion(json: string){
+    /**
+     * Adds new question to question table. Adds id to the given class
+     * table. Adds question id to the user.
+     * @param json
+     * @returns {Observable<R>}
+     */
+    addQuestion(json: string){
 
         var headers = new Headers();
         headers.append('Content-Type',

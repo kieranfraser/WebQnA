@@ -100,5 +100,6 @@ export class DashboardComponent implements OnInit {
             console.log(JSON.parse(JSON.stringify(item)).name);
             this.classes.push(JSON.parse(JSON.stringify(item)).name);
         }
+        this.selectedClass = this.classes[0];
     }
 }

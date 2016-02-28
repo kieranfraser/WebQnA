@@ -9,8 +9,8 @@
     <div class="form-row">
         <label>
             <span>Class</span>
-            <select name="classes" [(ngModel)]="questionModel.class">
-                <option *ngFor="#class of classes" [value]="class">{{class}}</option>
+            <select name="classes" [(ngModel)]="questionModel.classid">
+                <option [value]="selectedClass">{{selectedClass}}</option>
             </select>
         </label>
     </div>

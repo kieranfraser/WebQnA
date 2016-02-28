@@ -2,6 +2,9 @@
  * Created by kfraser on 27/02/2016.
  */
 var express = require('express');
+var mongoose = require('mongoose');
+// set Promise provider to bluebird
+mongoose.Promise = require('bluebird');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
@@ -34,26 +37,60 @@ router.get('/getuser', function(req, res, next) {
     });
 });
 
-/* Create Question */
+/**
+ * Create a question. Add the question to the question table.
+ * Add the reference to the lecture and user tables.
+ */
 router.post('/addquestion',jsonParser, function(req, res, next) {
 
 
     console.log(req.body);
 
     var newQuestion = Question({
+        classid: req.body.classid,
         question: req.body.question,
         summary: req.body.summary,
         choices: req.body.choices,
-        user: req.body.user,
-        type: req.body.type
+        answers: [],
+        userid: req.body.user,
+        date: req.body.date,
+        type: req.body.type,
+        anonymous: req.body.anonymous
     });
+    var promise = newQuestion.save();
 
-    newQuestion.save(function(err){
-        if(err) throw err;
-        console.log('Question saved.');
-    });
-    res.send(req.body);
+    promise.then(function(question) {
+
+            Lecture.findOne({name: question.classid}, function(err, lecture){
+                if(err) console.log("Error retrieving class.");
+                console.log("found class "+lecture);
+
+                lecture.questions.push(question._id);
+                lecture.save(function(err){
+                    if(err) throw err;
+                    console.log('class updated.');
+                });
+            });
+
+            User.findOne({userid: question.userid }, function(err, user) {
+                if (err) console.log("error searching user"+err);
+                console.log("found user "+user);
+
+                user.questions.push(question._id);
+                user.save(function(err){
+                    if(err) throw err;
+                    console.log('user updated.');
+                });
+            });
+            res.send(question);
+        })
+        .catch(function(err){
+            // just need one of these
+            console.log('the error:', err);
+        });
 });
+
+
 
 /**
  *  Create Class
@@ -85,6 +122,19 @@ router.get('/getclasses', function(req, res, next) {
         console.log("Class list: "+lectures);
         res.send(lectures);
     });
+});
+
+/**
+ * Get a class given class name. (NOTE: the class name should unique!)
+ */
+router.get('/getclass', function(req, res, next) {
+
+    Lecture.findOne({name: req.query.classname}, function(err, lecture){
+        if(err) console.log("Error retrieving class list.");
+        console.log("Class list: "+lecture);
+        res.send(lecture);
+    });
+
 });
 
 module.exports = router;

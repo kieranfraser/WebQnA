@@ -88,6 +88,7 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                         console.log(JSON.parse(JSON.stringify(item)).name);
                         this.classes.push(JSON.parse(JSON.stringify(item)).name);
                     }
+                    this.selectedClass = this.classes[0];
                 };
                 DashboardComponent = __decorate([
                     core_1.Component({
