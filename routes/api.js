@@ -90,7 +90,17 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
         });
 });
 
-
+/**
+ * Get a list of questions for a given class
+ */
+router.get('/getquestions', function(req, res, next) {
+    console.log(req.query.classname);
+    Question.find({ classid: req.query.classname }, function(err, questions) {
+        if (err) console.log("error getting questions "+err);
+        console.log(questions);
+        res.send(questions);
+    });
+});
 
 /**
  *  Create Class
@@ -119,7 +129,7 @@ router.get('/getclasses', function(req, res, next) {
 
     Lecture.find({}, function(err, lectures){
         if(err) console.log("Error retrieving class list.");
-        console.log("Class list: "+lectures);
+        console.log("Class test: "+lectures);
         res.send(lectures);
     });
 });
@@ -131,7 +141,7 @@ router.get('/getclass', function(req, res, next) {
 
     Lecture.findOne({name: req.query.classname}, function(err, lecture){
         if(err) console.log("Error retrieving class list.");
-        console.log("Class list: "+lecture);
+        console.log("Class test2: "+lecture);
         res.send(lecture);
     });
 

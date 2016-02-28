@@ -5,13 +5,13 @@
                 <div class="chat-box-head"></div>
                 <div class="panel-body chat-box-main">
 
-                    <div class="well well-lg">
+                    <div class="well well-lg" *ngFor="#question of questions">
                         <div class="chat-box-left">
-                            {{comment.question}}
+                            {{question.summary}}
                         </div>
                         <div class="chat-box-name-left">
                             <img class="img-circle" src="{{userProfile}}" alt="Profiler">
-                            -  {{comment.author}}
+                            -  {{question.anonymous}}
                         </div>
                     </div>
                 </div>

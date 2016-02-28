@@ -9,9 +9,16 @@ import 'rxjs/add/operator/map';
 export class HTTPService {
     constructor(private http: Http){}
 
-    getQuestion(){
-        return this.http.get('http://cookie.jsontest.com/')
-        .map(res => res.json());
+    /**
+     * Get a list of questions for a given class name (class
+     * names are unique)
+     * @param className
+     * @returns {Observable<R>}
+     */
+    getQuestion(className: string){
+        let queryString = '?classname='+className;
+        return this.http.get('/api/getquestions'+queryString)
+            .map(res => res.json());
     }
 
     /**

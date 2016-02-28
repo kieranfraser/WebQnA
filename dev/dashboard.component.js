@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service"], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service", "./models/question"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -11,7 +11,7 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, class_input_component_1, http_service_1;
+    var core_1, router_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, class_input_component_1, http_service_1, question_1;
     var DashboardComponent;
     return {
         setters:[
@@ -38,6 +38,9 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
+            },
+            function (question_1_1) {
+                question_1 = question_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
@@ -69,11 +72,14 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                     this.id_token = localStorage.getItem('id_token');
                     // populate the class dropdown box
                     this.getClassList();
+                    this.getQuestions();
                     // get all user questions
                     this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;
                 };
                 DashboardComponent.prototype.classChange = function (value) {
+                    console.log("changed");
                     this.selectedClass = value;
+                    this.getQuestions();
                 };
                 DashboardComponent.prototype.getClassList = function () {
                     var _this = this;
@@ -84,11 +90,24 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                     this.classes = [];
                     for (var _i = 0; _i < classListArray.length; _i++) {
                         var item = classListArray[_i];
-                        console.log(item);
-                        console.log(JSON.parse(JSON.stringify(item)).name);
                         this.classes.push(JSON.parse(JSON.stringify(item)).name);
                     }
                     this.selectedClass = this.classes[0];
+                };
+                DashboardComponent.prototype.getQuestions = function () {
+                    var _this = this;
+                    var questionListArray = [];
+                    this.httpService.getQuestion(this.selectedClass).subscribe(function (data) { return questionListArray = JSON.parse(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.populateFeed(questionListArray); });
+                };
+                DashboardComponent.prototype.populateFeed = function (questionArray) {
+                    this.questions = [];
+                    console.log(questionArray);
+                    for (var _i = 0; _i < questionArray.length; _i++) {
+                        var item = questionArray[_i];
+                        console.log((JSON.parse(JSON.stringify(item)).classid));
+                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).user), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous));
+                        this.questions.push(question);
+                    }
                 };
                 DashboardComponent = __decorate([
                     core_1.Component({

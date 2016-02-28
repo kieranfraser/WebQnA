@@ -4,10 +4,13 @@
 import {Component, View, OnInit} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Alert, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
+import {Question} from "./models/question";
+import {HTTPService} from "./services/http-service";
 
 @Component({
     selector: 'question-feed',
-    inputs: ['classValue']
+    providers: [HTTPService],
+    inputs: ['classValue', 'questions']
 })
 
 @View({
@@ -26,11 +29,12 @@ export class QuestionFeedComponent implements OnInit {
 
     // Input from the dashboard component, used to filter the comment feed
     classValue: string;
+    questions: Question[];
 
-    constructor() {}
+    constructor( private httpService: HTTPService) {}
 
     ngOnInit() {
         console.log("Feed Loaded");
+        // get the list of questions for the given class
     }
-
 }
