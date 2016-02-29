@@ -84,4 +84,4 @@ gulp.task('serve', ['build'], function() {
 
 gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views']);
 gulp.task('buildAndReload', ['build'], reload);
-gulp.task('default', ['build']);
+gulp.task('default', ['serve']);
