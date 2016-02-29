@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
      * The boolean which controls the login/logout button on the nav bar
      * @type {boolean}
      */
-    public  userLoggedIn = false;
+    public  userLoggedIn: boolean = false;
     public userProfile;
 
     constructor(private _router:Router, public http: Http, public authHttp: AuthHttp,
@@ -127,7 +127,7 @@ export class AppComponent implements OnInit {
                 error => alert(error),
                 () => console.log("get user details success")
             );
-
+            this.userLoggedIn = true;
             console.log("Login successful, redirecting to the dashboard.");
             this._router.navigate(['Dashboard']);
         });

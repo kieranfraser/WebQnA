@@ -71,7 +71,7 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                 DashboardComponent.prototype.ngOnInit = function () {
                     console.log("Navigated to dashboard");
                     this.id_token = localStorage.getItem('id_token');
-                    // populate the class dropdown box
+                    // populate the class dropdown box and load the question feed
                     this.getClassList();
                     // get all user questions
                     this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;

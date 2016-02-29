@@ -4,7 +4,8 @@
             <a class="navbar-brand" [routerLink]="['Landing']">Qanda</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a [routerLink]="['About']">About</a></li>
+            <li><a [routerLink]="['About']">About</a></li>
+            <li *ngIf="userLoggedIn"><a [routerLink]="['Dashboard']">Dashboard</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li  *ngIf="userLoggedIn === true" ><img class="img-circle" src="{{userProfile}}" alt="Profiler" height="35px" width="35px"></li>
@@ -16,4 +17,3 @@
 <div class="main">
     <router-outlet></router-outlet>
 </div>
-<question-feed></question-feed>

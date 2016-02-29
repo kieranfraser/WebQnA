@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
         console.log("Navigated to dashboard");
         this.id_token = localStorage.getItem('id_token');
 
-        // populate the class dropdown box
+        // populate the class dropdown box and load the question feed
         this.getClassList();
         // get all user questions
         this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;

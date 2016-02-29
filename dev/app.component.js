@@ -113,6 +113,7 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                         var userId = JSON.parse(localStorage.getItem('profile')).user_id;
                         // Get user details (joined classes, questions asked) from database
                         _this.httpService.getUserDetails(userId).subscribe(function (data) { return localStorage.setItem('user', JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("get user details success"); });
+                        _this.userLoggedIn = true;
                         console.log("Login successful, redirecting to the dashboard.");
                         _this._router.navigate(['Dashboard']);
                     });
