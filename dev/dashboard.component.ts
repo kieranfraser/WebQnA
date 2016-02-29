@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
      * This is the JWT for the user's authentication
      */
     id_token: string;
+    emptyFeed: boolean = true;
 
     public classes:string[] = [];
     public userQuestionIds: string[];
@@ -77,8 +78,6 @@ export class DashboardComponent implements OnInit {
 
         // populate the class dropdown box
         this.getClassList();
-        this.getQuestions();
-
         // get all user questions
         this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;
     }
@@ -104,6 +103,7 @@ export class DashboardComponent implements OnInit {
             this.classes.push(JSON.parse(JSON.stringify(item)).name);
         }
         this.selectedClass = this.classes[0];
+        this.getQuestions();
     }
 
     getQuestions(){
@@ -117,7 +117,6 @@ export class DashboardComponent implements OnInit {
 
     populateFeed(questionArray: JSON[]){
         this.questions = [];
-        console.log(questionArray);
         for(var item of questionArray){
             console.log((JSON.parse(JSON.stringify(item)).classid));
             var question = new Question(
@@ -130,6 +129,12 @@ export class DashboardComponent implements OnInit {
                 (JSON.parse(JSON.stringify(item)).type),
                 (JSON.parse(JSON.stringify(item)).anonymous));
             this.questions.push(question);
+        }
+        if(this.questions.length > 0){
+            this.emptyFeed = false;
+        }
+        else{
+            this.emptyFeed = true;
         }
     }
 }

@@ -31,4 +31,5 @@
 </div>
 
 
-<question-feed [classValue]="selectedClass" [questions]="questions">Loading...</question-feed>
+<question-feed *ngIf="!emptyFeed" [classValue]="selectedClass" [questions]="questions">Loading...</question-feed>
+<h2 *ngIf="emptyFeed"> There are no questions for this class yet. Be the first to ask a question!</h2>

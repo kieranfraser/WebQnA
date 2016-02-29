@@ -16,7 +16,7 @@ const paths = {
     distFiles: 'public/dist/**/*',
     srcFiles: 'dev/**/*',
     srcTsFiles: 'dev/**/*.ts',
-    srcSass: 'dev/assests/**.scss',
+    srcSass: 'dev/assets/**.scss',
     srcHTML: 'dev/views/**/**.html'
 };
 
@@ -56,7 +56,8 @@ gulp.task('copy:libs', ['clean'], function() {
             'node_modules/angular2/bundles/http.js',
             'node_modules/angular2-jwt/angular2-jwt.js',
             'node_modules/moment/moment.js',
-            'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.min.js'
+            'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.min.js',
+            'node_modules/ng2-charts/**/*'
         ])
         .pipe(gulp.dest('public/dist/lib'))
 });

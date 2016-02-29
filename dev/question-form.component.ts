@@ -1,14 +1,13 @@
-/**
- * Created by kfraser on 26/02/2016.
- */
+
 /**
  * Created by kfraser on 24/02/2016.
  */
-import {Component, View} from 'angular2/core';
+import {Component, View, forwardRef, Inject} from 'angular2/core';
 import {Http, Response, Headers} from 'angular2/http';
 import {Question} from "./models/question";
 import {HTTPService} from "./services/http-service";
 import {DatePipe} from "angular2/common";
+import {DashboardComponent} from "./dashboard.component";
 
 @Component({
     selector: 'question-input-form',
@@ -42,7 +41,11 @@ export class QuestionInputFormComponent{
         "");
 
 
-    constructor(private http: Http, private httpService: HTTPService){}
+    constructor(@Inject(forwardRef(() => DashboardComponent)) private _parent:DashboardComponent,
+                private http: Http, private httpService: HTTPService){
+
+        this.selectedClass = this._parent.selectedClass;
+    }
 
     submitted = false;
 
@@ -71,6 +74,8 @@ export class QuestionInputFormComponent{
             this.today.toDateString(),
             this.types[0],
             "");
+        this._parent.isCollapsedQuestion = !this._parent.isCollapsedQuestion;
+        this._parent.getQuestions();
     }
 
 }

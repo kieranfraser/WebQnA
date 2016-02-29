@@ -53,6 +53,7 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                 function DashboardComponent(_parent, httpService) {
                     this._parent = _parent;
                     this.httpService = httpService;
+                    this.emptyFeed = true;
                     this.classes = [];
                     this.isCollapsedQuestion = true;
                     this.isCollapsedClass = true;
@@ -72,7 +73,6 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                     this.id_token = localStorage.getItem('id_token');
                     // populate the class dropdown box
                     this.getClassList();
-                    this.getQuestions();
                     // get all user questions
                     this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;
                 };
@@ -93,6 +93,7 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                         this.classes.push(JSON.parse(JSON.stringify(item)).name);
                     }
                     this.selectedClass = this.classes[0];
+                    this.getQuestions();
                 };
                 DashboardComponent.prototype.getQuestions = function () {
                     var _this = this;
@@ -101,12 +102,17 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                 };
                 DashboardComponent.prototype.populateFeed = function (questionArray) {
                     this.questions = [];
-                    console.log(questionArray);
                     for (var _i = 0; _i < questionArray.length; _i++) {
                         var item = questionArray[_i];
                         console.log((JSON.parse(JSON.stringify(item)).classid));
                         var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).user), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous));
                         this.questions.push(question);
+                    }
+                    if (this.questions.length > 0) {
+                        this.emptyFeed = false;
+                    }
+                    else {
+                        this.emptyFeed = true;
                     }
                 };
                 DashboardComponent = __decorate([
