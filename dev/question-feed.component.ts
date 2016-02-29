@@ -6,6 +6,7 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Alert, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 import {Question} from "./models/question";
 import {HTTPService} from "./services/http-service";
+import {AnswerQuestionComponent} from "./answer-component";
 
 @Component({
     selector: 'question-feed',
@@ -15,13 +16,12 @@ import {HTTPService} from "./services/http-service";
 
 @View({
     templateUrl: 'views/question_feed.html',
-    directives: [Alert, DROPDOWN_DIRECTIVES, CORE_DIRECTIVES]
+    directives: [Alert, DROPDOWN_DIRECTIVES, CORE_DIRECTIVES, AnswerQuestionComponent]
 })
 
 /**
- * This is the main class for application - the dashboard.
- * Here the comment feed is visible to the logged in user.
- * The user can post comments, answer questions, join classes etc.
+ * This is the question feed component. It loads a set of questions related to
+ * a selected class.
  */
 export class QuestionFeedComponent implements OnInit {
 
