@@ -26,7 +26,7 @@ gulp.task('clean', function () {
 gulp.task('sass-copy:css', function () {
     return gulp.src(paths.srcSass)
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(distStyle));
+        .pipe(gulp.dest(paths.distStyle));
 });
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('copy:assets', ['clean'], function() {
