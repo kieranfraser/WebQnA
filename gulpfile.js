@@ -24,7 +24,7 @@ gulp.task('clean', function () {
     return del(paths.distFiles);
 });
 gulp.task('sass-copy:css', function () {
-    return gulp.src(srcSass)
+    return gulp.src(paths.srcSass)
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest(distStyle));
 });
