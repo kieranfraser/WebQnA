@@ -5,14 +5,17 @@ const sourcemaps = require('gulp-sourcemaps');
 const tscConfig = require('./tsconfig.json');
 const browserSync = require('browser-sync');
 const tslint = require('gulp-tslint');
+var sass = require('gulp-sass');
 const reload = browserSync.reload;
 
 const paths = {
     dist: 'public/dist/app',
     distview: 'public/views',
+    distStyle: 'public/stylesheets',
     distFiles: 'public/dist/**/*',
     srcFiles: 'dev/**/*',
     srcTsFiles: 'dev/**/*.ts',
+    srcSass: 'dev/assests/**.scss',
     srcHTML: 'dev/views/**/**.html'
 }
 
@@ -20,7 +23,11 @@ const paths = {
 gulp.task('clean', function () {
     return del(paths.distFiles);
 });
-
+gulp.task('sass-copy:css', function () {
+    return gulp.src(srcSass)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(distStyle));
+});
 // copy static assets - i.e. non TypeScript compiled source
 gulp.task('copy:assets', ['clean'], function() {
     return gulp.src([paths.srcFiles, '!' + paths.srcTsFiles])
@@ -72,16 +79,16 @@ gulp.task('tslint', function(){
 
 // Run browsersync for development
 gulp.task('serve', ['build'], function() {
-    browserSync({
-        server: {
-            baseDir: paths.dist
-        }
-    });
+   // browserSync({
+    //    server: {
+    //        baseDir: paths.dist
+    //    }
+    //});
 
     gulp.watch(paths.srcFiles, ['buildAndReload']);
 });
 
 
-gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views']);
+gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views', 'sass-copy:css']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['serve']);
