@@ -5,7 +5,7 @@
                 <div class="chat-box-head"></div>
                 <div class="panel-body chat-box-main">
 
-                    <div class="well well-lg" *ngFor="#question of questions" data-toggle="modal" data-target="#answerModal">
+                    <div class="well well-lg" *ngFor="#question of questions" data-toggle="modal" data-target="#answerModal" (click)="clickedQuestion(question)">
                         <div class="chat-box-left">
                             {{question.summary}}
                         </div>
@@ -20,9 +20,24 @@
     </div>
 </div>
 
+<style type="text/css">
+    @media screen and (min-width: 768px) {
+        .modal-dialog {
+            width: 80%; /* New width for default modal */
+        }
+        .modal-sm {
+            width: 50%; /* New width for small modal */
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .modal-lg {
+            width: 950px; /* New width for large modal */
+        }
+    }
+</style>
 <!-- Answer Modal -->
 <div id="answerModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-        <answer-question></answer-question>
+        <answer-question [question]="selectedQuestion"></answer-question>
     </div>
 </div>

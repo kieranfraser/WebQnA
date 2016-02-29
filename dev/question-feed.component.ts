@@ -25,16 +25,22 @@ import {AnswerQuestionComponent} from "./answer-component";
  */
 export class QuestionFeedComponent implements OnInit {
 
-    public comment = { question: "this is a question", author: "Kieran"};
-
     // Input from the dashboard component, used to filter the comment feed
     classValue: string;
     questions: Question[];
+
+    selectedQuestion: Question;
 
     constructor( private httpService: HTTPService) {}
 
     ngOnInit() {
         console.log("Feed Loaded");
+        this.selectedQuestion = new Question("","","",[],"","","","");
         // get the list of questions for the given class
+    }
+
+    clickedQuestion(question: Question){
+        console.log(question.summary)
+        this.selectedQuestion = question;
     }
 }
