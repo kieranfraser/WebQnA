@@ -6,6 +6,7 @@ const tscConfig = require('./tsconfig.json');
 const browserSync = require('browser-sync');
 const tslint = require('gulp-tslint');
 var sass = require('gulp-sass');
+var nodemon = require('gulp-nodemon');
 const reload = browserSync.reload;
 
 const paths = {
@@ -17,7 +18,7 @@ const paths = {
     srcTsFiles: 'dev/**/*.ts',
     srcSass: 'dev/assests/**.scss',
     srcHTML: 'dev/views/**/**.html'
-}
+};
 
 // clean the contents of the distribution directory
 gulp.task('clean', function () {
@@ -88,6 +89,12 @@ gulp.task('serve', ['build'], function() {
     gulp.watch(paths.srcFiles, ['buildAndReload']);
 });
 
+gulp.task('binwww', function () {
+    nodemon({
+        script: 'bin/www'
+        , env: { 'NODE_ENV': 'development' }
+    })
+})
 
 gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views', 'sass-copy:css']);
 gulp.task('buildAndReload', ['build'], reload);
