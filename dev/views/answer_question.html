@@ -1,10 +1,33 @@
 <div class="modal-content">
     <div class="modal-header">
+        <div class="row">
+            <div class="col-sm-6 col-centered">
+                <h4 class="modal-title">{{question.summary}} - {{question.user}}</h4>
+            </div>
+            <div class="col-sm-6 col-centered">
+                <button type="button" class="btn btn-primary" (click)="isCollapsedAnswer = !isCollapsedAnswer">Answer</button>
+                <button type="button" class="btn btn-primary" (click)="isCollapsedStats = !isCollapsedStats">Statistics</button>
+            </div>
+        </div>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Answer Component Header</h4>
     </div>
+
     <div class="modal-body">
-        <p>{{question.summary}}</p>
+        <div [collapse]="isCollapsedAnswer" class="card card-block card-header">
+            <div class="well well-lg"> Here will go the answer form</div>
+        </div>
+        <div [collapse]="isCollapsedStats" class="card card-block card-header">
+            <bar-graph *ngIf="!isCollapsedStats"></bar-graph>
+        </div>
+        <div class="well well-lg" *ngFor="#answer of question.answers">
+            <div class="chat-box-left">
+                answer body
+            </div>
+            <div class="chat-box-name-left">
+                <img class="img-circle" src="{{userProfile}}" alt="Profiler">
+                -  answerer
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

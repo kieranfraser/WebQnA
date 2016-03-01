@@ -124,6 +124,7 @@ export class DashboardComponent implements OnInit {
                 (JSON.parse(JSON.stringify(item)).question),
                 (JSON.parse(JSON.stringify(item)).summary),
                 (JSON.parse(JSON.stringify(item)).choices),
+                (JSON.parse(JSON.stringify(item)).answers),
                 (JSON.parse(JSON.stringify(item)).user),
                 (JSON.parse(JSON.stringify(item)).date),
                 (JSON.parse(JSON.stringify(item)).type),

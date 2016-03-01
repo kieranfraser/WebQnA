@@ -4,11 +4,14 @@
 import {Component, Inject, forwardRef} from 'angular2/core';
 import {QuestionFeedComponent} from "./question-feed.component";
 import {Question} from "./models/question";
+import {Collapse} from "ng2-bootstrap/ng2-bootstrap";
+import {BarGraphComponent} from "./graphs/bar-graph.component";
 
 @Component({
     selector: 'answer-question',
     templateUrl: 'views/answer_question.html',
-    inputs: ['question']
+    inputs: ['question'],
+    directives: [Collapse, BarGraphComponent]
 })
 
 /**
@@ -17,7 +20,10 @@ import {Question} from "./models/question";
  */
 export class AnswerQuestionComponent{
 
-    question = new Question("","","",[],"","","","");
+    public isCollapsedAnswer:boolean = true;
+    public isCollapsedStats:boolean = true;
+
+    question = new Question("","","",[],[],"","","","");
     /**
      * 1. Get the question that was clicked.
      * 2. Create wells for each answer in the question.answer array.

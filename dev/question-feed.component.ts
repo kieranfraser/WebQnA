@@ -35,7 +35,7 @@ export class QuestionFeedComponent implements OnInit {
 
     ngOnInit() {
         console.log("Feed Loaded");
-        this.selectedQuestion = new Question("","","",[],"","","","");
+        this.selectedQuestion = new Question("","","",[],[],"","","","");
         // get the list of questions for the given class
     }
 
