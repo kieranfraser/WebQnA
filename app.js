@@ -37,6 +37,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(__dirname + '/public'));
 
 app.use('/', index);
+app.use('/dash', index);
+app.use('/about', index);
 
 // Database configuration:
 //  mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda
