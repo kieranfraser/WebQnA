@@ -6,12 +6,13 @@ import {QuestionFeedComponent} from "./question-feed.component";
 import {Question} from "./models/question";
 import {Collapse} from "ng2-bootstrap/ng2-bootstrap";
 import {BarGraphComponent} from "./graphs/bar-graph.component";
+import {AnswerInputFormComponent} from "./answer-form.component";
 
 @Component({
     selector: 'answer-question',
     templateUrl: 'views/answer_question.html',
     inputs: ['question'],
-    directives: [Collapse, BarGraphComponent]
+    directives: [Collapse, BarGraphComponent, AnswerInputFormComponent]
 })
 
 /**
@@ -31,4 +32,6 @@ export class AnswerQuestionComponent{
      * 4. On submit, add the the answer to the question.answer array and update the question.
      */
     constructor(@Inject(forwardRef(() => QuestionFeedComponent))private _parent: QuestionFeedComponent){}
+
+    onSubmit(){}
 }

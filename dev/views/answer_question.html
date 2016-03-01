@@ -14,7 +14,9 @@
 
     <div class="modal-body">
         <div [collapse]="isCollapsedAnswer" class="card card-block card-header">
-            <div class="well well-lg"> Here will go the answer form</div>
+            <div class="well well-lg">
+                <answer-input-form [selectedQuestion]="question"></answer-input-form>
+            </div>
         </div>
         <div [collapse]="isCollapsedStats" class="card card-block card-header">
             <bar-graph *ngIf="!isCollapsedStats"></bar-graph>
