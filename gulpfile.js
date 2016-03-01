@@ -81,22 +81,26 @@ gulp.task('tslint', function(){
 
 // Run browsersync for development
 gulp.task('serve', ['build'], function() {
-   // browserSync({
-    //    server: {
-    //        baseDir: paths.dist
-    //    }
-    //});
+   //browserSync({
+     //   server: {
+       //     baseDir: paths.dist
+       // }
+   // });
 
     gulp.watch(paths.srcFiles, ['buildAndReload']);
 });
 
-gulp.task('binwww', function () {
+browserSync({
+    ui: false
+});
+
+gulp.task('runwww', function () {
     nodemon({
         script: 'bin/www'
         , env: { 'NODE_ENV': 'development' }
     })
 })
-
+gulp.task('binwww',['runwww']);
 gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views', 'sass-copy:css']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['serve']);

@@ -23,6 +23,7 @@ var jwtCheck = jwt({
   audience: 'deuLbU0yLQDPCVHPaDrT8cA61JB8PCZ5'
 });
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
