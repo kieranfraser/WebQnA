@@ -19,4 +19,6 @@ import {Alert} from'ng2-bootstrap/ng2-bootstrap';
  * Component for the landing page - seen first by the user (set as useAsDefault)
  * ToDo: Must add stuff to the landing.html
  */
-export class LandingComponent {}
+export class LandingComponent {
+
+}
