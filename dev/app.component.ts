@@ -91,6 +91,7 @@ export class AppComponent implements OnInit {
         console.log('Checking if the user is logged in on init.');
         if(tokenNotExpired()){
             this.userLoggedIn = true;
+            this._router.navigateByUrl('/dash');
         }
     }
 

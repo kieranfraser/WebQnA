@@ -1,0 +1,210 @@
+//colors
+$color_gray_approx: #818181;
+$color_mine_shaft_approx: #303030;
+$color_pomegranate_approx: #f4511e;
+$white: #fff;
+$color_black_haze_approx: #f6f6f6;
+$black_20: rgba(0,0,0, .2);
+$color_silver_chalice_approx: #aaa;
+
+//fonts
+$font_0: Lato;
+$font_1: sans-serif;
+$font_2: Montserrat;
+
+body {
+  font: 400 15px $font_0, $font_1;
+  line-height: 1.8;
+  color: $color_gray_approx;
+}
+h2 {
+  font-size: 24px;
+  text-transform: uppercase;
+  color: $color_mine_shaft_approx;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+h4 {
+  font-size: 19px;
+  line-height: 1.375em;
+  color: $color_mine_shaft_approx;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+.jumbotron {
+  background-color: $color_pomegranate_approx;
+  color: $white;
+  padding: 100px 25px;
+  font-family: $font_2, $font_1;
+}
+.container-fluid {
+  padding: 60px 50px;
+}
+.bg-grey {
+  background-color: $color_black_haze_approx;
+}
+.logo-small {
+  color: $color_pomegranate_approx;
+  font-size: 50px;
+}
+.logo {
+  color: $color_pomegranate_approx;
+  font-size: 200px;
+}
+.thumbnail {
+  padding: 0 0 15px 0;
+  border: none;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 0;
+  img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+}
+.carousel-control {
+  &.right {
+    background-image: none;
+    color: $color_pomegranate_approx;
+  }
+  &.left {
+    background-image: none;
+    color: $color_pomegranate_approx;
+  }
+}
+.item {
+  h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    font-weight: 400;
+    font-style: italic;
+    margin: 70px 0;
+  }
+  span {
+    font-style: normal;
+  }
+}
+.panel {
+  border: 1px solid $color_pomegranate_approx;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 0 !important;
+  //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+  transition: box-shadow 0.5s;
+  &:hover {
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 5px 0 40px $black_20;
+  }
+}
+.panel-footer {
+  background-color: $white !important;
+  .btn {
+    margin: 15px 0;
+    background-color: $color_pomegranate_approx;
+    color: $white;
+    &:hover {
+      border: 1px solid $color_pomegranate_approx;
+      background-color: $white !important;
+      color: $color_pomegranate_approx;
+    }
+  }
+  h3 {
+    font-size: 32px;
+  }
+  h4 {
+    color: $color_silver_chalice_approx;
+    font-size: 14px;
+  }
+}
+.panel-heading {
+  color: $white !important;
+  background-color: $color_pomegranate_approx !important;
+  padding: 25px;
+  border-bottom: 1px solid transparent;
+  //Instead of the line below you could use @include border-top-left-radius($radius)
+  border-top-left-radius: 0;
+  //Instead of the line below you could use @include border-top-right-radius($radius)
+  border-top-right-radius: 0;
+  //Instead of the line below you could use @include border-bottom-left-radius($radius)
+  border-bottom-left-radius: 0;
+  //Instead of the line below you could use @include border-bottom-right-radius($radius)
+  border-bottom-right-radius: 0;
+}
+.navbar {
+  margin-bottom: 0;
+  background-color: $color_pomegranate_approx;
+  z-index: 9999;
+  border: 0;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 0;
+  font-family: $font_2, $font_1;
+  .navbar-brand {
+    color: $white !important;
+  }
+  li a {
+    color: $white !important;
+  }
+}
+.slide {
+  animation-name: slide;
+  animation-duration: 1s;
+  visibility: visible;
+}
+@keyframes slide {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes slide {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media screen and(max-width: 768px) {
+  .col-sm-4 {
+    text-align: center;
+    margin: 25px 0;
+  }
+  .btn-lg {
+    width: 100%;
+    margin-bottom: 35px;
+  }
+}
+@media screen and(max-width: 480px) {
+  .logo {
+    font-size: 150px;
+  }
+}
+.carousel-indicators li {
+  border-color: $color_pomegranate_approx;
+  &.active {
+    background-color: $color_pomegranate_approx;
+  }
+}
+.navbar-nav li {
+  a:hover {
+    color: $color_pomegranate_approx !important;
+    background-color: $white !important;
+  }
+  &.active a {
+    color: $color_pomegranate_approx !important;
+    background-color: $white !important;
+  }
+}
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+  color: $white !important;
+}
+footer .glyphicon {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: $color_pomegranate_approx;
+}

@@ -11,6 +11,7 @@ import {PathLocationStrategy, LocationStrategy} from 'angular2/router';
  * Sets the base url as '/'
  * and the directives used?
  */
+
 bootstrap(AppComponent, [
   HTTP_PROVIDERS,
   ROUTER_PROVIDERS,
