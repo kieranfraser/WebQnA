@@ -63,8 +63,6 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
 
             Lecture.findOne({name: question.classid}, function(err, lecture){
                 if(err) console.log("Error retrieving class.");
-                console.log("found class "+lecture);
-
                 lecture.questions.push(question._id);
                 lecture.save(function(err){
                     if(err) throw err;
@@ -74,8 +72,6 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
 
             User.findOne({userid: question.userid }, function(err, user) {
                 if (err) console.log("error searching user"+err);
-                console.log("found user "+user);
-
                 user.questions.push(question._id);
                 user.save(function(err){
                     if(err) throw err;
@@ -94,10 +90,8 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
  * Get a list of questions for a given class
  */
 router.get('/getquestions', function(req, res, next) {
-    console.log(req.query.classname);
     Question.find({ classid: req.query.classname }, function(err, questions) {
         if (err) console.log("error getting questions "+err);
-        console.log(questions);
         res.send(questions);
     });
 });
@@ -108,8 +102,6 @@ router.get('/getquestions', function(req, res, next) {
  *  TODO: user who created the class (now participant).
  *  */
 router.post('/addclass',jsonParser, function(req, res, next) {
-
-    console.log(req.body);
 
     var newLecture = Lecture({
         name: req.body.name,
@@ -129,7 +121,6 @@ router.get('/getclasses', function(req, res, next) {
 
     Lecture.find({}, function(err, lectures){
         if(err) console.log("Error retrieving class list.");
-        console.log("Class test: "+lectures);
         res.send(lectures);
     });
 });
@@ -141,7 +132,6 @@ router.get('/getclass', function(req, res, next) {
 
     Lecture.findOne({name: req.query.classname}, function(err, lecture){
         if(err) console.log("Error retrieving class list.");
-        console.log("Class test2: "+lecture);
         res.send(lecture);
     });
 

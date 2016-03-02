@@ -9,6 +9,8 @@ import {HTTPService} from "./services/http-service";
 import {DatePipe} from "angular2/common";
 import {DashboardComponent} from "./dashboard.component";
 
+declare var io: any;
+
 @Component({
     selector: 'question-input-form',
     providers: [HTTPService],
@@ -31,6 +33,8 @@ export class QuestionInputFormComponent{
     public today:Date = new Date();
     selectedClass: string;
 
+    socket = null;
+
     questionModel = new Question(this.selectedClass,
         "",
         "",
@@ -46,6 +50,12 @@ export class QuestionInputFormComponent{
                 private http: Http, private httpService: HTTPService){
 
         this.selectedClass = this._parent.selectedClass;
+
+        this.socket = io('/');
+        this.socket.on('question', function(){
+            console.log('Message from server: question feed to be updated');
+            this._parent.getQuestions();
+        }.bind(this));
     }
 
     submitted = false;
@@ -76,6 +86,8 @@ export class QuestionInputFormComponent{
             this.today.toDateString(),
             this.types[0],
             "");
+
+        this.socket.emit('update', 'question');
         this._parent.isCollapsedQuestion = !this._parent.isCollapsedQuestion;
         this._parent.getQuestions();
     }
