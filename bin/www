@@ -29,7 +29,8 @@ io.on('connection', function(socket){
   });
   socket.on('update', function(feed){
     console.log('update received for: '+ feed);
-      socket.broadcast.emit(feed);
+      socket.broadcast.emit('update');
+      socket.broadcast.emit('answer');
   });
 });
 /**

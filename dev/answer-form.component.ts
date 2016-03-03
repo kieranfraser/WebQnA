@@ -7,6 +7,8 @@ import {Answer} from "./models/answer";
 import {Question} from "./models/question";
 import {HTTPService} from "./services/http-service";
 
+declare var io: any;
+
 @Component({
     selector: 'answer-input-form',
     templateUrl: 'views/answer_input_form.html',
@@ -21,6 +23,8 @@ import {HTTPService} from "./services/http-service";
  */
 export class AnswerInputFormComponent{
 
+    socket = null;
+
     selectedQuestion: Question;
     answerModel = new Answer(
         "",
@@ -28,12 +32,46 @@ export class AnswerInputFormComponent{
         "",
         ""
     );
-    public today:Date = new Date();
+    public now:Date = new Date();
     submitted: boolean = false;
 
     constructor(@Inject(forwardRef(()=>AnswerQuestionComponent)) private _parent: AnswerQuestionComponent,
                 private httpService: HTTPService){
         this.selectedQuestion = _parent.question;
+
+        this.socket = io('/');
+    }
+
+    onSubmit(){
+        this.submitted = true;
+
+        this.now = new Date();
+        this.answerModel.user = JSON.parse(localStorage.getItem('profile')).user_id;
+        this.answerModel.date = this.now.toString();
+
+
+        this.selectedQuestion.answers.push(this.answerModel);
+        console.log('this is the question');
+        console.log(this.selectedQuestion);
+
+        var json = JSON.stringify(this.selectedQuestion);
+        this.httpService.updateQuestion(json).subscribe(
+            data => console.log(JSON.stringify(data)),
+            error => alert(error),
+            () => this.sendUpdate()
+        );
+
+        this.answerModel = new Answer(
+            "",
+            "",
+            "",
+            ""
+        );
+    }
+
+    sendUpdate(){
+        console.log("post answer success")
+        this.socket.emit('update', 'answer');
     }
 
 }

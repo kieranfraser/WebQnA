@@ -1,12 +1,13 @@
 /**
  * Created by kfraser on 26/02/2016.
  */
-import {Component, View, OnInit} from 'angular2/core';
+import {Component, View, Inject, forwardRef, OnInit} from 'angular2/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Alert, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 import {Question} from "./models/question";
 import {HTTPService} from "./services/http-service";
 import {AnswerQuestionComponent} from "./answer-component";
+import {DashboardComponent} from "./dashboard.component";
 
 @Component({
     selector: 'question-feed',
@@ -31,7 +32,8 @@ export class QuestionFeedComponent implements OnInit {
 
     selectedQuestion: Question;
 
-    constructor( private httpService: HTTPService) {}
+    constructor( private httpService: HTTPService,
+                 @Inject(forwardRef(() => DashboardComponent)) private _parent: DashboardComponent) {}
 
     ngOnInit() {
         console.log("Feed Loaded");
@@ -40,7 +42,10 @@ export class QuestionFeedComponent implements OnInit {
     }
 
     clickedQuestion(question: Question){
-        console.log(question.summary)
         this.selectedQuestion = question;
+    }
+
+    updateQuestions(){
+        this._parent.getQuestions();
     }
 }

@@ -21,6 +21,17 @@ export class HTTPService {
             .map(res => res.json());
     }
 
+    getSelectedQuestion(json: string){
+        var headers = new Headers();
+        headers.append('Content-Type',
+            'application/json');
+
+        return this.http.post('/api/getselectedquestion',
+            json, {
+                headers: headers
+            }).map( res => res.json());
+    }
+
     /**
      * Adds new question to question table. Adds id to the given class
      * table. Adds question id to the user.
@@ -35,6 +46,17 @@ export class HTTPService {
 
         return this.http.post('/api/addquestion',
         json, {
+                headers: headers
+            }).map( res => res.json());
+    }
+
+    updateQuestion(json: string){
+        var headers = new Headers();
+        headers.append('Content-Type',
+            'application/json');
+
+        return this.http.post('/api/updatequestion',
+            json, {
                 headers: headers
             }).map( res => res.json());
     }

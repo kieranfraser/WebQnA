@@ -41,7 +41,7 @@ export class QuestionInputFormComponent{
         [],
         [],
         JSON.parse(localStorage.getItem('profile')).user_id,
-        this.today.toDateString(),
+        this.today.toString(),
         this.types[0],
         "");
 
@@ -52,7 +52,7 @@ export class QuestionInputFormComponent{
         this.selectedClass = this._parent.selectedClass;
 
         this.socket = io('/');
-        this.socket.on('question', function(){
+        this.socket.on('update', function(){
             console.log('Message from server: question feed to be updated');
             this._parent.getQuestions();
         }.bind(this));
@@ -83,7 +83,7 @@ export class QuestionInputFormComponent{
             [],
             [],
             JSON.parse(localStorage.getItem('profile')).user_id,
-            this.today.toDateString(),
+            this.today.toString(),
             this.types[0],
             "");
 

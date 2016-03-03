@@ -106,4 +106,4 @@ gulp.task('runwww', function () {
 gulp.task('binwww',['runwww']);
 gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views', 'sass-copy:css']);
 gulp.task('buildAndReload', ['build'], reload);
-gulp.task('default', ['serve']);
+gulp.task('default', ['build']); //serve

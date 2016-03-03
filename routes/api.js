@@ -87,6 +87,30 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
 });
 
 /**
+ * Update a question with new answers
+ */
+router.post('/updatequestion',jsonParser, function(req, res, next) {
+
+    console.log(req.body);
+    Question.findOne({userid: req.body.user, date: req.body.date}, function(err, question){
+        if(err) console.log("Error retrieving question (answer update).");
+        console.log(req.body.user);
+        console.log(req.body.date);
+        if(question == null){
+            console.log('question not found');
+        }
+        console.log('this is the database: '+question.answers);
+        console.log('this is the value update: '+req.body.answers);
+        question.answers = req.body.answers;
+        question.save(function(err){
+            if(err) throw err;
+            console.log('question updated with answer.');
+            res.send(question);
+        });
+    });
+});
+
+/**
  * Get a list of questions for a given class
  */
 router.get('/getquestions', function(req, res, next) {
@@ -95,6 +119,23 @@ router.get('/getquestions', function(req, res, next) {
         res.send(questions);
     });
 });
+
+/**
+ * Get selected question (used for updating answer feed.
+ * ToDo: could just return the answers column instead of returning the whole question.
+ * ToDO: MUST CHANGE QUESTION QUERIES... NOT GOOD PRACTICE OR SCALABLE TO QUERY ON
+ * ToDo: THE USER ID AND DATE (DATE IN PARTICULAR NEEDS MODIFYING)
+ */
+
+router.post('/getselectedquestion',jsonParser, function(req, res, next) {
+
+    Question.find({ userid: req.body.user, date: req.body.date }, function(err, question) {
+        if (err) console.log("error getting selected question for answer feed "+err);
+        console.log(question);
+        res.send(question);
+    });
+});
+
 
 /**
  *  Create Class
