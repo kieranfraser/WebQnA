@@ -1,194 +1,213 @@
-<!-- Link to stylesheet for landing page -->
-<link rel='stylesheet' href = '../stylesheets/landing.css'/>
 
+<link rel='stylesheet' href = '../stylesheets/css/lightbox.css'/>
+<link rel='stylesheet' href = '../stylesheets/css/main.css'/>
+<link rel='stylesheet' href = '../stylesheets/css/animate.min.css'/>
+<link rel='stylesheet' href = '../stylesheets/css/font-awesome.min.css'/>
+<link rel='stylesheet' href = '../stylesheets/css/prettyPhoto.css'/>
+<link rel='stylesheet' href = '../stylesheets/css/responsive.css'/>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
-<!-- TODO: Needs to be added to the nav bar in app.html
-
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                &lt;!&ndash;<a class="navbar-brand" href="#myPage">Logo</a>&ndash;&gt;
+<section id="home-slider">
+    <div class="container">
+        <div class="main-slider">
+            <div class="slide-text">
+                <h1>Social Media meets the Classroom</h1>
             </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#about">PROBLEMS</a></li>
-                    <li><a href="#goals">SOLUTIONS</a></li>
-                    <li><a href="#services">FEATURES</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
-            </div>
+            <img src="../images/home/slider/slide1/house.png" class="img-responsive slider-house" alt="slider image">
+            <img src="../images/home/slider/slide1/circle1.png" class="slider-circle1" alt="slider image">
+            <img src="../images/home/slider/slide1/circle2.png" class="slider-circle2" alt="slider image">
+            <img src="../images/home/slider/slide1/cloud1.png" class="slider-cloud1" alt="slider image">
+            <img src="../images/home/slider/slide1/cloud2.png" class="slider-cloud2" alt="slider image">
+            <img src="../images/home/slider/slide1/cloud3.png" class="slider-cloud3" alt="slider image">
+            <img src="../images/home/slider/slide1/sun.png" class="slider-sun" alt="slider image">
+            <img src="../images/home/cycle.png" class="slider-cycle" alt="">
         </div>
-    </nav>
-
--->
-
-    <!-- Container (Qanda Section) -->
-    <div id="Qanda" class="jumbotron text-center">
-        <h1>Qanda</h1>
-        <p>The App where Social Media meets the Classroom</p>
     </div>
+    <!--<div class="preloader"><i class="fa fa-sun-o fa-spin"></i></div>-->
+</section>
+<!--/#home-slider-->
 
-    <!-- Container (About Section) -->
-    <div id="about" class="container-fluid">
+<section id="services">
+    <div class="container">
         <div class="row">
-            <div class="col-sm-8">
-                <h2>Existing Problems</h2>
-                <p>Students do not interact with the lecturer for fear of asking a silly question.</p>
-                <p>Lecturers struggle because they have no idea if students understood the recently taught material.</p>
-                <p>Future lecturers of a particular module, have no way of determining which parts were successful in the past.</p>
-                <!--<br><button class="btn btn-default btn-lg">Get in Touch</button>-->
-            </div>
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-signal logo"></span>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Container (Goals Section) -->
-    <div id="goals" div class="container-fluid bg-grey">
-        <div class="row">
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-globe logo slideanim"></span>
-            </div>
-            <div class="col-sm-8">
-                <h2>Proposed Solutions</h2>
-                <p>Our app allows students to participate in anonymous Q&A sessions with the lecturer.</p>
-                <p>Lecturers can create polls and pose questions for the students to answer.</p>
-                <p>Future lecturers of the module can access Q&A sessions from previous years.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Container (Features Section) -->
-    <div id="services" class="container-fluid text-center">
-        <h2>KEY FEATURES</h2>
-        <h4>What we offer</h4>
-        <br>
-        <div class="row slideanim">
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon glyphicon-user logo-small"></span>
-                <h4>ACCOUNTS</h4>
-                <p>Lecturers have access to special accounts, from which they can moderate class discussions.</p>
-            </div>
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon glyphicon-list-alt logo-small"></span>
-                <h4>Q&A</h4>
-                <p>Student and lecturers can participate in questions and answer sessions.</p>
-            </div>
-            <div class="col-sm-4">
-                <span class="glyphicon glyphicon-lock logo-small"></span>
-                <h4>PRIVACY</h4>
-                <p>Students can interact with other students and respond to questions anonymously.</p>
-            </div>
-        </div>
-        <br><br>
-
-        <!-- Container (Contact Section) -->
-        <div id="contact" class="container-fluid bg-grey">
-            <h2 class="text-center">CONTACT</h2>
-            <div class="row">
-                <div class="col-sm-5">
-                    <p>Contact us and we'll get back to you within 24 hours.</p>
-                    <p><span class="glyphicon glyphicon-map-marker"></span> Trinity College Dublin, Ireland</p>
-                    <!--<p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>-->
-                    <p><span class="glyphicon glyphicon-envelope"></span> https://github.com/adonoghuTcd/WebQnA</p>
+            <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <div class="single-service">
+                    <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
+                        <img src="../images/home/icon1.png" alt="">
+                    </div>
+                    <h4>ACCOUNTS</h4>
+                    <p>Lecturers have access to special accounts, from which they can moderate class discussions.</p>
                 </div>
-                <div class="col-sm-7 slideanim">
-                    <div class="row">
-                        <div class="col-sm-6 form-group">
-                            <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-                        </div>
-                        <div class="col-sm-6 form-group">
-                            <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-                        </div>
+            </div>
+            <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                <div class="single-service">
+                    <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="600ms">
+                        <img src="../images/home/icon2.png" alt="">
                     </div>
-                    <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-                    <div class="row">
-                        <div class="col-sm-12 form-group">
-                            <button class="btn btn-default pull-right" type="submit">Send</button>
-                        </div>
+                    <h4>Q&A</h4>
+                    <p>Student and lecturers can participate in questions and answer sessions.</p>
+                </div>
+            </div>
+            <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="900ms">
+                <div class="single-service">
+                    <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="900ms">
+                        <img src="../images/home/icon3.png" alt="">
                     </div>
+                    <h4>PRIVACY</h4>
+                    <p>Students can interact with other students and respond to questions anonymously.</p>
                 </div>
             </div>
         </div>
-
-        <div id="googleMap" style="height:400px;width:100%;"></div>
-
-<!-- TODO: Needs to be implemented in angular2 to work
-        <script>
-            var myCenter = new google.maps.LatLng(53.343769, -6.251102);
-
-            function initialize() {
-                var mapProp = {
-                    center:myCenter,
-                    zoom:12,
-                    scrollwheel:false,
-                    draggable:false,
-                    mapTypeId:google.maps.MapTypeId.ROADMAP
-                };
-
-                var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-                var marker = new google.maps.Marker({
-                    position:myCenter,
-                });
-
-                marker.setMap(map);
-            }
-
-            google.maps.event.addDomListener(window, 'load', initialize);
-        </script>-->
-
-        <footer class="container-fluid text-center">
-            <a href="#myPage" title="To Top">
-                <span class="glyphicon glyphicon-chevron-up"></span>
-            </a>
-        </footer>
-
-        <!-- TODO: This scrollspy jquery needs to be implemented in angular 2
-        <script>
-            $(document).ready(function(){
-                // Add smooth scrolling to all links in navbar + footer link
-                $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
-
-                    // Prevent default anchor click behavior
-                    event.preventDefault();
-
-                    // Store hash
-                    var hash = this.hash;
-
-                    // Using jQuery's animate() method to add smooth page scroll
-                    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-                    $('html, body').animate({
-                        scrollTop: $(hash).offset().top
-                    }, 900, function(){
-
-                        // Add hash (#) to URL when done scrolling (default click behavior)
-                        window.location.hash = hash;
-                    });
-                });
-
-                $(window).scroll(function() {
-                    $(".slideanim").each(function(){
-                        var pos = $(this).offset().top;
-
-                        var winTop = $(window).scrollTop();
-                        if (pos < winTop + 600) {
-                            $(this).addClass("slide");
-                        }
-                    });
-                });
-            })
-        </script>
-        -->
     </div>
-</body>
+</section>
+<!--/#services-->
+
+<section id="features">
+    <div class="container">
+        <div class="row">
+            <div class="single-features">
+                <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <img src="../images/home/image1.png" class="img-responsive" alt="">
+                </div>
+                <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <h2>Existing Problems</h2>
+                    <p>Students do not interact with the lecturer for fear of asking a silly question.</p>
+                    <p>Lecturers struggle because they have no idea if students understood the recently taught material.</p>
+                    <p>Future lecturers of a particular module, have no way of determining which parts were successful in the past.</p>                </div>
+            </div>
+            <div class="single-features">
+                <div class="col-sm-6 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <h2>Proposed Solutions</h2>
+                    <p>Our app allows students to participate in anonymous Q&A sessions with the lecturer.</p>
+                    <p>Lecturers can create polls and pose questions for the students to answer.</p>
+                    <p>Future lecturers of the module can access Q&A sessions from previous years.</p>
+                </div>
+                <div class="col-sm-5 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <img src="../images/home/image2.png" class="img-responsive" alt="">
+                </div>
+            </div>
+            <!--
+            <div class="single-features">
+                <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <img src="../images/home/image3.png" class="img-responsive" alt="">
+                </div>
+                <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <h2>Experienced and Enthusiastic</h2>
+                    <P>Ut officia cupidatat anim excepteur fugiat cillum ea occaecat rump pork chop tempor. Ut tenderloin veniam commodo. Shankle aliquip short ribs, chicken eiusmod exercitation shank landjaeger spare ribs corned beef.</P>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</section>
+<!--/#features-->
+
+<section id="clients">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <p><img src="../images/home/clients.png" class="img-responsive" alt=""></p>
+                    <h1 class="title">Happy Clients</h1>
+                </div>
+                <div class="clients-logo wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="../images/home/client1.png" class="img-responsive" alt=""></a>
+                    </div>
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="../images/home/client2.png" class="img-responsive" alt=""></a>
+                    </div>
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="../images/home/client3.png" class="img-responsive" alt=""></a>
+                    </div>
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="../images/home/client4.png" class="img-responsive" alt=""></a>
+                    </div>
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="../images/home/client5.png" class="img-responsive" alt=""></a>
+                    </div>
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="#"><img src="../images/home/client6.png" class="img-responsive" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#clients-->
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center bottom-separator">
+                <img src="../images/home/under.png" class="img-responsive inline" alt="">
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="testimonial bottom">
+                    <h2>Testimonial</h2>
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#"><img src="../images/home/profile1.png" alt=""></a>
+                        </div>
+                        <div class="media-body">
+                            <blockquote>Qanda helped me get the feedback I wanted out of my students</blockquote>
+                            <h3><a href="#">- Jhon Kalis</a></h3>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="pull-left">
+                            <a href="#"><img src="../images/home/profile2.png" alt=""></a>
+                        </div>
+                        <div class="media-body">
+                            <blockquote>I could ask questions without fear of speaking in class.</blockquote>
+                            <h3><a href="">- Abraham Josef</a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="contact-info bottom">
+                    <h2>Contacts</h2>
+                    <address>
+                        E-mail: <a href="mailto:someone@example.com">email@email.com</a> <br>
+                        Phone: +1 (123) 456 7890 <br>
+                        Fax: +1 (123) 456 7891 <br>
+                    </address>
+
+                    <h2>Address</h2>
+                    <address>
+                        Trinity College Dublin, <br>
+                        Dublin 2, <br>
+                        Ireland <br>
+                    </address>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <div class="contact-form bottom">
+                    <h2>Send a message</h2>
+                    <form name="contact-form" method="post" action="sendemail.php">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Your text here"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="copyright-text text-center">
+                    <p>&copy; qanda 2016. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--/#footer-->

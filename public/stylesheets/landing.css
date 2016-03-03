@@ -98,8 +98,7 @@ h4 {
   border-bottom-right-radius: 0; }
 
 .navbar {
-  margin-bottom: 0;
-  background-color: #f4511e;
+  background-color: #f4511e !important;
   z-index: 9999;
   border: 0;
   font-size: 12px !important;
@@ -145,6 +144,9 @@ h4 {
   border-color: #f4511e; }
   .carousel-indicators li.active {
     background-color: #f4511e; }
+
+.user-profiler {
+  padding-top: 10px; }
 
 .navbar-nav li a:hover {
   color: #f4511e !important;

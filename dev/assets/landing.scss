@@ -1,7 +1,7 @@
 //colors
 $color_gray_approx: #818181;
 $color_mine_shaft_approx: #303030;
-$color_pomegranate_approx: #f4511e;
+$color_core: #f4511e;
 $white: #fff;
 $color_black_haze_approx: #f6f6f6;
 $black_20: rgba(0,0,0, .2);
@@ -32,7 +32,7 @@ h4 {
   margin-bottom: 30px;
 }
 .jumbotron {
-  background-color: $color_pomegranate_approx;
+  background-color: $color_core;
   color: $white;
   padding: 100px 25px;
   font-family: $font_2, $font_1;
@@ -44,11 +44,11 @@ h4 {
   background-color: $color_black_haze_approx;
 }
 .logo-small {
-  color: $color_pomegranate_approx;
+  color: $color_core;
   font-size: 50px;
 }
 .logo {
-  color: $color_pomegranate_approx;
+  color: $color_core;
   font-size: 200px;
 }
 .thumbnail {
@@ -65,11 +65,11 @@ h4 {
 .carousel-control {
   &.right {
     background-image: none;
-    color: $color_pomegranate_approx;
+    color: $color_core;
   }
   &.left {
     background-image: none;
-    color: $color_pomegranate_approx;
+    color: $color_core;
   }
 }
 .item {
@@ -85,7 +85,7 @@ h4 {
   }
 }
 .panel {
-  border: 1px solid $color_pomegranate_approx;
+  border: 1px solid $color_core;
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 0 !important;
   //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
@@ -99,12 +99,12 @@ h4 {
   background-color: $white !important;
   .btn {
     margin: 15px 0;
-    background-color: $color_pomegranate_approx;
+    background-color: $color_core;
     color: $white;
     &:hover {
-      border: 1px solid $color_pomegranate_approx;
+      border: 1px solid $color_core;
       background-color: $white !important;
-      color: $color_pomegranate_approx;
+      color: $color_core;
     }
   }
   h3 {
@@ -117,7 +117,7 @@ h4 {
 }
 .panel-heading {
   color: $white !important;
-  background-color: $color_pomegranate_approx !important;
+  background-color: $color_core !important;
   padding: 25px;
   border-bottom: 1px solid transparent;
   //Instead of the line below you could use @include border-top-left-radius($radius)
@@ -130,8 +130,7 @@ h4 {
   border-bottom-right-radius: 0;
 }
 .navbar {
-  margin-bottom: 0;
-  background-color: $color_pomegranate_approx;
+  background-color: $color_core !important;
   z-index: 9999;
   border: 0;
   font-size: 12px !important;
@@ -184,18 +183,23 @@ h4 {
   }
 }
 .carousel-indicators li {
-  border-color: $color_pomegranate_approx;
+  border-color: $color_core;
   &.active {
-    background-color: $color_pomegranate_approx;
+    background-color: $color_core;
   }
 }
+
+.user-profiler {
+  padding-top:10px;
+}
+
 .navbar-nav li {
   a:hover {
-    color: $color_pomegranate_approx !important;
+    color: $color_core !important;
     background-color: $white !important;
   }
   &.active a {
-    color: $color_pomegranate_approx !important;
+    color: $color_core !important;
     background-color: $white !important;
   }
 }
@@ -206,5 +210,5 @@ h4 {
 footer .glyphicon {
   font-size: 20px;
   margin-bottom: 20px;
-  color: $color_pomegranate_approx;
+  color: $color_core;
 }
