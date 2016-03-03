@@ -105,7 +105,7 @@ System.register(['angular2/core', 'angular2/router', "./app.component", "ng2-boo
                     for (var _i = 0; _i < questionArray.length; _i++) {
                         var item = questionArray[_i];
                         console.log((JSON.parse(JSON.stringify(item)).classid));
-                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).user), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous));
+                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous));
                         this.questions.push(question);
                     }
                     if (this.questions.length > 0) {

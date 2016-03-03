@@ -86,6 +86,7 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                     console.log('Checking if the user is logged in on init.');
                     if (angular2_jwt_1.tokenNotExpired()) {
                         this.userLoggedIn = true;
+                        this._router.navigateByUrl('/dash');
                     }
                 };
                 /**
