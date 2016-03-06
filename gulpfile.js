@@ -42,7 +42,7 @@ gulp.task('copy:assets', ['clean'], function() {
 
 // copy static angular html templates
 gulp.task('copy:views', ['clean'], function() {
-    return gulp.src([paths.srcHTML])
+    return gulp.src(paths.srcHTML)
         .pipe(gulp.dest(paths.distview))
 });
 
