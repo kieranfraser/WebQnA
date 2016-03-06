@@ -124,7 +124,7 @@ gulp.task('runwww', function () {
         script: 'bin/www'
         , env: { 'NODE_ENV': 'development' }
     })
-})
+});
 gulp.task('binwww',['runwww']);
 gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views', 'sass-copy:css']);
 gulp.task('buildAndReload', ['build'], reload);
