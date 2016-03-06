@@ -42,7 +42,7 @@ gulp.task('copy:assets', ['clean'], function() {
 
 // copy static angular html templates
 gulp.task('copy:views', ['clean'], function() {
-    return gulp.src([paths.srcHTML])
+    return gulp.src(paths.srcHTML)
         .pipe(gulp.dest(paths.distview))
 });
 
@@ -124,7 +124,7 @@ gulp.task('runwww', function () {
         script: 'bin/www'
         , env: { 'NODE_ENV': 'development' }
     })
-})
+});
 gulp.task('binwww',['runwww']);
 gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views', 'sass-copy:css']);
 gulp.task('buildAndReload', ['build'], reload);
