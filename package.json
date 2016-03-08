@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "tslint": "tslint -c tslint.json app/**/*.ts",
-    "postinstall": "gulp default",
     "start": "node ./bin/www"
   },
   "dependencies": {
@@ -33,10 +32,7 @@
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.4.5",
     "systemjs": "0.19.22",
-    "zone.js": "0.5.11"
-  },
-  "devDependencies": {
-    "angular2": "^2.0.0-beta.3",
+    "zone.js": "0.5.11",
     "autoprefixer": "^6.2.1",
     "concurrently": "^1.0.0",
     "connect": "^3.4.0",
@@ -61,5 +57,7 @@
     "tsconfig-glob": "^0.3.3",
     "tslint": "^3.2.1",
     "typescript": "^1.7.5"
+  },
+  "devDependencies": {
   }
 }
