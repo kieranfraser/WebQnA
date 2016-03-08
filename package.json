@@ -2,6 +2,9 @@
   "name": "WebstormProjectsQnA",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "4.3.2"
+  },
   "scripts": {
     "tslint": "tslint -c tslint.json app/**/*.ts",
     "start": "node ./bin/www"
@@ -61,6 +64,5 @@
     "tsconfig-glob": "^0.3.3",
     "tslint": "^3.2.1",
     "typescript": "^1.7.5"
-  },
-  "engine": "node 4.3.2"
+  }
 }
