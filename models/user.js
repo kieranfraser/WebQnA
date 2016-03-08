@@ -6,12 +6,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
-    facebook_id: String,
+    userid: String,
     lectures: [Schema.Types.ObjectId],
     questions: [Schema.Types.ObjectId],
     anonymous: Boolean,
-    auth: String,
-    gmail: String
+    auth: String
 });
 
 
