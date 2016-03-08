@@ -17,7 +17,7 @@ const paths = {
     srcFiles: 'dev/**/*',
     srcTsFiles: 'dev/**/*.ts',
     srcSass: 'dev/assets/**.scss',
-    srcHTML: 'dev/views/**/**.html'
+    srcHTML: 'dev/views/**/*.html'
 };
 
 // clean the contents of the distribution directory
