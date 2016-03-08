@@ -2,7 +2,7 @@
   "name": "WebstormProjectsQnA",
   "version": "0.0.0",
   "private": true,
-  "postinstall": "gulp default",
+  "postinstall": "gulp",
   "scripts": {
     "tslint": "tslint -c tslint.json app/**/*.ts",
     "start": "node ./bin/www"
