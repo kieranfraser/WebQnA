@@ -61,5 +61,6 @@
     "tsconfig-glob": "^0.3.3",
     "tslint": "^3.2.1",
     "typescript": "^1.7.5"
-  }
+  },
+  "engine": "node 4.3.2"
 }
