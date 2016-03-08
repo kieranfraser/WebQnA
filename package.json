@@ -10,7 +10,6 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "zone.js": "0.5.11",
     "angular2": "2.0.0-beta.3",
     "angular2-jwt": "^0.1.6",
     "bluebird": "^3.3.3",
@@ -35,7 +34,9 @@
     "rxjs": "5.0.0-beta.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.4.5",
-    "systemjs": "0.19.22"
+    "systemjs": "0.19.22",
+    "tsd": "^0.6.5",
+    "zone.js": "0.5.11"
   },
   "devDependencies": {
     "angular2": "2.0.0-beta.3",
