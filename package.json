@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "tslint": "tslint -c tslint.json app/**/*.ts",
+    "postinstall": "gulp default",
     "start": "node ./bin/www"
   },
   "dependencies": {
