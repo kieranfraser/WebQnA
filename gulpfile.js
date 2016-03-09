@@ -17,7 +17,7 @@ const paths = {
     srcFiles: 'dev/**/*',
     srcTsFiles: 'dev/**/*.ts',
     srcSass: 'dev/assets/**.scss',
-    srcHTML: 'dev/views/**/*.html'
+    srcHTML: 'dev/views/**/**.html'
 };
 
 // clean the contents of the distribution directory
@@ -104,6 +104,6 @@ gulp.task('runwww', function () {
     })
 })
 gulp.task('binwww',['runwww']);
-gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'copy:views', 'sass-copy:css']);
+gulp.task('build', [ 'clean', 'compile', 'copy:libs', 'copy:assets', 'sass-copy:css']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']); //serve
