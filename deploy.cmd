@@ -105,7 +105,6 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
-
 :: Post deployment stub
 IF DEFINED POST_DEPLOYMENT_ACTION call "%POST_DEPLOYMENT_ACTION%"
 IF !ERRORLEVEL! NEQ 0 goto error

@@ -1,0 +1,20 @@
+@mixin mobile {
+  @media only screen and (max-width: 769px) {
+    @content;
+  }
+}
+
+.user-profiler {
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 50%;
+  margin-top:40%;
+  @include mobile {
+    margin-left: 6%;
+    margin-top: 0%;
+  }
+}
+
+.navbar {
+  border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+}

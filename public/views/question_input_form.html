@@ -1,0 +1,52 @@
+
+
+<form class="form-basic" (ngSubmit)="onSubmit()">
+
+    <div class="form-title-row">
+        <h1>Question</h1>
+    </div>
+
+    <div class="form-row">
+        <label>
+            <span>Class</span>
+            <select name="classes" [(ngModel)]="questionModel.classid">
+                <option [value]="selectedClass">{{selectedClass}}</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="form-row">
+        <label>
+            <span>Question Summary</span>
+            <input type="text" name="summary" [(ngModel)]="questionModel.summary">
+        </label>
+    </div>
+
+    <div class="form-row">
+        <label>
+            <span>Type</span>
+            <select name="type" [(ngModel)]="questionModel.type">
+                <option *ngFor="#type of types" [value]="type">{{type}}</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="form-row">
+        <label>
+            <span>Question</span>
+            <textarea name="question" [(ngModel)]="questionModel.question"></textarea>
+        </label>
+    </div>
+
+    <div class="form-row">
+        <label>
+            <span>Anonymous</span>
+            <input type="checkbox" name="anonymous" checked [(ngModel)]="questionModel.anonymous">
+        </label>
+    </div>
+
+    <div class="form-row">
+        <button type="submit">Submit Form</button>
+    </div>
+
+</form>
