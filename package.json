@@ -38,7 +38,7 @@
     "connect": "^3.4.0",
     "cssnano": "^3.4.0",
     "del": "^2.1.0",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-ext-replace": "^0.2.0",
     "gulp-imagemin": "^2.4.0",
     "gulp-nodemon": "^2.0.6",

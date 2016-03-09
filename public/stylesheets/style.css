@@ -5,3 +5,7 @@
     .user-profiler {
       margin-left: 6%;
       margin-top: 0%; } }
+
+.navbar {
+  border-radius: 0 !important;
+  -moz-border-radius: 0 !important; }
