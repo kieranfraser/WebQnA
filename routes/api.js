@@ -55,7 +55,9 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
         userid: req.body.user,
         date: req.body.date,
         type: req.body.type,
-        anonymous: req.body.anonymous
+        anonymous: req.body.anonymous,
+        username: req.body.username,
+        picture: req.body.picture
     });
     var promise = newQuestion.save();
 

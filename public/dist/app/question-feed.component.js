@@ -46,7 +46,7 @@ System.register(['angular2/core', 'angular2/common', "ng2-bootstrap/ng2-bootstra
                 }
                 QuestionFeedComponent.prototype.ngOnInit = function () {
                     console.log("Feed Loaded");
-                    this.selectedQuestion = new question_1.Question("", "", "", [], [], "", "", "", "");
+                    this.selectedQuestion = new question_1.Question("", "", "", [], [], "", "", "", "", "", "");
                     // get the list of questions for the given class
                 };
                 QuestionFeedComponent.prototype.clickedQuestion = function (question) {
@@ -54,6 +54,8 @@ System.register(['angular2/core', 'angular2/common', "ng2-bootstrap/ng2-bootstra
                 };
                 QuestionFeedComponent.prototype.updateQuestions = function () {
                     this._parent.getQuestions();
+                };
+                QuestionFeedComponent.prototype.getUserName = function (id) {
                 };
                 QuestionFeedComponent = __decorate([
                     core_1.Component({

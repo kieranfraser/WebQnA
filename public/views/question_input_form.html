@@ -31,10 +31,38 @@
         </label>
     </div>
 
-    <div class="form-row">
+    <div class="form-row" *ngIf="questionModel.type === 'Free-text'">
         <label>
             <span>Question</span>
             <textarea name="question" [(ngModel)]="questionModel.question"></textarea>
+        </label>
+    </div>
+
+    <div class="form-row" *ngIf="questionModel.type === 'Multi-choice'">
+        <label>
+            <span>Choice 1:</span>
+            <input type="text" name="choice1" [(ngModel)]="choiceOne">
+        </label>
+    </div>
+
+    <div class="form-row" *ngIf="questionModel.type === 'Multi-choice'">
+        <label>
+            <span>Choice 2:</span>
+            <input type="text" name="choice2" [(ngModel)]="choiceTwo">
+        </label>
+    </div>
+
+    <div class="form-row" *ngIf="questionModel.type === 'Multi-choice'">
+        <label>
+            <span>Choice 3:</span>
+            <input type="text" name="choice3" [(ngModel)]="choiceThree">
+        </label>
+    </div>
+
+    <div class="form-row" *ngIf="questionModel.type === 'Multi-choice'">
+        <label>
+            <span>Choice 4:</span>
+            <input type="text" name="choice4" [(ngModel)]="choiceFour">
         </label>
     </div>
 

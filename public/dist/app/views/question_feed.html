@@ -6,12 +6,24 @@
                 <div class="panel-body chat-box-main">
 
                     <div class="well well-lg" *ngFor="#question of questions" data-toggle="modal" data-target="#answerModal" (click)="clickedQuestion(question)">
-                        <div class="chat-box-left">
-                            {{question.summary}}
-                        </div>
-                        <div class="chat-box-name-left">
-                            <img class="img-circle" src="{{userProfile}}" alt="Profiler">
-                            -  {{question.anonymous}}
+                        <div class="row">
+                            <div class="col-xs-6 col-md-4" *ngIf="question.anonymous === ''">
+                                <img class="img-circle" src="{{question.picture}}" alt="{{question.username}}">
+                            </div>
+                            <div class="col-xs-6 col-md-4" *ngIf="question.anonymous === 'true'">
+                                <h5><small>Anonymous</small></h5>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <div class="chat-box-left">
+                                    <h5 style="text-align: center">{{question.summary}}</h5>
+                                </div>
+                                <div class="chat-box-name-left" *ngIf="question.anonymous === ''">
+                                    <h4 style="text-align: center"><small> - {{question.username}}</small></h4>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <h5 style="text-align: center"><small>{{question.answers.length}} replies</small></h5>
+                            </div>
                         </div>
                     </div>
                 </div>

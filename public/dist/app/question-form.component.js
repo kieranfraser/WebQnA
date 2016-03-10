@@ -41,7 +41,11 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
                     this.types = ["Free-text", "Multi-choice"];
                     this.today = new Date();
                     this.socket = null;
-                    this.questionModel = new question_1.Question(this.selectedClass, "", "", [], [], JSON.parse(localStorage.getItem('profile')).user_id, this.today.toString(), this.types[0], "");
+                    this.questionModel = new question_1.Question(this.selectedClass, "", "", [], [], JSON.parse(localStorage.getItem('profile')).user_id, this.today.toString(), this.types[0], "", JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture);
+                    this.choiceOne = "";
+                    this.choiceTwo = "";
+                    this.choiceThree = "";
+                    this.choiceFour = "";
                     this.submitted = false;
                     this.selectedClass = this._parent.selectedClass;
                     this.socket = io('/');
@@ -56,11 +60,17 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
                     console.log(this.questionModel);
                     console.log(this.selectedClass);
                     this.questionModel.classid = this.selectedClass;
+                    // logic for choices
+                    if (this.questionModel.type === 'Multi-choice') {
+                        console.log("the choices are:");
+                        console.log(this.questionModel.choices);
+                        this.questionModel.choices = [this.choiceOne, this.choiceTwo, this.choiceThree, this.choiceFour];
+                    }
                     var json = JSON.stringify(this.questionModel);
                     console.log(json);
                     this.httpService.addQuestion(json).subscribe(function (data) { return console.log(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("post question success"); });
                     console.log(JSON.stringify(this.questionModel));
-                    this.questionModel = new question_1.Question(this.selectedClass, "", "", [], [], JSON.parse(localStorage.getItem('profile')).user_id, this.today.toString(), this.types[0], "");
+                    this.questionModel = new question_1.Question(this.selectedClass, "", "", [], [], JSON.parse(localStorage.getItem('profile')).user_id, this.today.toString(), this.types[0], "", JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture);
                     this.socket.emit('update', 'question');
                     this._parent.isCollapsedQuestion = !this._parent.isCollapsedQuestion;
                     this._parent.getQuestions();

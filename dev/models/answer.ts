@@ -7,7 +7,9 @@ export class Answer {
         public answer: string,
         public user: string,
         public date: string,
-        public anonymous: string
+        public anonymous: string,
+        public username: string,
+        public picture: string
     ) {}
 }
 
