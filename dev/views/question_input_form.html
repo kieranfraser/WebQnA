@@ -25,7 +25,7 @@
     <div class="form-row">
         <label>
             <span>Type</span>
-            <select name="type" [(ngModel)]="questionModel.type">
+            <select name="type" [(ngModel)]="questionModel.type" (click)="0">
                 <option *ngFor="#type of types" [value]="type">{{type}}</option>
             </select>
         </label>
