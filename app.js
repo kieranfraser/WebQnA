@@ -19,8 +19,8 @@ var app = express();
 // Auth0 configuration for express
 var jwt = require('express-jwt');
 var jwtCheck = jwt({
-  secret: new Buffer('W-KHkgITXLdjtdUC8eWaL2vD5fD1ib6IRkNhKLRk5XmEHDQvCLGiFX65tUZXb87O', 'base64'),
-  audience: 'deuLbU0yLQDPCVHPaDrT8cA61JB8PCZ5'
+  secret: new Buffer('Oelbbh-artSVMgdRekAelqnrKJLVSUnuCXi088I0HP-9wRdGq_IUTPa0bgxLT-_a', 'base64'),
+  audience: '8IYkTjEb8T85oLK0XOuo2wTytwJm9Qxs'
 });
 
 
@@ -43,7 +43,7 @@ app.use('/about', index);
 
 // Database configuration:
 //  mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda
-var mongodbUri = 'mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda';
+var mongodbUri = 'mongodb://qandaDev:teampanda@ds019468.mlab.com:19468/qandas';
 mongoose.connect(mongodbUri);
 
 app.use('/api', api);
