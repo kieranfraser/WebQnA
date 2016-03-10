@@ -30,13 +30,22 @@
             </div>
         </div>
         <div [collapse]="isCollapsedStats" class="card card-block card-header">
-            <div class="container-fluid">
+            <div class="container-fluid" *ngIf="question.type === 'Multi-choice'">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-8">
-                        <bar-graph [selectedQuestion]="question" *ngIf="!isCollapsedStats"></bar-graph>
+                        <bar-graph [selectedQuestion]="question" *ngIf="!isCollapsedStats" ></bar-graph>
                     </div>
                     <div class="col-xs-6 col-md-4">
-
+                        <doughnut-chart [selectedQuestion]="question" *ngIf="!isCollapsedStats"></doughnut-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid" *ngIf="question.type === 'Free-text'">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-8">
+                        <doughnut-chart [selectedQuestion]="question" *ngIf="!isCollapsedStats"></doughnut-chart>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
                     </div>
                 </div>
             </div>

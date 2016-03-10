@@ -9,6 +9,7 @@ import {BarGraphComponent} from "./graphs/bar-graph.component";
 import {AnswerInputFormComponent} from "./answer-form.component";
 import {HTTPService} from "./services/http-service";
 import {Answer} from "./models/answer";
+import {DoughnutChartComponent} from "./graphs/doughnut-chart.component";
 
 declare var io: any;
 
@@ -16,7 +17,7 @@ declare var io: any;
     selector: 'answer-question',
     templateUrl: 'views/answer_question.html',
     inputs: ['question'],
-    directives: [Collapse, BarGraphComponent, AnswerInputFormComponent],
+    directives: [Collapse, BarGraphComponent, AnswerInputFormComponent, DoughnutChartComponent],
     providers: [HTTPService]
 })
 

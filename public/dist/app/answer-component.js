@@ -1,4 +1,4 @@
-System.register(['angular2/core', "./question-feed.component", "./models/question", "ng2-bootstrap/ng2-bootstrap", "./graphs/bar-graph.component", "./answer-form.component", "./services/http-service"], function(exports_1, context_1) {
+System.register(['angular2/core', "./question-feed.component", "./models/question", "ng2-bootstrap/ng2-bootstrap", "./graphs/bar-graph.component", "./answer-form.component", "./services/http-service", "./graphs/doughnut-chart.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', "./question-feed.component", "./models/questio
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, question_feed_component_1, question_1, ng2_bootstrap_1, bar_graph_component_1, answer_form_component_1, http_service_1;
+    var core_1, question_feed_component_1, question_1, ng2_bootstrap_1, bar_graph_component_1, answer_form_component_1, http_service_1, doughnut_chart_component_1;
     var AnswerQuestionComponent;
     return {
         setters:[
@@ -37,6 +37,9 @@ System.register(['angular2/core', "./question-feed.component", "./models/questio
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
+            },
+            function (doughnut_chart_component_1_1) {
+                doughnut_chart_component_1 = doughnut_chart_component_1_1;
             }],
         execute: function() {
             AnswerQuestionComponent = (function () {
@@ -88,7 +91,7 @@ System.register(['angular2/core', "./question-feed.component", "./models/questio
                         selector: 'answer-question',
                         templateUrl: 'views/answer_question.html',
                         inputs: ['question'],
-                        directives: [ng2_bootstrap_1.Collapse, bar_graph_component_1.BarGraphComponent, answer_form_component_1.AnswerInputFormComponent],
+                        directives: [ng2_bootstrap_1.Collapse, bar_graph_component_1.BarGraphComponent, answer_form_component_1.AnswerInputFormComponent, doughnut_chart_component_1.DoughnutChartComponent],
                         providers: [http_service_1.HTTPService]
                     }),
                     __param(0, core_1.Inject(core_1.forwardRef(function () { return question_feed_component_1.QuestionFeedComponent; }))), 
