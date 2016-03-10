@@ -61,6 +61,11 @@ System.register(['angular2/core', 'angular2/common', 'ng2-charts', "../answer-co
                 }
                 BarGraphComponent.prototype.ngOnInit = function () {
                     this.barChartLabels = this.selectedQuestion.choices;
+                    this.getChoiceData();
+                };
+                BarGraphComponent.prototype.ngOnChanges = function () {
+                    this.barChartLabels = this.selectedQuestion.choices;
+                    this.getChoiceData();
                 };
                 // events
                 BarGraphComponent.prototype.chartClicked = function (e) {

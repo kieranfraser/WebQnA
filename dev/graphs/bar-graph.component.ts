@@ -11,6 +11,8 @@ import {HTTPService} from "../services/http-service";
 import {Question} from "../models/question";
 import {Answer} from "../models/answer";
 import {OnInit} from "angular2/core";
+import {OnChanges} from "angular2/core";
+import {AfterViewChecked} from "angular2/core";
 
 
 declare var io: any;
@@ -26,7 +28,7 @@ declare var io: any;
  * This is a default component - intentionally empty (including the
  * html) as it's needed when a child must have a terminal state.
  */
-export class BarGraphComponent implements OnInit{
+export class BarGraphComponent implements OnInit, OnChanges{
 
 
     socket = null;
@@ -45,7 +47,14 @@ export class BarGraphComponent implements OnInit{
 
     ngOnInit(){
         this.barChartLabels = this.selectedQuestion.choices;
+        this.getChoiceData();
     }
+
+    ngOnChanges(){
+        this.barChartLabels = this.selectedQuestion.choices;
+        this.getChoiceData();
+    }
+
     // events
     chartClicked(e:any) {
         console.log(e);
