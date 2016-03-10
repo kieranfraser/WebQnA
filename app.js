@@ -43,7 +43,7 @@ app.use('/about', index);
 
 // Database configuration:
 //  mongodb://qandaDev:teampanda@ds054128.mongolab.com:54128/qanda
-var mongodbUri = 'mongodb://qandaDev:teampanda@ds019468.mlab.com:19468/qandas';
+var mongodbUri = 'mongodb://qandaProd:teampanda@ds019468.mlab.com:19468/qandas';
 mongoose.connect(mongodbUri);
 
 app.use('/api', api);
