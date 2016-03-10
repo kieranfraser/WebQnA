@@ -60,7 +60,13 @@ export class AppComponent implements OnInit {
      */
     options = {
         //container: 'root',
-        responseType: 'token'
+        responseType: 'token',
+        icon: '/images/ico/apple-touch-icon-144-precomposed.png',
+        dict: {
+            signin: {
+                title: "Qanda Login"
+            }
+        }
     };
 
     /**

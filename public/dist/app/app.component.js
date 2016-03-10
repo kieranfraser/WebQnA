@@ -64,7 +64,13 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                      */
                     this.options = {
                         //container: 'root',
-                        responseType: 'token'
+                        responseType: 'token',
+                        icon: '/images/ico/apple-touch-icon-144-precomposed.png',
+                        dict: {
+                            signin: {
+                                title: "Qanda Login"
+                            }
+                        }
                     };
                     /**
                      * The lock instantiation requires the client id and domain respectively.
