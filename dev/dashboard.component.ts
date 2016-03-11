@@ -12,6 +12,7 @@ import {QuestionInputFormComponent} from "./question-form.component";
 import {ClassInputComponent} from "./class-input.component";
 import {HTTPService} from "./services/http-service";
 import {Question} from "./models/question";
+import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap"
 
 @Component({
     selector: 'dashboard',
@@ -21,7 +22,8 @@ import {Question} from "./models/question";
 @View({
     templateUrl: 'views/dashboard.html',
     directives: [ ROUTER_DIRECTIVES, Alert, QuestionFeedComponent,
-        ClassInputComponent , QuestionInputFormComponent, Collapse]
+        ClassInputComponent , QuestionInputFormComponent, Collapse,
+        BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
 
 /**
@@ -84,6 +86,7 @@ export class DashboardComponent implements OnInit {
 
     classChange(value:string){
         console.log("changed");
+        console.log(value);
         this.selectedClass = value;
         this.getQuestions();
     }
@@ -102,7 +105,6 @@ export class DashboardComponent implements OnInit {
         for(var item of classListArray){
             this.classes.push(JSON.parse(JSON.stringify(item)).name);
         }
-        this.selectedClass = this.classes[0];
         this.getQuestions();
     }
 
