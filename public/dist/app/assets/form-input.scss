@@ -1,0 +1,160 @@
+//colors
+$color_concrete_approx: #f3f3f3;
+$white: #ffffff;
+$black_10: rgba(0, 0, 0, 0.1);
+$color_trout_approx: #4c565e;
+$color_cornflower_blue_approx: #6caee0;
+$color_chicago_approx: #5f5f5f;
+$black_8: rgba(0, 0, 0, 0.08);
+$alto: #dbdbdb;
+
+//fonts
+$font_0: sans-serif;
+
+html {
+  background-color: $color_concrete_approx;
+}
+.form-basic {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 55px;
+  //Instead of the line below you could use @include box-sizing($bs)
+  box-sizing: border-box;
+  background-color: $white;
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 1px 3px 0 $black_10;
+  font: bold 14px $font_0;
+  text-align: center;
+  .form-row {
+    text-align: left;
+    margin-bottom: 22px;
+    > label span {
+      display: inline-block;
+      //Instead of the line below you could use @include box-sizing($bs)
+      box-sizing: border-box;
+      color: $color_chicago_approx;
+      width: 180px;
+      text-align: right;
+      vertical-align: top;
+      padding: 12px 25px;
+    }
+  }
+  .form-title-row {
+    text-align: center;
+    margin-bottom: 55px;
+  }
+  h1 {
+    display: inline-block;
+    //Instead of the line below you could use @include box-sizing($bs)
+    box-sizing: border-box;
+    color: $color_trout_approx;
+    font-size: 24px;
+    padding: 0 10px 15px;
+    border-bottom: 2px solid $color_cornflower_blue_approx;
+    margin: 0;
+  }
+  input {
+    color: $color_chicago_approx;
+    //Instead of the line below you could use @include box-sizing($bs)
+    box-sizing: border-box;
+    width: 240px;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 1px 2px 4px 0 $black_8;
+    padding: 12px;
+    border: 1px solid $alto;
+  }
+  input[type=radio] {
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: none;
+    width: auto;
+  }
+  input[type=checkbox] {
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: none;
+    width: auto;
+    margin-top: 13px;
+  }
+  select {
+    background-color: $white;
+    color: $color_chicago_approx;
+    //Instead of the line below you could use @include box-sizing($bs)
+    box-sizing: border-box;
+    max-width: 240px;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 1px 2px 4px 0 $black_8;
+    padding: 12px 8px;
+    border: 1px solid $alto;
+  }
+  textarea {
+    color: $color_chicago_approx;
+    //Instead of the line below you could use @include box-sizing($bs)
+    box-sizing: border-box;
+    width: 240px;
+    height: 80px;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 1px 2px 4px 0 $black_8;
+    font: normal 13px $font_0;
+    padding: 12px;
+    border: 1px solid $alto;
+    resize: vertical;
+  }
+  .form-radio-buttons {
+    display: inline-block;
+    vertical-align: top;
+    > div {
+      margin-top: 10px;
+    }
+    input {
+      width: auto;
+    }
+    label span {
+      margin-left: 8px;
+      color: $color_chicago_approx;
+      font-weight: normal;
+    }
+  }
+  button {
+    display: block;
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 2px;
+    background-color: $color_cornflower_blue_approx;
+    color: $white;
+    font-weight: bold;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: 1px 2px 4px 0 $black_8;
+    padding: 14px 22px;
+    border: 0;
+    margin: 40px 183px 0;
+  }
+}
+@media(max-width: 600px) {
+  .form-basic {
+    padding: 30px;
+    max-width: 480px;
+    .form-row {
+      max-width: 300px;
+      margin: 25px auto;
+      text-align: left;
+      > label span {
+        display: block;
+        text-align: left;
+        padding: 0 0 15px;
+      }
+    }
+    .form-title-row {
+      margin-bottom: 50px;
+    }
+    select {
+      width: 240px;
+    }
+    input[type=checkbox] {
+      margin-top: 0;
+    }
+    button {
+      margin: 0;
+    }
+    .form-radio-buttons > div {
+      margin: 0 0 10px;
+    }
+  }
+}

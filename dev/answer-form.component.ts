@@ -6,6 +6,8 @@ import {AnswerQuestionComponent} from "./answer-component";
 import {Answer} from "./models/answer";
 import {Question} from "./models/question";
 import {HTTPService} from "./services/http-service";
+import { CORE_DIRECTIVES, FORM_DIRECTIVES } from 'angular2/common';
+import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap"
 
 declare var io: any;
 
@@ -14,7 +16,7 @@ declare var io: any;
     templateUrl: 'views/answer_input_form.html',
     inputs: ['selectedQuestion'],
     providers: [HTTPService],
-    directives: []
+    directives: [ BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
 
 /**
@@ -30,7 +32,9 @@ export class AnswerInputFormComponent{
         "",
         "",
         "",
-        ""
+        "",
+        JSON.parse(localStorage.getItem('profile')).name,
+        JSON.parse(localStorage.getItem('profile')).picture
     );
     public now:Date = new Date();
     submitted: boolean = false;
@@ -38,7 +42,6 @@ export class AnswerInputFormComponent{
     constructor(@Inject(forwardRef(()=>AnswerQuestionComponent)) private _parent: AnswerQuestionComponent,
                 private httpService: HTTPService){
         this.selectedQuestion = _parent.question;
-
         this.socket = io('/');
     }
 
@@ -53,20 +56,25 @@ export class AnswerInputFormComponent{
         this.selectedQuestion.answers.push(this.answerModel);
         console.log('this is the question');
         console.log(this.selectedQuestion);
+        if(this.answerModel.answer != ""){
+            var json = JSON.stringify(this.selectedQuestion);
+            this.httpService.updateQuestion(json).subscribe(
+                data => console.log(JSON.stringify(data)),
+                error => alert(error),
+                () => this.sendUpdate()
+            );
 
-        var json = JSON.stringify(this.selectedQuestion);
-        this.httpService.updateQuestion(json).subscribe(
-            data => console.log(JSON.stringify(data)),
-            error => alert(error),
-            () => this.sendUpdate()
-        );
+            this.answerModel = new Answer(
+                "",
+                "",
+                "",
+                "",
+                JSON.parse(localStorage.getItem('profile')).name,
+                JSON.parse(localStorage.getItem('profile')).picture
+            );
 
-        this.answerModel = new Answer(
-            "",
-            "",
-            "",
-            ""
-        );
+            this._parent.isCollapsedAnswer = true;
+        }
     }
 
     sendUpdate(){

@@ -1,0 +1,12 @@
+<style>
+    .chart {
+        display: block; width: 100%;
+    }
+</style>
+<base-chart class="chart"
+            [data]="doughnutChartData"
+            [labels]="doughnutChartLabels"
+            [chartType]="doughnutChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></base-chart>
+<h4 style="text-align: center"><small>Participation</small></h4>

@@ -128,7 +128,9 @@ export class DashboardComponent implements OnInit {
                 (JSON.parse(JSON.stringify(item)).userid),
                 (JSON.parse(JSON.stringify(item)).date),
                 (JSON.parse(JSON.stringify(item)).type),
-                (JSON.parse(JSON.stringify(item)).anonymous));
+                (JSON.parse(JSON.stringify(item)).anonymous),
+                (JSON.parse(JSON.stringify(item)).username),
+                (JSON.parse(JSON.stringify(item)).picture));
             this.questions.push(question);
         }
         if(this.questions.length > 0){

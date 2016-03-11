@@ -60,14 +60,20 @@ export class AppComponent implements OnInit {
      */
     options = {
         //container: 'root',
-        responseType: 'token'
+        responseType: 'token',
+        icon: '/images/ico/apple-touch-icon-144-precomposed.png',
+        dict: {
+            signin: {
+                title: "Qanda Login"
+            }
+        }
     };
 
     /**
      * The lock instantiation requires the client id and domain respectively.
      * ToDo: These hardcoded authentication values need to be removed from GitHub!
      */
-    lock = new Auth0Lock('deuLbU0yLQDPCVHPaDrT8cA61JB8PCZ5', 'qanda.eu.auth0.com');
+    lock = new Auth0Lock('8IYkTjEb8T85oLK0XOuo2wTytwJm9Qxs', 'qanda.eu.auth0.com');
     hash = this.lock.parseHash();
     jwtHelper: JwtHelper = new JwtHelper();
     thing: string;

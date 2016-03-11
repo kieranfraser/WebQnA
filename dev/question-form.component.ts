@@ -43,7 +43,15 @@ export class QuestionInputFormComponent{
         JSON.parse(localStorage.getItem('profile')).user_id,
         this.today.toString(),
         this.types[0],
-        "");
+        "",
+        JSON.parse(localStorage.getItem('profile')).name,
+        JSON.parse(localStorage.getItem('profile')).picture);
+
+    choiceOne: string = "";
+    choiceTwo: string = "";
+    choiceThree: string = "";
+    choiceFour: string = "";
+
 
 
     constructor(@Inject(forwardRef(() => DashboardComponent)) private _parent:DashboardComponent,
@@ -68,6 +76,13 @@ export class QuestionInputFormComponent{
         console.log(this.selectedClass);
         this.questionModel.classid = this.selectedClass;
 
+        // logic for choices
+        if(this.questionModel.type === 'Multi-choice'){
+            console.log("the choices are:");
+            console.log(this.questionModel.choices);
+            this.questionModel.choices = [this.choiceOne, this.choiceTwo, this.choiceThree, this.choiceFour];
+        }
+
         var json = JSON.stringify(this.questionModel);
         console.log(json);
         this.httpService.addQuestion(json).subscribe(
@@ -85,7 +100,9 @@ export class QuestionInputFormComponent{
             JSON.parse(localStorage.getItem('profile')).user_id,
             this.today.toString(),
             this.types[0],
-            "");
+            "",
+            JSON.parse(localStorage.getItem('profile')).name,
+            JSON.parse(localStorage.getItem('profile')).picture);
 
         this.socket.emit('update', 'question');
         this._parent.isCollapsedQuestion = !this._parent.isCollapsedQuestion;

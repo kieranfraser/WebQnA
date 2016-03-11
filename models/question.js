@@ -14,12 +14,16 @@ var questionSchema = Schema({
         answer: String,
         user: String,
         date: String,
-        anonymous: String
+        anonymous: String,
+        username: String,
+        picture: String
     }],
     userid: String,
     date: String,
     type: String,
-    anonymous: String
+    anonymous: String,
+    username: String,
+    picture: String
 });
 
 var Question = mongoose.model('questions', questionSchema);
