@@ -45,7 +45,7 @@ System.register(['angular2/core', "./answer-component", "./models/answer", "./se
                     this.now = new Date();
                     this.submitted = false;
                     this.selectedQuestion = _parent.question;
-                    this.socket = io('/');
+                    //this.socket = io('/');
                 }
                 AnswerInputFormComponent.prototype.onSubmit = function () {
                     var _this = this;

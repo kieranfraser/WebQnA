@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
 
     constructor(private _router:Router, public http: Http, public authHttp: AuthHttp,
                 private httpService: HTTPService) {
-        this.socket = io('/');
+        //this.socket = io('/');
     }
 
     /**
@@ -153,7 +153,7 @@ export class AppComponent implements OnInit {
      */
     logout() {
         console.log('User has logged out. Redirect to landing page.');
-        this.socket.emit('userLogout', JSON.parse(localStorage.getItem('profile')).user_id);
+        //this.socket.emit('userLogout', JSON.parse(localStorage.getItem('profile')).user_id);
         localStorage.removeItem('profile');
         localStorage.removeItem('id_token');
         this.userLoggedIn = false;

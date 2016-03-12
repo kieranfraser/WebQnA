@@ -59,11 +59,11 @@ export class QuestionInputFormComponent{
 
         this.selectedClass = this._parent.selectedClass;
 
-        this.socket = io('/');
+        /*this.socket = io('/');
         this.socket.on('update', function(){
             console.log('Message from server: question feed to be updated');
             this._parent.getQuestions();
-        }.bind(this));
+        }.bind(this));*/
     }
 
     submitted = false;

@@ -42,7 +42,7 @@ export class AnswerInputFormComponent{
     constructor(@Inject(forwardRef(()=>AnswerQuestionComponent)) private _parent: AnswerQuestionComponent,
                 private httpService: HTTPService){
         this.selectedQuestion = _parent.question;
-        this.socket = io('/');
+        //this.socket = io('/');
     }
 
     onSubmit(){
