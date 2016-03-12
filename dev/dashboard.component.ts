@@ -90,6 +90,7 @@ export class DashboardComponent implements OnInit {
      * it's called when this component is routed to while onInit isn't
      * (onInit may only be activated when the component is created? not
      * sure must come back to this.. there were issues on the angular2 forum)
+     * TODO: first navigation to dashboard, update the online user list
      * @param next
      * @param prev
      */

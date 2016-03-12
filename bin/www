@@ -47,7 +47,6 @@ io.on('connection', function(socket){
       var value = onlineUserList[key];
       onlineList.push(value);
     }
-    socket.emit('onlineUserList', onlineList);
     socket.broadcast.emit('onlineUserList', onlineList);
   });
 
