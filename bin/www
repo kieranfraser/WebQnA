@@ -41,7 +41,7 @@ io.on('connection', function(socket){
   socket.on('userLogin', function(user){
     console.log('User logged in: '+user);
     onlineList = [];
-    onlineUserList[user.userId] = user;
+    onlineUserList[user] = user;
     for(var key in onlineUserList) {
       var value = onlineUserList[key];
       onlineList.push(value);

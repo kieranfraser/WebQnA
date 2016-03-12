@@ -51,10 +51,10 @@
                     <div class = "panel-body">
                         <div class="row" style="padding: 5%;" *ngFor="#user of onlineUsers">
                             <div class=".col-xs-6" *ngIf="user != null">
-                                <img style="float: left; margin: 4%;" class=" img-circle" src="{{user.picture}}" alt="User:" height="35px" width="35px">
+                                <!--<img style="float: left; margin: 4%;" class=" img-circle" src="{{user.picture}}" alt="User:" height="35px" width="35px">-->
                             </div>
                             <div class=".col-xs-6" *ngIf="user != null">
-                                <h5><small>{{user.name}}</small></h5>
+                                <h5><small>{{user}}</small></h5>
                             </div>
                         </div>
                     </div>
