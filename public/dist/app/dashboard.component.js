@@ -73,15 +73,15 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     this.onlineUsers = [];
                     console.log("Set user as logged in (button state)");
                     _parent.setLoggedIn();
-                    this.socket = io('/');
+                    this.socket = _parent.socket;
                     this.socket.on('onlineUserList', function (list) {
                         console.log('Online User List: ' + list);
                         this.onlineUsers = list;
                     }.bind(this));
                     var newUserOnline = new online_user_1.OnlineUser(JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture, JSON.parse(localStorage.getItem('profile')).user_id);
-                    this.socket.emit('userLogin', JSON.parse(localStorage.getItem('profile')).user_id);
+                    this.socket.emit('userLogin', newUserOnline);
                     console.log("adding self to online user list");
-                    this.onlineUsers.push(JSON.parse(localStorage.getItem('profile')).user_id);
+                    this.onlineUsers.push(newUserOnline);
                 }
                 /**
                  * This is called in child component instead of onInit because

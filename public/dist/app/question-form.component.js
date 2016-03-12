@@ -48,11 +48,11 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
                     this.choiceFour = "";
                     this.submitted = false;
                     this.selectedClass = this._parent.selectedClass;
-                    /*this.socket = io('/');
-                    this.socket.on('update', function(){
+                    this.socket = _parent.socket;
+                    this.socket.on('update', function () {
                         console.log('Message from server: question feed to be updated');
                         this._parent.getQuestions();
-                    }.bind(this));*/
+                    }.bind(this));
                 }
                 QuestionInputFormComponent.prototype.onSubmit = function () {
                     this.submitted = true;

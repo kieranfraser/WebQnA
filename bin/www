@@ -25,7 +25,7 @@ var io = require('socket.io')(server);
 var onlineUserList = {};
 var onlineList = [];
 
-
+io.set("heartbeat interval", 60000);
 
 io.on('connection', function(socket){
   socket.on('disconnect', function () {
@@ -41,7 +41,7 @@ io.on('connection', function(socket){
   socket.on('userLogin', function(user){
     console.log('User logged in: '+user);
     onlineList = [];
-    onlineUserList[user] = user;
+    onlineUserList[user.userId] = user;
     for(var key in onlineUserList) {
       var value = onlineUserList[key];
       onlineList.push(value);

@@ -43,6 +43,8 @@ System.register(['angular2/core', 'angular2/common', "ng2-bootstrap/ng2-bootstra
                 function QuestionFeedComponent(httpService, _parent) {
                     this.httpService = httpService;
                     this._parent = _parent;
+                    this.socket = null;
+                    this.socket = _parent.socket;
                 }
                 QuestionFeedComponent.prototype.ngOnInit = function () {
                     console.log("Feed Loaded");

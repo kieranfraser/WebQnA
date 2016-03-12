@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
      * List of online users - update using socket.io
      */
     socket = null;
-    onlineUsers: string[] = [];
+    onlineUsers: OnlineUser[] = [];
 
     /**
      * For the constructor must inject the parent "loginComponent" as
@@ -74,7 +74,7 @@ export class DashboardComponent implements OnInit {
                 private httpService: HTTPService) {
         console.log("Set user as logged in (button state)");
         _parent.setLoggedIn();
-        this.socket = io('/');
+        this.socket = _parent.socket;
 
         this.socket.on('onlineUserList', function(list){
             console.log('Online User List: '+ list);
@@ -84,9 +84,9 @@ export class DashboardComponent implements OnInit {
         var newUserOnline = new OnlineUser(JSON.parse(localStorage.getItem('profile')).name,
             JSON.parse(localStorage.getItem('profile')).picture, JSON.parse(localStorage.getItem('profile')).user_id);
 
-        this.socket.emit('userLogin', JSON.parse(localStorage.getItem('profile')).user_id);
+        this.socket.emit('userLogin', newUserOnline);
         console.log("adding self to online user list");
-        this.onlineUsers.push(JSON.parse(localStorage.getItem('profile')).user_id);
+        this.onlineUsers.push(newUserOnline);
     }
 
     /**

@@ -9,6 +9,8 @@ import {HTTPService} from "./services/http-service";
 import {AnswerQuestionComponent} from "./answer-component";
 import {DashboardComponent} from "./dashboard.component";
 
+declare var io: any;
+
 @Component({
     selector: 'question-feed',
     providers: [HTTPService],
@@ -32,8 +34,12 @@ export class QuestionFeedComponent implements OnInit {
 
     selectedQuestion: Question;
 
+    socket = null;
+
     constructor( private httpService: HTTPService,
-                 @Inject(forwardRef(() => DashboardComponent)) private _parent: DashboardComponent) {}
+                 @Inject(forwardRef(() => DashboardComponent)) private _parent: DashboardComponent) {
+        this.socket = _parent.socket;
+    }
 
     ngOnInit() {
         console.log("Feed Loaded");

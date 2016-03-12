@@ -56,7 +56,7 @@ System.register(['angular2/core', "./question-feed.component", "./models/questio
                     this.isCollapsedAnswer = true;
                     this.isCollapsedStats = true;
                     this.question = new question_1.Question("", "", "", [], [], "", "", "", "", "", "");
-                    this.socket = io('/');
+                    this.socket = _parent.socket;
                     this.socket.on('answer', function () {
                         console.log('Message from server: answer feed to be updated!!');
                         this.getUpdatedSelectedQuestion();

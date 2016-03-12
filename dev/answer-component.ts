@@ -41,7 +41,8 @@ export class AnswerQuestionComponent{
      */
     constructor(@Inject(forwardRef(() => QuestionFeedComponent))private _parent: QuestionFeedComponent,
                 private httpService: HTTPService){
-        this.socket = io('/');
+
+        this.socket = _parent.socket;
         this.socket.on('answer', function(){
             console.log('Message from server: answer feed to be updated!!');
             this.getUpdatedSelectedQuestion();
