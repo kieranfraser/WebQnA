@@ -41,6 +41,8 @@ declare var io: any;
  * This is the main class for application - the dashboard.
  * Here the comment feed is visible to the logged in user.
  * The user can post comments, answer questions, join classes etc.
+ * TODO: Important! investigate why slow/hanging requests when two instances
+ * TODO: of the application are open on the same machine (possibly socket.io problem)
  */
 export class DashboardComponent implements OnInit {
 
