@@ -25,7 +25,7 @@ var io = require('socket.io')(server);
 var onlineUserList = {};
 var onlineList = [];
 
-io.set('transports', ['websocket']);
+
 
 io.on('connection', function(socket){
   socket.on('disconnect', function () {
