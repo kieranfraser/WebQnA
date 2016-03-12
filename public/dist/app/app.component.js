@@ -84,6 +84,8 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                      * @type {boolean}
                      */
                     this.userLoggedIn = false;
+                    this.socket = null;
+                    this.socket = io('/');
                 }
                 /**
                  * On init must check if the user is logged in:
@@ -134,6 +136,7 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                  */
                 AppComponent.prototype.logout = function () {
                     console.log('User has logged out. Redirect to landing page.');
+                    this.socket.emit('userLogout', JSON.parse(localStorage.getItem('profile')).user_id);
                     localStorage.removeItem('profile');
                     localStorage.removeItem('id_token');
                     this.userLoggedIn = false;

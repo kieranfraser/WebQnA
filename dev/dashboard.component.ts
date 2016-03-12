@@ -57,7 +57,6 @@ export class DashboardComponent implements OnInit {
 
     public isCollapsedQuestion:boolean = true;
     public isCollapsedClass:boolean = true;
-    newUser: {username: string, picture: string};
 
     /**
      * List of online users - update using socket.io
@@ -76,15 +75,13 @@ export class DashboardComponent implements OnInit {
         console.log("Set user as logged in (button state)");
         _parent.setLoggedIn();
         this.socket = io('/');
-        this.socket.on('addUser', function(user){
-            console.log('Add user from server: '+ user);
-            this.onlineUsers.push(user);
+        this.socket.on('onlineUserList', function(list){
+            console.log('Online User List: '+ list);
+            this.onlineUsers = list;
         }.bind(this));
-        this.socket.on('removeUser', function(user){
-            console.log('Remove user from server: '+ user);
-        }.bind(this));
+
         var newUserOnline = new OnlineUser(JSON.parse(localStorage.getItem('profile')).name,
-            JSON.parse(localStorage.getItem('profile')).picture);
+            JSON.parse(localStorage.getItem('profile')).picture, JSON.parse(localStorage.getItem('profile')).user_id);
         this.socket.emit('userLogin', newUserOnline);
     }
 

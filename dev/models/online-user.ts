@@ -4,6 +4,7 @@
 export class OnlineUser {
     constructor(
         public name: string,
-        public picture: string
+        public picture: string,
+        public userId
     ) {}
 }

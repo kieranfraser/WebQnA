@@ -74,14 +74,11 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     console.log("Set user as logged in (button state)");
                     _parent.setLoggedIn();
                     this.socket = io('/');
-                    this.socket.on('addUser', function (user) {
-                        console.log('Add user from server: ' + user);
-                        this.onlineUsers.push(user);
+                    this.socket.on('onlineUserList', function (list) {
+                        console.log('Online User List: ' + list);
+                        this.onlineUsers = list;
                     }.bind(this));
-                    this.socket.on('removeUser', function (user) {
-                        console.log('Remove user from server: ' + user);
-                    }.bind(this));
-                    var newUserOnline = new online_user_1.OnlineUser(JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture);
+                    var newUserOnline = new online_user_1.OnlineUser(JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture, JSON.parse(localStorage.getItem('profile')).user_id);
                     this.socket.emit('userLogin', newUserOnline);
                 }
                 /**

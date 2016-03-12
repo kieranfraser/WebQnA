@@ -40,8 +40,12 @@
             </div>
             <div>onlineUsers
                 <div class="row" style="width: 100%;" *ngFor="#user of onlineUsers">
-                    <img class="img-circle" src="{{user.picture}}" alt="User:" height="35px" width="35px">
-                    <h5><small>{{user.name}}</small></h5>
+                    <div class=".col-xs-6" *ngIf="user != null">
+                        <img style="float: left; margin: 4%;" class=" img-circle" src="{{user.picture}}" alt="User:" height="35px" width="35px">
+                    </div>
+                    <div class=".col-xs-6" *ngIf="user != null">
+                        <h5><small>{{user.name}}</small></h5>
+                    </div>
                 </div>
             </div>
         </div>

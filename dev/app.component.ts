@@ -21,6 +21,7 @@ import {HTTPService} from "./services/http-service";
  * see https://github.com/auth0/lock for details.
  */
 declare var Auth0Lock;
+declare var io: any;
 
 @Component({
     selector: 'app',
@@ -85,8 +86,13 @@ export class AppComponent implements OnInit {
     public  userLoggedIn: boolean = false;
     public userProfile;
 
+
+    socket = null;
+
     constructor(private _router:Router, public http: Http, public authHttp: AuthHttp,
-                private httpService: HTTPService) {}
+                private httpService: HTTPService) {
+        this.socket = io('/');
+    }
 
     /**
      * On init must check if the user is logged in:
@@ -147,6 +153,7 @@ export class AppComponent implements OnInit {
      */
     logout() {
         console.log('User has logged out. Redirect to landing page.');
+        this.socket.emit('userLogout', JSON.parse(localStorage.getItem('profile')).user_id);
         localStorage.removeItem('profile');
         localStorage.removeItem('id_token');
         this.userLoggedIn = false;
