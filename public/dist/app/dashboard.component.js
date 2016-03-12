@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service", "./models/question"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service", "./models/question", "./models/online-user"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, common_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, class_input_component_1, http_service_1, question_1, ng2_bootstrap_2;
+    var core_1, router_1, common_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, class_input_component_1, http_service_1, question_1, ng2_bootstrap_2, online_user_1;
     var DashboardComponent;
     return {
         setters:[
@@ -47,6 +47,9 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
             },
             function (question_1_1) {
                 question_1 = question_1_1;
+            },
+            function (online_user_1_1) {
+                online_user_1 = online_user_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
@@ -63,8 +66,23 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     this.classes = [];
                     this.isCollapsedQuestion = true;
                     this.isCollapsedClass = true;
+                    /**
+                     * List of online users - update using socket.io
+                     */
+                    this.socket = null;
+                    this.onlineUsers = [];
                     console.log("Set user as logged in (button state)");
                     _parent.setLoggedIn();
+                    this.socket = io('/');
+                    this.socket.on('addUser', function (user) {
+                        console.log('Add user from server: ' + user);
+                        this.onlineUsers.push(user);
+                    }.bind(this));
+                    this.socket.on('removeUser', function (user) {
+                        console.log('Remove user from server: ' + user);
+                    }.bind(this));
+                    var newUserOnline = new online_user_1.OnlineUser(JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture);
+                    this.socket.emit('userLogin', newUserOnline);
                 }
                 /**
                  * This is called in child component instead of onInit because

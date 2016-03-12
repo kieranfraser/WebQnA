@@ -13,6 +13,9 @@ import {ClassInputComponent} from "./class-input.component";
 import {HTTPService} from "./services/http-service";
 import {Question} from "./models/question";
 import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap"
+import {OnlineUser} from "./models/online-user";
+
+declare var io: any;
 
 @Component({
     selector: 'dashboard',
@@ -54,6 +57,14 @@ export class DashboardComponent implements OnInit {
 
     public isCollapsedQuestion:boolean = true;
     public isCollapsedClass:boolean = true;
+    newUser: {username: string, picture: string};
+
+    /**
+     * List of online users - update using socket.io
+     */
+    socket = null;
+    onlineUsers: OnlineUser[] = [];
+
     /**
      * For the constructor must inject the parent "loginComponent" as
      * need to change parent variables which control button states (e.g.
@@ -64,6 +75,17 @@ export class DashboardComponent implements OnInit {
                 private httpService: HTTPService) {
         console.log("Set user as logged in (button state)");
         _parent.setLoggedIn();
+        this.socket = io('/');
+        this.socket.on('addUser', function(user){
+            console.log('Add user from server: '+ user);
+            this.onlineUsers.push(user);
+        }.bind(this));
+        this.socket.on('removeUser', function(user){
+            console.log('Remove user from server: '+ user);
+        }.bind(this));
+        var newUserOnline = new OnlineUser(JSON.parse(localStorage.getItem('profile')).name,
+            JSON.parse(localStorage.getItem('profile')).picture);
+        this.socket.emit('userLogin', newUserOnline);
     }
 
     /**
