@@ -45,7 +45,7 @@ io.on('connection', function(socket){
       onlineList.push(value);
     }
     socket.emit('onlineUserList', onlineList);
-    socket.broadcast.emit('onlineUserList', onlineUserList);
+    socket.broadcast.emit('onlineUserList', onlineList);
   });
 
   socket.on('userLogout', function(userid){
