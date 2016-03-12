@@ -85,6 +85,7 @@ export class DashboardComponent implements OnInit {
             JSON.parse(localStorage.getItem('profile')).picture, JSON.parse(localStorage.getItem('profile')).user_id);
 
         this.socket.emit('userLogin', newUserOnline);
+        console.log("adding self to online user list");
         this.onlineUsers.push(newUserOnline);
     }
 
