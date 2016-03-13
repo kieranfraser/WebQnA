@@ -1,4 +1,5 @@
-<div class="modal-content">
+<link rel='stylesheet' href = '../stylesheets/answer-modal.css'/>
+<div class="modal-content answer-feed-background" >
     <div class="modal-header">
         <div class="row">
             <div class="col-xs-6 col-sm-3">
@@ -23,7 +24,7 @@
         </div>
     </div>
 
-    <div class="modal-body">
+    <div class="modal-body answer-feed-background">
         <div [collapse]="isCollapsedAnswer" class="card card-block card-header">
             <div class="well well-lg">
                 <answer-input-form [selectedQuestion]="question"></answer-input-form>
@@ -50,7 +51,8 @@
                 </div>
             </div>
         </div>
-        <div class="well well-lg" *ngFor="#answer of question.answers">
+        <div class="well well-lg" style="border-style: outset; border-color: rgba(19, 124, 158, 0.28); border-radius: 20px;"
+             *ngFor="#answer of question.answers">
             <div class="row">
                 <div class="col-xs-6 col-md-4" *ngIf="answer.anonymous === ''">
                     <img class="img-circle" src="{{answer.picture}}" alt="Too good-looking" height="35px" width="35px">
