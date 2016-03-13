@@ -51,4 +51,4 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
     }
 });
 
-//# sourceMappingURL=maps/class-list.js.map
+//# sourceMappingURL=maps/class-list.component.js.map
