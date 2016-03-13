@@ -4,11 +4,7 @@
         <div class="row" style="margin-top: 1%">
             <div class="col-sm-4 col-centered">
                 <div class="btn-group">
-                    <!--<select class="form-control" id="sel1" (change)="classChange($event.target.value)">
-                        <option *ngFor="#class of classes" [value]="class">
-                            {{class}}
-                        </option>
-                    </select>-->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#classListModal">All Classes</button>
                 </div>
             </div>
             <div class="col-sm-4 col-centered">
@@ -35,11 +31,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-12 col-md-3">
-                <div class = "panel panel-default">
+                <div class = "panel panel-default" style="margin-top: 15px">
                     <div class = "panel-body">
                         <div class="btn-group" style="width: 100%; height: 50%;">
                             <div class="row" style="width: 100%;" *ngFor="#class of classes">
-                                <label style="width: 100%; margin: 5%; overflow-x: hidden; text-overflow: ellipsis" class="btn btn-primary" [(ngModel)]="selectedClass" (click)="classChange(class)" btnRadio="{{class}}">{{class}}</label>
+                                <label style="width: 100%; margin: 5%; overflow-x: hidden; text-overflow: ellipsis" class="btn btn-primary" *ngIf="class['joined'] === true" [(ngModel)]="selectedClass" (click)="classChange(class)" btnRadio="{{class['class']}}">{{class['class']}}</label>
                             </div>
                         </div>
                     </div>
@@ -68,5 +64,11 @@
                 <h4 *ngIf="emptyFeed"> There are no questions for this class yet. Be the first to ask a question!</h4>
             </div>
         </div>
+    </div>
+</div>
+<!-- Class List Modal -->
+<div id="classListModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <class-list [classes]="classes"></class-list>
     </div>
 </div>

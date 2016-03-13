@@ -14,6 +14,7 @@ import {HTTPService} from "./services/http-service";
 import {Question} from "./models/question";
 import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap"
 import {OnlineUser} from "./models/online-user";
+import {ClassListComponent} from "./dashboard/class-list";
 
 declare var io: any;
 
@@ -25,7 +26,7 @@ declare var io: any;
 @View({
     templateUrl: 'views/dashboard.html',
     directives: [ ROUTER_DIRECTIVES, Alert, QuestionFeedComponent,
-        ClassInputComponent , QuestionInputFormComponent, Collapse,
+        ClassInputComponent , QuestionInputFormComponent, ClassListComponent, Collapse,
         BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
 
@@ -52,7 +53,7 @@ export class DashboardComponent implements OnInit {
     id_token: string;
     emptyFeed: boolean = true;
 
-    public classes:string[] = [];
+    public classes:any[] = [];
     public userQuestionIds: string[];
     public selectedClass:string;
     questions: Question[];
@@ -113,7 +114,7 @@ export class DashboardComponent implements OnInit {
     classChange(value:string){
         console.log("changed");
         console.log(value);
-        this.selectedClass = value;
+        this.selectedClass = value['class'];
         this.getQuestions();
     }
 
@@ -129,7 +130,8 @@ export class DashboardComponent implements OnInit {
     populateClassDropdown(classListArray:JSON[]){
         this.classes = [];
         for(var item of classListArray){
-            this.classes.push(JSON.parse(JSON.stringify(item)).name);
+
+            this.classes.push({'class':JSON.parse(JSON.stringify(item)).name, 'joined': false});
         }
         this.getQuestions();
     }
