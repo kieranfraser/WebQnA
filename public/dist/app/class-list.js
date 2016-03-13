@@ -38,7 +38,7 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                 ClassListComponent = __decorate([
                     core_1.Component({
                         selector: 'class-list',
-                        templateUrl: 'views/dashboard/class_list_modal.html',
+                        templateUrl: 'views/class_list_modal.html',
                         directives: [ng2_bootstrap_1.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
                         inputs: ['classes'],
                     }), 
@@ -51,4 +51,4 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
     }
 });
 
-//# sourceMappingURL=../maps/dashboard/class-list.js.map
+//# sourceMappingURL=maps/class-list.js.map

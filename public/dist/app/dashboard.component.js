@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service", "./models/question", "./models/online-user", "./dashboard/class-list"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service", "./models/question", "./models/online-user", "./class-list"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

@@ -10,7 +10,7 @@ declare var io: any;
 
 @Component({
     selector: 'class-list',
-    templateUrl: 'views/dashboard/class_list_modal.html',
+    templateUrl: 'views/class_list_modal.html',
     directives: [ BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ],
     inputs: ['classes'],
 })

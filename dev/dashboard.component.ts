@@ -14,7 +14,7 @@ import {HTTPService} from "./services/http-service";
 import {Question} from "./models/question";
 import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap"
 import {OnlineUser} from "./models/online-user";
-import {ClassListComponent} from "./dashboard/class-list";
+import {ClassListComponent} from "./class-list";
 
 declare var io: any;
 
