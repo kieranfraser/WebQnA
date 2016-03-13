@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="row pad-top pad-bottom">
+        <div>
+            <div class="chat-box-div">
+                <div class="chat-box-head"></div>
+                <div class="panel-body chat-box-main">
+
+                    <div class="well well-lg" *ngFor="#question of questions" data-toggle="modal" data-target="#answerModal" (click)="clickedQuestion(question)">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-4" *ngIf="question.anonymous === ''">
+                                <img class="img-circle" src="{{question.picture}}" alt="{{question.username}}" height="35px" width="35px">
+                            </div>
+                            <div class="col-xs-6 col-md-4" *ngIf="question.anonymous === 'true'">
+                                <h5><small>Anonymous</small></h5>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <div class="chat-box-left">
+                                    <h5 style="text-align: center">{{question.summary}}</h5>
+                                </div>
+                                <div class="chat-box-name-left" *ngIf="question.anonymous === ''">
+                                    <h4 style="text-align: center"><small> - {{question.username}}</small></h4>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <h5 style="text-align: center"><small>{{question.answers.length}} replies</small></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style type="text/css">
+    @media screen and (min-width: 768px) {
+        .modal-dialog {
+            width: 80%; /* New width for default modal */
+        }
+        .modal-sm {
+            width: 50%; /* New width for small modal */
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .modal-lg {
+            width: 950px; /* New width for large modal */
+        }
+    }
+</style>
+<!-- Answer Modal -->
+<div id="answerModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <answer-question [question]="selectedQuestion"></answer-question>
+    </div>
+</div>

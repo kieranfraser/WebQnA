@@ -1,0 +1,75 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xs-6 col-sm-3">
+                <div *ngIf="question.anonymous === ''" >
+                    <img style="align-content: center" class="img-circle" src="{{question.picture}}" alt="{{question.username}}" height="35px" width="35px">
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <h4 class="modal-title" *ngIf="question.anonymous === 'true'">{{question.summary}}<small> - Anonymous</small></h4>
+                <h4 class="modal-title" *ngIf="question.anonymous === ''">{{question.summary}}<small> - {{question.username}}</small></h4>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <button type="button" class="btn btn-primary" (click)="isCollapsedAnswer = !isCollapsedAnswer">Answer</button>
+                <button type="button" class="btn btn-primary" (click)="isCollapsedStats = !isCollapsedStats">Statistics</button>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+        </div>
+        <div>
+            <h6>{{question.question}}</h6>
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <div [collapse]="isCollapsedAnswer" class="card card-block card-header">
+            <div class="well well-lg">
+                <answer-input-form [selectedQuestion]="question"></answer-input-form>
+            </div>
+        </div>
+        <div [collapse]="isCollapsedStats" class="card card-block card-header">
+            <div class="container-fluid" *ngIf="question.type === 'Multi-choice'">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-8">
+                        <bar-graph [selectedQuestion]="question" *ngIf="!isCollapsedStats" ></bar-graph>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <doughnut-chart [selectedQuestion]="question" *ngIf="!isCollapsedStats"></doughnut-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid" *ngIf="question.type === 'Free-text'">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-8">
+                        <doughnut-chart [selectedQuestion]="question" *ngIf="!isCollapsedStats"></doughnut-chart>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="well well-lg" *ngFor="#answer of question.answers">
+            <div class="row">
+                <div class="col-xs-6 col-md-4" *ngIf="answer.anonymous === ''">
+                    <img class="img-circle" src="{{answer.picture}}" alt="Too good-looking" height="35px" width="35px">
+                </div>
+                <div class="col-xs-6 col-md-4" *ngIf="answer.anonymous === 'true'">
+                    <h5><small>Anonymous</small></h5>
+                </div>
+                <div class="col-xs-6 col-md-8">
+                    <div class="chat-box-left">
+                        <h5 style="text-align: center">{{answer.answer}}</h5>
+                    </div>
+                    <div class="chat-box-name-left" *ngIf="answer.anonymous === ''">
+                        <h4 style="text-align: center"><small> - {{answer.username}}</small></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+</div>
