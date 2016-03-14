@@ -112,13 +112,24 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                 DashboardComponent.prototype.getClassList = function () {
                     var _this = this;
                     var classListArray = [];
-                    this.httpService.getAllClasses().subscribe(function (data) { return classListArray = JSON.parse(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.populateClassDropdown(classListArray); });
+                    this.httpService.getAllClasses().subscribe(function (data) { return classListArray = JSON.parse(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.populateAllClassesModal(classListArray); });
                 };
-                DashboardComponent.prototype.populateClassDropdown = function (classListArray) {
+                DashboardComponent.prototype.populateAllClassesModal = function (classListArray) {
                     this.classes = [];
+                    var userClasses = JSON.parse(localStorage.getItem('user')).lectures;
+                    console.log("User classes: " + userClasses);
                     for (var _i = 0, classListArray_1 = classListArray; _i < classListArray_1.length; _i++) {
                         var item = classListArray_1[_i];
-                        this.classes.push({ 'class': JSON.parse(JSON.stringify(item)).name, 'joined': false });
+                        var joined = true;
+                        if (userClasses != null) {
+                            if (userClasses.indexOf(JSON.parse(JSON.stringify(item)).name) === -1) {
+                                joined = false;
+                            }
+                        }
+                        else {
+                            joined = false;
+                        }
+                        this.classes.push({ 'class': JSON.parse(JSON.stringify(item)).name, 'joined': joined });
                     }
                     this.getQuestions();
                 };

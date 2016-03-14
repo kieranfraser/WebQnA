@@ -80,6 +80,13 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                     return this.http.get('/api/getclasses')
                         .map(function (res) { return res.json(); });
                 };
+                HTTPService.prototype.updateUserClasses = function (json) {
+                    var headers = new http_1.Headers();
+                    headers.append('Content-Type', 'application/json');
+                    return this.http.post('/api/userclasses', json, {
+                        headers: headers
+                    }).map(function (res) { return res.json(); });
+                };
                 HTTPService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

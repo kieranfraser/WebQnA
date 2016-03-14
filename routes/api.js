@@ -16,7 +16,7 @@ var Lecture = require('../models/lecture');
 /* Create/Get User */
 router.get('/getuser', function(req, res, next) {
     console.log(req.query.userid);
-    User.findOne({ userid: req.query.userid }, {new:true}, function(err, user) {
+    User.findOne({ userid: req.query.userid },'userid lectures questions notifications auth', {new:true}, function(err, user) {
         if (err) console.log("error"+err);
         // object of the user
         if(user === null){
@@ -34,6 +34,85 @@ router.get('/getuser', function(req, res, next) {
         else{
             res.send(user);
         }
+    });
+});
+
+/**
+ * Update a user with their currently joined classes
+ */
+router.post('/userclasses',jsonParser, function(req, res, next) {
+
+    console.log(req.body);
+
+    User.findOne({ userid: req.body.userid }, function(err, user) {
+        if(err) console.log("Error retrieving user (update class).");
+
+        var newClassListArray = [];
+        var newClassList = req.body.classes.length;
+        if(user.lectures != null) {
+            var oldClassList = user.lectures.length;
+
+            // adding user as participant to classes
+            for (var i = 0; i < newClassList; i++) {
+                newClassListArray.push(req.body.classes[i]);
+
+                if (user.lectures.indexOf(req.body.classes[i]) === -1) {
+                    Lecture.findOne({name: req.body.classes[i]}, function (err, lecture) {
+                        if (err) console.log("Error retrieving class for update user.");
+                        if(lecture.participants.indexOf(user.userid === -1)){
+                            lecture.participants.push(user.userid);
+                            lecture.save(function (err) {
+                                if (err) throw err;
+                                console.log('lecture updated with user.');
+                            });
+                        }
+                    });
+                }
+            }
+
+            // removing user as participant from classes
+            for (var j = 0; j < oldClassList; j++) {
+                if (req.body.classes.indexOf(user.lectures[j]) === -1) {
+                    Lecture.findOne({name: user.lectures[j]}, function (err, lecture) {
+                        if (err) console.log("Error retrieving class for update user.");
+                        var index = lecture.participants.indexOf(user.userid);
+                        console.log("Old length: " + lecture.participants.length);
+                        lecture.participants.splice(index, 1);
+                        console.log("New length: " + lecture.participants.length);
+                        lecture.save(function (err) {
+                            if (err) throw err;
+                            console.log('lecture updated with user.');
+                        });
+                    });
+                }
+            }
+        }
+        else{
+            // adding user as participant to classes
+            for (var i = 0; i < newClassList; i++) {
+                newClassListArray.push(req.body.classes[i]);
+                Lecture.findOne({name: req.body.classes[i]}, function (err, lecture) {
+                    if (err) console.log("Error retrieving class for update user.");
+                    if(lecture.participants.indexOf(user.userid === -1)){
+                        lecture.participants.push(user.userid);
+                        lecture.save(function (err) {
+                            if (err) throw err;
+                            console.log('lecture updated with user.');
+                        });
+                    }
+                });
+            }
+        }
+        newClassListArray = [];
+        for (var i = 0; i < newClassList; i++) {
+            newClassListArray.push(req.body.classes[i]);
+        }
+        user.lectures = newClassListArray;
+        user.save(function(err, updatedUser){
+            if(err) throw err;
+            console.log('user updated with classes.');
+            res.send(updatedUser);
+        });
     });
 });
 

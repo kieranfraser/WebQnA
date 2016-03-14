@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstrap'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstrap', "./models/user", "./services/http-service", "./dashboard.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,10 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, ng2_bootstrap_1;
+    var __param = (this && this.__param) || function (paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); }
+    };
+    var core_1, common_1, ng2_bootstrap_1, user_1, http_service_1, dashboard_component_1;
     var ClassListComponent;
     return {
         setters:[
@@ -22,18 +25,35 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
             },
             function (ng2_bootstrap_1_1) {
                 ng2_bootstrap_1 = ng2_bootstrap_1_1;
+            },
+            function (user_1_1) {
+                user_1 = user_1_1;
+            },
+            function (http_service_1_1) {
+                http_service_1 = http_service_1_1;
+            },
+            function (dashboard_component_1_1) {
+                dashboard_component_1 = dashboard_component_1_1;
             }],
         execute: function() {
             ClassListComponent = (function () {
-                function ClassListComponent() {
+                function ClassListComponent(_parent, httpService) {
+                    this._parent = _parent;
+                    this.httpService = httpService;
                     this.singleModel = '1';
                     this.radioModel = 'Middle';
                 }
                 ClassListComponent.prototype.save = function () {
+                    var joinedList = [];
                     for (var _i = 0, _a = this.classes; _i < _a.length; _i++) {
-                        var a = _a[_i];
-                        console.log(a);
+                        var lecture = _a[_i];
+                        if (lecture['joined'] === true) {
+                            joinedList.push(lecture['class']);
+                        }
                     }
+                    this.user = new user_1.User(JSON.parse(localStorage.getItem('profile')).user_id, joinedList, [], [], "", "");
+                    var json = JSON.stringify(this.user);
+                    this.httpService.updateUserClasses(json).subscribe(function (data) { return console.log(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("User classes updated"); });
                 };
                 ClassListComponent = __decorate([
                     core_1.Component({
@@ -41,8 +61,9 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                         templateUrl: 'views/class_list_modal.html',
                         directives: [ng2_bootstrap_1.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES],
                         inputs: ['classes'],
-                    }), 
-                    __metadata('design:paramtypes', [])
+                    }),
+                    __param(0, core_1.Inject(core_1.forwardRef(function () { return dashboard_component_1.DashboardComponent; }))), 
+                    __metadata('design:paramtypes', [dashboard_component_1.DashboardComponent, http_service_1.HTTPService])
                 ], ClassListComponent);
                 return ClassListComponent;
             }());

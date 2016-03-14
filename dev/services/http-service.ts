@@ -83,4 +83,15 @@ export class HTTPService {
             .map(res => res.json());
     }
 
+    updateUserClasses(json: string){
+        var headers = new Headers();
+        headers.append('Content-Type',
+            'application/json');
+
+        return this.http.post('/api/userclasses',
+            json, {
+                headers: headers
+            }).map( res => res.json());
+    }
+
 }

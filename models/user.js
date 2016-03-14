@@ -7,9 +7,9 @@ var Schema = mongoose.Schema;
 
 var userSchema = Schema({
     userid: String,
-    lectures: [Schema.Types.ObjectId],
+    lectures: [String],
     questions: [Schema.Types.ObjectId],
-    anonymous: Boolean,
+    notifications: [Schema.Types.ObjectId],
     auth: String
 });
 

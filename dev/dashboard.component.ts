@@ -123,15 +123,25 @@ export class DashboardComponent implements OnInit {
         this.httpService.getAllClasses().subscribe(
             data => classListArray = JSON.parse(JSON.stringify(data)),
             error => alert(error),
-            () => this.populateClassDropdown(classListArray)
+            () => this.populateAllClassesModal(classListArray)
         );
     }
 
-    populateClassDropdown(classListArray:JSON[]){
+    populateAllClassesModal(classListArray:JSON[]){
         this.classes = [];
+        var userClasses = JSON.parse(localStorage.getItem('user')).lectures;
+        console.log("User classes: "+userClasses);
         for(var item of classListArray){
-
-            this.classes.push({'class':JSON.parse(JSON.stringify(item)).name, 'joined': false});
+            var joined: boolean = true;
+            if(userClasses != null){
+                if(userClasses.indexOf(JSON.parse(JSON.stringify(item)).name) === -1){
+                    joined = false;
+                }
+            }
+            else{
+                joined = false;
+            }
+            this.classes.push({'class':JSON.parse(JSON.stringify(item)).name, 'joined': joined});
         }
         this.getQuestions();
     }

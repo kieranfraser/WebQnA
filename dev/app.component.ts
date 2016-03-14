@@ -138,12 +138,19 @@ export class AppComponent implements OnInit {
             this.httpService.getUserDetails(userId).subscribe(
                 data => localStorage.setItem('user', JSON.stringify(data)),
                 error => alert(error),
-                () => console.log("get user details success")
+                () => this.navigateToDashboard()
             );
-            this.userLoggedIn = true;
-            console.log("Login successful, redirecting to the dashboard.");
-            this._router.navigate(['Dashboard']);
         });
+    }
+
+    navigateToDashboard(){
+        console.log("get user details failure");
+        console.log((JSON.parse(localStorage.getItem('user')).userid));
+        console.log((JSON.parse(localStorage.getItem('user')).lectures));
+        console.log((JSON.parse(localStorage.getItem('user')).questions));
+        this.userLoggedIn = true;
+        console.log("Login successful, redirecting to the dashboard.");
+        this._router.navigate(['Dashboard']);
     }
 
     /**
