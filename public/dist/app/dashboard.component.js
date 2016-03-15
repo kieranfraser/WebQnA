@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service", "./models/question", "./models/online-user", "./class-list.component"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service", "./models/question", "./models/online-user", "./class-list.component", "./lecturer-auth.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, common_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, class_input_component_1, http_service_1, question_1, ng2_bootstrap_2, online_user_1, class_list_component_1;
+    var core_1, router_1, common_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, class_input_component_1, http_service_1, question_1, ng2_bootstrap_2, online_user_1, class_list_component_1, lecturer_auth_component_1;
     var DashboardComponent;
     return {
         setters:[
@@ -53,6 +53,9 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
             },
             function (class_list_component_1_1) {
                 class_list_component_1 = class_list_component_1_1;
+            },
+            function (lecturer_auth_component_1_1) {
+                lecturer_auth_component_1 = lecturer_auth_component_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
@@ -161,8 +164,8 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     core_1.View({
                         templateUrl: 'views/dashboard.html',
                         directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.Alert, question_feed_component_1.QuestionFeedComponent,
-                            class_input_component_1.ClassInputComponent, question_form_component_1.QuestionInputFormComponent, class_list_component_1.ClassListComponent, ng2_bootstrap_1.Collapse,
-                            ng2_bootstrap_2.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+                            class_input_component_1.ClassInputComponent, question_form_component_1.QuestionInputFormComponent, class_list_component_1.ClassListComponent, lecturer_auth_component_1.LecturerAuthComponent,
+                            ng2_bootstrap_1.Collapse, ng2_bootstrap_2.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
                     }),
                     __param(0, core_1.Inject(core_1.forwardRef(function () { return app_component_1.AppComponent; }))), 
                     __metadata('design:paramtypes', [app_component_1.AppComponent, http_service_1.HTTPService])

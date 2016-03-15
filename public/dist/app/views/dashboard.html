@@ -1,5 +1,5 @@
 <link rel='stylesheet' href = '../stylesheets/dashboard.css'/>
-<div class="container-fluid  feed-background">
+<div class="container-fluid  feed-background" style="height: 100vh;">
     <div class="container">
         <div class="row" style="margin-top: 1%">
             <div class="col-sm-4 col-centered">
@@ -57,6 +57,7 @@
                             </div>
                         </div>
                     </div>
+                    <h6 style="text-align: center">Are you a Lecturer? <a style="text-decoration: underline;" data-toggle="modal" data-target="#authLecturer">Get Authorised</a></h6>
                 </div>
             </div>
             <div class="col-xs-12 col-md-9">
@@ -70,5 +71,11 @@
 <div id="classListModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <class-list [classes]="classes"></class-list>
+    </div>
+</div>
+<!-- Class List Modal -->
+<div id="authLecturer" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <lecturer-auth></lecturer-auth>
     </div>
 </div>

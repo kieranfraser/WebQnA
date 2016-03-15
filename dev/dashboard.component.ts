@@ -15,6 +15,7 @@ import {Question} from "./models/question";
 import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap"
 import {OnlineUser} from "./models/online-user";
 import {ClassListComponent} from "./class-list.component";
+import {LecturerAuthComponent} from "./lecturer-auth.component";
 
 declare var io: any;
 
@@ -26,8 +27,8 @@ declare var io: any;
 @View({
     templateUrl: 'views/dashboard.html',
     directives: [ ROUTER_DIRECTIVES, Alert, QuestionFeedComponent,
-        ClassInputComponent , QuestionInputFormComponent, ClassListComponent, Collapse,
-        BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ]
+        ClassInputComponent , QuestionInputFormComponent, ClassListComponent, LecturerAuthComponent,
+        Collapse,BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
 
 /**

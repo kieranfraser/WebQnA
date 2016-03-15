@@ -1,0 +1,36 @@
+<div class="modal-content answer-feed-background" >
+    <div class="modal-header">
+        <div class="row">
+            <div style="text-align: center; padding: 2%">
+                <h4 style="margin-bottom: 6%">Welcome to the authorisation process for Lecturers. The steps are simple:</h4>
+                <dl>
+                    <dt>Step 1</dt>
+                    <dd>Click the button below to send your user details to the Qanda team.</dd>
+                    <dt>Step 2</dt>
+                    <dd>A member of the Qanda team will contact you to verify your position within your academic institution.</dd>
+                    <dt>Step 3</dt>
+                    <dd style="margin-bottom: 5%">Once verification is complete your user authorisation level will be upgraded to "Lecturer".</dd>
+                    <dt>What this will mean:</dt>
+                    <dd> - You will have the ability to add classes and control posts in your class.</dd>
+                    <dd> - You will have access to class statistics.</dd>
+                    <dd> - You will be able to see all anonymously posted information.</dd>
+                    <dd> - You will have access to "Lecture Resources" where all lecturers can archive and share teaching material.</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-body" style="text-align: center">
+        <div class="btn-group" >
+            <div class="row" *ngIf="unsent === true">
+                <label class="btn btn-primary" (click)="getAuthorised()">Send my user details to Qanda</label>
+            </div>
+            <div *ngIf="unsent === false">
+                <h4><small style="color: #e38a21;">User details sent. Qanda will be in touch shortly to verify your identity.</small></h4>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    </div>
+</div>

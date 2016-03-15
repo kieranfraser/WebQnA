@@ -12,6 +12,9 @@ var Question = require('../models/question');
 var User = require('../models/user');
 var Lecture = require('../models/lecture');
 
+// Used for sending lecture authorisation mail
+var nodemailer = require('nodemailer');
+
 
 /* Create/Get User */
 router.get('/getuser', function(req, res, next) {
@@ -257,6 +260,42 @@ router.get('/getclass', function(req, res, next) {
         res.send(lecture);
     });
 
+});
+
+/**
+ * Send an email to qandasteam to update a lecturer auth status
+ * TODO: Password shouldn't be saved here
+ */
+router.post('/authorise',jsonParser, function(req, res, next) {
+
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'qandasteam@gmail.com', // Your email id
+            pass: 'teampanda' // Your password
+        }
+    });
+
+    var text = 'Greetings, \n\n' +
+        'Please follow up with the following user to authorise them as a lecturer: \n\n'
+        +'Name: '+ req.body.name+' \n\n'+'Email: '+req.body.email+' \n\n'+'Facebook: '+req.body.link+'\n\n'+
+        'User Id: '+req.body.user_id+
+        '\n\n\n Kind Regards, \n\n Team Qanda';
+    var mailOptions = {
+        from: 'qandasteam@gmail.com', // sender address
+        to: 'kfraser@tcd.ie', // list of receivers
+        subject: 'Authorise Lecturer: '+req.body.name, // Subject line
+        text: text
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+            res.json({yo: 'error'});
+        }else{
+            console.log('Message sent: ' + info.response);
+            res.json({yo: info.response});
+        };
+    });
 });
 
 module.exports = router;

@@ -1,18 +1,13 @@
 <div class="modal-content answer-feed-background" >
     <div class="modal-header">
         <div class="row">
-            <div class="col-xs-6 col-sm-3">
-            </div>
-            <div class="col-xs-6 col-sm-3">
-            </div>
-            <div class="col-xs-6 col-sm-3">
-            </div>
-            <div class="col-xs-6 col-sm-3">
+            <div style="text-align: center">
+                <h4><small>Select any number of classes below to have them added to your list of joined classes</small></h4>
             </div>
         </div>
     </div>
 
-    <div class="modal-body">
+    <div class="modal-body" style="text-align: center">
         <div class="btn-group" >
             <div class="row" style="width: 100%;" *ngFor="#class of classes">
                 <label style="width: 100%; margin: 5%; overflow-x: hidden; text-overflow: ellipsis" class="btn btn-primary" [(ngModel)]="class['joined']" btnCheckbox>{{class['class']}}</label>

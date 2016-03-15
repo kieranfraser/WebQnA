@@ -94,4 +94,15 @@ export class HTTPService {
             }).map( res => res.json());
     }
 
+    sendAuthEmail(json: string){
+        var headers = new Headers();
+        headers.append('Content-Type',
+            'application/json');
+
+        return this.http.post('/api/authorise',
+            json, {
+                headers: headers
+            }).map( res => res.json());
+    }
+
 }

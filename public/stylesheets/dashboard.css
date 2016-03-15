@@ -3,3 +3,11 @@
   max-width: 100%;
   max-height: 100%;
   background-repeat: repeat; }
+
+a:hover {
+  color: #dca806;
+  cursor: pointer; }
+
+a:active {
+  color: blue;
+  cursor: pointer; }
