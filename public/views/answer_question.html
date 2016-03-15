@@ -51,8 +51,9 @@
                 </div>
             </div>
         </div>
-        <div class="well well-lg" style="border-style: outset; border-color: rgba(19, 124, 158, 0.28); border-radius: 20px;"
+        <div class="panel panel-default" style="padding: 3%"
              *ngFor="#answer of question.answers">
+            <!--style="border-style: outset; border-color: rgba(19, 124, 158, 0.28); border-radius: 20px;"-->
             <div class="row">
                 <div class="col-xs-6 col-md-4" *ngIf="answer.anonymous === ''">
                     <img class="img-circle" src="{{answer.picture}}" alt="Too good-looking" height="35px" width="35px">
@@ -71,7 +72,7 @@
             </div>
         </div>
     </div>
-    <div class="modal-footer">
+    <!--<div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    </div>
+    </div>-->
 </div>

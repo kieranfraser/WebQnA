@@ -5,8 +5,9 @@
                 <div class="chat-box-head"></div>
                 <div class="panel-body chat-box-main">
 
-                    <div class="well well-lg"  style="border-style: outset; border-color: rgba(19, 124, 158, 0.28); border-radius: 20px;"
+                    <div class="panel panel-default" style="padding: 3%"
                          *ngFor="#question of questions" data-toggle="modal" data-target="#answerModal" (click)="clickedQuestion(question)">
+                        <!--style="border-style: outset; border-color: rgba(19, 124, 158, 0.28); border-radius: 20px;-->
                         <div class="row">
                             <div class="col-xs-6 col-md-4" *ngIf="question.anonymous === ''">
                                 <img class="img-circle" src="{{question.picture}}" alt="{{question.username}}" height="35px" width="35px">

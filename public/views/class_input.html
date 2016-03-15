@@ -1,6 +1,13 @@
-<div class="form-group">
-    <label for="classname">Class Name:</label>
-    <input type="text" [(ngModel)]="className" class="form-control" id="classname">
-</div>
+<div class="modal-content" >
+    <form class="form-basic">
+        <div class="form-title-row">
+            <h1>Add Class</h1>
+        </div>
+        <div class="form-row">
+            <label for="classname">Class Name:</label>
+            <input type="text" [(ngModel)]="className" class="form-control" id="classname">
+        </div>
+    </form>
 
-<button type="button" class="btn btn-primary" (click)="addClass()">Add Class</button>
+    <button type="button" class="btn btn-success" (click)="addClass()">Add Class</button>
+</div>

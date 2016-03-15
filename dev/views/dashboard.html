@@ -1,25 +1,21 @@
 <link rel='stylesheet' href = '../stylesheets/dashboard.css'/>
+
 <div class="container-fluid  feed-background" style="height: 100vh;">
     <div class="container">
         <div class="row" style="margin-top: 1%">
             <div class="col-sm-4 col-centered">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#classListModal" data-backdrop="static" data-keyboard="false">All Classes</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#classListModal">All Classes</button><!--data-backdrop="static" data-keyboard="false"-->
                 </div>
             </div>
             <div class="col-sm-4 col-centered">
             </div>
             <!-- Optional: clear the XS cols if their content doesn't match in height -->
             <div class="clearfix visible-xs-block"></div>
-            <div class="col-sm-4 col-centered" *ngIf="selectedClass != ''" >
-                <button type="button" class="btn btn-primary" (click)="isCollapsedQuestion = !isCollapsedQuestion">Ask Question</button>
+            <div class="col-sm-4 col-centered">
+                <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addClassModal">Add Class</button><!--(click)="isCollapsedClass = !isCollapsedClass"-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#askQuestionModal" *ngIf="selectedClass != ''">Ask Question</button><!--(click)="isCollapsedQuestion = !isCollapsedClass"-->
             </div>
-        </div>
-    </div>
-
-    <div [collapse]="isCollapsedQuestion" class="card card-block card-header">
-        <div class="well well-lg">
-            <question-input-form [selectedClass]="selectedClass"></question-input-form>
         </div>
     </div>
     <div class="container-fluid">
@@ -29,7 +25,7 @@
                     <div class = "panel-body">
                         <div class="btn-group" style="width: 100%; height: 50%;" *ngIf="userClasses.length > 0">
                             <div class="row" style="width: 100%;" *ngFor="#class of classes">
-                                <label style="width: 100%; margin: 5%; overflow-x: hidden; text-overflow: ellipsis" class="btn btn-primary" *ngIf="class['joined'] === true" [(ngModel)]="selectedClass" (click)="classChange(class)" btnRadio="{{class['class']}}">{{class['class']}}</label>
+                                <label style="width: 100%; margin-left: 5%; margin-top: 1%; overflow-x: hidden; text-overflow: ellipsis" class="btn btn-primary" *ngIf="class['joined'] === true" [(ngModel)]="selectedClass" (click)="classChange(class)" btnRadio="{{class['class']}}">{{class['class']}}</label>
                             </div>
                         </div>
                         <div *ngIf="userClasses.length === 0">
@@ -67,15 +63,28 @@
         </div>
     </div>
 </div>
+
 <!-- Class List Modal -->
 <div id="classListModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <class-list [classes]="classes"></class-list>
     </div>
 </div>
-<!-- Class List Modal -->
+<!-- Lecturer Authorise Modal -->
 <div id="authLecturer" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <lecturer-auth></lecturer-auth>
+    </div>
+</div>
+<!-- Ask Question Modal -->
+<div id="askQuestionModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <question-input-form [selectedClass]="selectedClass"></question-input-form>
+    </div>
+</div>
+<!-- Add Class Modal -->
+<div id="addClassModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <class-input></class-input>
     </div>
 </div>
