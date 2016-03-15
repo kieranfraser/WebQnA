@@ -1,4 +1,4 @@
-System.register(['angular2/core', "./dashboard.component", "./models/lecture", "./services/http-service"], function(exports_1, context_1) {
+System.register(['angular2/core', "./models/lecture", "./services/http-service", "./class-list.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,21 +13,21 @@ System.register(['angular2/core', "./dashboard.component", "./models/lecture", "
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, dashboard_component_1, lecture_1, http_service_1;
+    var core_1, lecture_1, http_service_1, class_list_component_1;
     var ClassInputComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (dashboard_component_1_1) {
-                dashboard_component_1 = dashboard_component_1_1;
-            },
             function (lecture_1_1) {
                 lecture_1 = lecture_1_1;
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
+            },
+            function (class_list_component_1_1) {
+                class_list_component_1 = class_list_component_1_1;
             }],
         execute: function() {
             ClassInputComponent = (function () {
@@ -53,7 +53,7 @@ System.register(['angular2/core', "./dashboard.component", "./models/lecture", "
                     this.httpService.addClass(json).subscribe(function (data) { return console.log(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("Class added"); });
                     console.log(JSON.stringify(this.newClass));
                     this.className = "";
-                    this._parent.getClassList();
+                    this._parent.refresh();
                     this._parent.isCollapsedClass = !this._parent.isCollapsedClass;
                 };
                 ClassInputComponent = __decorate([
@@ -64,8 +64,8 @@ System.register(['angular2/core', "./dashboard.component", "./models/lecture", "
                     core_1.View({
                         templateUrl: 'views/class_input.html'
                     }),
-                    __param(0, core_1.Inject(core_1.forwardRef(function () { return dashboard_component_1.DashboardComponent; }))), 
-                    __metadata('design:paramtypes', [dashboard_component_1.DashboardComponent, http_service_1.HTTPService])
+                    __param(0, core_1.Inject(core_1.forwardRef(function () { return class_list_component_1.ClassListComponent; }))), 
+                    __metadata('design:paramtypes', [class_list_component_1.ClassListComponent, http_service_1.HTTPService])
                 ], ClassInputComponent);
                 return ClassInputComponent;
             }());

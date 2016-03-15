@@ -16,6 +16,7 @@ import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap"
 import {OnlineUser} from "./models/online-user";
 import {ClassListComponent} from "./class-list.component";
 import {LecturerAuthComponent} from "./lecturer-auth.component";
+import {User} from "./models/user";
 
 declare var io: any;
 
@@ -27,7 +28,7 @@ declare var io: any;
 @View({
     templateUrl: 'views/dashboard.html',
     directives: [ ROUTER_DIRECTIVES, Alert, QuestionFeedComponent,
-        ClassInputComponent , QuestionInputFormComponent, ClassListComponent, LecturerAuthComponent,
+        QuestionInputFormComponent, ClassListComponent, LecturerAuthComponent,
         Collapse,BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ]
 })
 
@@ -56,17 +57,21 @@ export class DashboardComponent implements OnInit {
 
     public classes:any[] = [];
     public userQuestionIds: string[];
-    public selectedClass:string;
+    public selectedClass:string = '';
     questions: Question[];
 
     public isCollapsedQuestion:boolean = true;
-    public isCollapsedClass:boolean = true;
 
     /**
      * List of online users - update using socket.io
      */
     socket = null;
     onlineUsers: OnlineUser[] = [];
+
+    /**
+     * User
+     */
+    public userClasses = [];
 
     /**
      * For the constructor must inject the parent "loginComponent" as
@@ -124,18 +129,27 @@ export class DashboardComponent implements OnInit {
         this.httpService.getAllClasses().subscribe(
             data => classListArray = JSON.parse(JSON.stringify(data)),
             error => alert(error),
+            () => this.getUpdatedUser(classListArray)
+        );
+    }
+
+    getUpdatedUser(classListArray){
+        // Get user details (joined classes, questions asked) from database
+        var userid :string = JSON.parse(localStorage.getItem('profile')).user_id;
+        this.httpService.getUserDetails(userid).subscribe(
+            data => localStorage.setItem('user', JSON.stringify(data)),
+            error => alert(error),
             () => this.populateAllClassesModal(classListArray)
         );
     }
 
     populateAllClassesModal(classListArray:JSON[]){
         this.classes = [];
-        var userClasses = JSON.parse(localStorage.getItem('user')).lectures;
-        console.log("User classes: "+userClasses);
+        this.userClasses = JSON.parse(localStorage.getItem('user')).lectures;
         for(var item of classListArray){
             var joined: boolean = true;
-            if(userClasses != null){
-                if(userClasses.indexOf(JSON.parse(JSON.stringify(item)).name) === -1){
+            if(this.userClasses != null){
+                if(this.userClasses.indexOf(JSON.parse(JSON.stringify(item)).name) === -1){
                     joined = false;
                 }
             }

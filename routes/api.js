@@ -25,7 +25,11 @@ router.get('/getuser', function(req, res, next) {
         if(user === null){
             console.log('null');
             var newUser = User({
-                userid: req.query.userid
+                userid: req.query.userid,
+                lectures: [],
+                questions: [],
+                notifications: [],
+                auth: 'student'
             });
 
             newUser.save(function(err){

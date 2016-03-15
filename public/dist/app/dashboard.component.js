@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./class-input.component", "./services/http-service", "./models/question", "./models/online-user", "./class-list.component", "./lecturer-auth.component"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./services/http-service", "./models/question", "./models/online-user", "./class-list.component", "./lecturer-auth.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, common_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, class_input_component_1, http_service_1, question_1, ng2_bootstrap_2, online_user_1, class_list_component_1, lecturer_auth_component_1;
+    var core_1, router_1, common_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, http_service_1, question_1, ng2_bootstrap_2, online_user_1, class_list_component_1, lecturer_auth_component_1;
     var DashboardComponent;
     return {
         setters:[
@@ -38,9 +38,6 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
             },
             function (question_form_component_1_1) {
                 question_form_component_1 = question_form_component_1_1;
-            },
-            function (class_input_component_1_1) {
-                class_input_component_1 = class_input_component_1_1;
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
@@ -70,13 +67,17 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     this.httpService = httpService;
                     this.emptyFeed = true;
                     this.classes = [];
+                    this.selectedClass = '';
                     this.isCollapsedQuestion = true;
-                    this.isCollapsedClass = true;
                     /**
                      * List of online users - update using socket.io
                      */
                     this.socket = null;
                     this.onlineUsers = [];
+                    /**
+                     * User
+                     */
+                    this.userClasses = [];
                     console.log("Set user as logged in (button state)");
                     _parent.setLoggedIn();
                     this.socket = _parent.socket;
@@ -115,17 +116,22 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                 DashboardComponent.prototype.getClassList = function () {
                     var _this = this;
                     var classListArray = [];
-                    this.httpService.getAllClasses().subscribe(function (data) { return classListArray = JSON.parse(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.populateAllClassesModal(classListArray); });
+                    this.httpService.getAllClasses().subscribe(function (data) { return classListArray = JSON.parse(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.getUpdatedUser(classListArray); });
+                };
+                DashboardComponent.prototype.getUpdatedUser = function (classListArray) {
+                    var _this = this;
+                    // Get user details (joined classes, questions asked) from database
+                    var userid = JSON.parse(localStorage.getItem('profile')).user_id;
+                    this.httpService.getUserDetails(userid).subscribe(function (data) { return localStorage.setItem('user', JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.populateAllClassesModal(classListArray); });
                 };
                 DashboardComponent.prototype.populateAllClassesModal = function (classListArray) {
                     this.classes = [];
-                    var userClasses = JSON.parse(localStorage.getItem('user')).lectures;
-                    console.log("User classes: " + userClasses);
+                    this.userClasses = JSON.parse(localStorage.getItem('user')).lectures;
                     for (var _i = 0, classListArray_1 = classListArray; _i < classListArray_1.length; _i++) {
                         var item = classListArray_1[_i];
                         var joined = true;
-                        if (userClasses != null) {
-                            if (userClasses.indexOf(JSON.parse(JSON.stringify(item)).name) === -1) {
+                        if (this.userClasses != null) {
+                            if (this.userClasses.indexOf(JSON.parse(JSON.stringify(item)).name) === -1) {
                                 joined = false;
                             }
                         }
@@ -164,7 +170,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     core_1.View({
                         templateUrl: 'views/dashboard.html',
                         directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.Alert, question_feed_component_1.QuestionFeedComponent,
-                            class_input_component_1.ClassInputComponent, question_form_component_1.QuestionInputFormComponent, class_list_component_1.ClassListComponent, lecturer_auth_component_1.LecturerAuthComponent,
+                            question_form_component_1.QuestionInputFormComponent, class_list_component_1.ClassListComponent, lecturer_auth_component_1.LecturerAuthComponent,
                             ng2_bootstrap_1.Collapse, ng2_bootstrap_2.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
                     }),
                     __param(0, core_1.Inject(core_1.forwardRef(function () { return app_component_1.AppComponent; }))), 

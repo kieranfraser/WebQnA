@@ -8,13 +8,16 @@ import {BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {User} from "./models/user";
 import {HTTPService} from "./services/http-service";
 import {DashboardComponent} from "./dashboard.component";
+import {ClassInputComponent} from "./class-input.component";
+import {Alert, Collapse} from "ng2-bootstrap/ng2-bootstrap";
+import {OnInit} from "angular2/core";
 
 declare var io: any;
 
 @Component({
     selector: 'class-list',
     templateUrl: 'views/class_list_modal.html',
-    directives: [ BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ],
+    directives: [ BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ClassInputComponent, Collapse ],
     inputs: ['classes'],
 })
 
@@ -22,17 +25,24 @@ declare var io: any;
  * This component is a modal that appears when the user clicks on the all
  * classes button on the dashboard.
  */
-export class ClassListComponent{
+export class ClassListComponent implements OnInit{
 
     private singleModel:string = '1';
     private radioModel:string = 'Middle';
 
+    public isCollapsedClass:boolean = true;
+
     public classes;
 
     user: User;
+    auth: string;
 
     constructor(@Inject(forwardRef(() => DashboardComponent)) private _parent:DashboardComponent,
                 private httpService: HTTPService) {}
+
+    ngOnInit(){
+        this.auth = JSON.parse(localStorage.getItem('user')).auth;
+    }
 
     save() {
         var joinedList :string[] = [];
@@ -54,6 +64,11 @@ export class ClassListComponent{
             error => alert(error),
             () => console.log("User classes updated")
         );
+        this._parent.getClassList();
+    }
+
+    refresh(){
+        this._parent.getClassList();
     }
 
 }

@@ -7,6 +7,7 @@ import {Alert, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 import {DashboardComponent} from "./dashboard.component";
 import {Lecture} from "./models/lecture";
 import {HTTPService} from "./services/http-service";
+import {ClassListComponent} from "./class-list.component";
 
 @Component({
     selector: 'class-input',
@@ -31,7 +32,7 @@ export class ClassInputComponent implements OnInit {
      * class creation well (disappears on submission).
      * @param _parent - Dashboard component
      */
-    constructor(@Inject(forwardRef(() => DashboardComponent)) private _parent:DashboardComponent,
+    constructor(@Inject(forwardRef(() => ClassListComponent)) private _parent:ClassListComponent,
                 private httpService: HTTPService) {}
 
     /**
@@ -57,7 +58,7 @@ export class ClassInputComponent implements OnInit {
         );
         console.log(JSON.stringify(this.newClass));
         this.className = "";
-        this._parent.getClassList();
+        this._parent.refresh();
         this._parent.isCollapsedClass = !this._parent.isCollapsedClass;
     }
 }
