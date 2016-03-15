@@ -63,6 +63,7 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                     var json = JSON.stringify(this.user);
                     this.httpService.updateUserClasses(json).subscribe(function (data) { return console.log(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("User classes updated"); });
                     this._parent.getClassList();
+                    this._parent.selectedClass = '';
                 };
                 ClassListComponent.prototype.refresh = function () {
                     this._parent.getClassList();

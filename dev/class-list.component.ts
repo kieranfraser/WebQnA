@@ -65,6 +65,7 @@ export class ClassListComponent implements OnInit{
             () => console.log("User classes updated")
         );
         this._parent.getClassList();
+        this._parent.selectedClass = '';
     }
 
     refresh(){
