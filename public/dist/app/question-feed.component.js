@@ -39,41 +39,40 @@ System.register(['angular2/core', 'angular2/common', "ng2-bootstrap/ng2-bootstra
                 dashboard_component_1 = dashboard_component_1_1;
             }],
         execute: function() {
-            QuestionFeedComponent = (function () {
-                function QuestionFeedComponent(httpService, _parent) {
+            let QuestionFeedComponent = class QuestionFeedComponent {
+                constructor(httpService, _parent) {
                     this.httpService = httpService;
                     this._parent = _parent;
                     this.socket = null;
                     this.socket = _parent.socket;
                 }
-                QuestionFeedComponent.prototype.ngOnInit = function () {
+                ngOnInit() {
                     console.log("Feed Loaded");
                     this.selectedQuestion = new question_1.Question("", "", "", [], [], "", "", "", "", "", "");
                     // get the list of questions for the given class
-                };
-                QuestionFeedComponent.prototype.clickedQuestion = function (question) {
+                }
+                clickedQuestion(question) {
                     this.selectedQuestion = question;
-                };
-                QuestionFeedComponent.prototype.updateQuestions = function () {
+                }
+                updateQuestions() {
                     this._parent.getQuestions();
-                };
-                QuestionFeedComponent.prototype.getUserName = function (id) {
-                };
-                QuestionFeedComponent = __decorate([
-                    core_1.Component({
-                        selector: 'question-feed',
-                        providers: [http_service_1.HTTPService],
-                        inputs: ['classValue', 'questions']
-                    }),
-                    core_1.View({
-                        templateUrl: 'views/question_feed.html',
-                        directives: [ng2_bootstrap_1.Alert, ng2_bootstrap_1.DROPDOWN_DIRECTIVES, common_1.CORE_DIRECTIVES, answer_component_1.AnswerQuestionComponent]
-                    }),
-                    __param(1, core_1.Inject(core_1.forwardRef(function () { return dashboard_component_1.DashboardComponent; }))), 
-                    __metadata('design:paramtypes', [http_service_1.HTTPService, dashboard_component_1.DashboardComponent])
-                ], QuestionFeedComponent);
-                return QuestionFeedComponent;
-            }());
+                }
+                getUserName(id) {
+                }
+            };
+            QuestionFeedComponent = __decorate([
+                core_1.Component({
+                    selector: 'question-feed',
+                    providers: [http_service_1.HTTPService],
+                    inputs: ['classValue', 'questions']
+                }),
+                core_1.View({
+                    templateUrl: 'views/question_feed.html',
+                    directives: [ng2_bootstrap_1.Alert, ng2_bootstrap_1.DROPDOWN_DIRECTIVES, common_1.CORE_DIRECTIVES, answer_component_1.AnswerQuestionComponent]
+                }),
+                __param(1, core_1.Inject(core_1.forwardRef(() => dashboard_component_1.DashboardComponent))), 
+                __metadata('design:paramtypes', [http_service_1.HTTPService, dashboard_component_1.DashboardComponent])
+            ], QuestionFeedComponent);
             exports_1("QuestionFeedComponent", QuestionFeedComponent);
         }
     }

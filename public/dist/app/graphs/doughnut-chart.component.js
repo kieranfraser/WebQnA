@@ -24,35 +24,34 @@ System.register(['angular2/core', 'angular2/common', 'ng2-charts'], function(exp
                 ng2_charts_1 = ng2_charts_1_1;
             }],
         execute: function() {
-            DoughnutChartComponent = (function () {
-                function DoughnutChartComponent() {
+            let DoughnutChartComponent = class DoughnutChartComponent {
+                constructor() {
                     // Doughnut
                     this.doughnutChartLabels = ['Participated', 'Yet to Participate'];
                     this.doughnutChartData = [7, 20];
                     this.doughnutChartType = 'Doughnut';
                 }
-                DoughnutChartComponent.prototype.ngOnInit = function () {
-                };
-                DoughnutChartComponent.prototype.ngOnChanges = function () {
-                };
+                ngOnInit() {
+                }
+                ngOnChanges() {
+                }
                 // events
-                DoughnutChartComponent.prototype.chartClicked = function (e) {
+                chartClicked(e) {
                     console.log(e);
-                };
-                DoughnutChartComponent.prototype.chartHovered = function (e) {
+                }
+                chartHovered(e) {
                     console.log(e);
-                };
-                DoughnutChartComponent = __decorate([
-                    core_1.Component({
-                        selector: 'doughnut-chart',
-                        templateUrl: '../views/graphs/doughnut_chart.html',
-                        inputs: ['selectedQuestion'],
-                        directives: [ng2_charts_1.CHART_DIRECTIVES, common_1.NgClass, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], DoughnutChartComponent);
-                return DoughnutChartComponent;
-            }());
+                }
+            };
+            DoughnutChartComponent = __decorate([
+                core_1.Component({
+                    selector: 'doughnut-chart',
+                    templateUrl: '../views/graphs/doughnut_chart.html',
+                    inputs: ['selectedQuestion'],
+                    directives: [ng2_charts_1.CHART_DIRECTIVES, common_1.NgClass, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+                }), 
+                __metadata('design:paramtypes', [])
+            ], DoughnutChartComponent);
             exports_1("DoughnutChartComponent", DoughnutChartComponent);
         }
     }

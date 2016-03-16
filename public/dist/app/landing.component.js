@@ -25,21 +25,18 @@ System.register(['angular2/core', 'ng2-bootstrap/ng2-bootstrap'], function(expor
                 ng2_bootstrap_1 = ng2_bootstrap_1_1;
             }],
         execute: function() {
-            LandingComponent = (function () {
-                function LandingComponent() {
-                }
-                LandingComponent = __decorate([
-                    core_1.Component({
-                        selector: 'landing'
-                    }),
-                    core_1.View({
-                        templateUrl: 'views/landing.html',
-                        directives: [ng2_bootstrap_1.Alert]
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], LandingComponent);
-                return LandingComponent;
-            }());
+            let LandingComponent = class LandingComponent {
+            };
+            LandingComponent = __decorate([
+                core_1.Component({
+                    selector: 'landing'
+                }),
+                core_1.View({
+                    templateUrl: 'views/landing.html',
+                    directives: [ng2_bootstrap_1.Alert]
+                }), 
+                __metadata('design:paramtypes', [])
+            ], LandingComponent);
             exports_1("LandingComponent", LandingComponent);
         }
     }

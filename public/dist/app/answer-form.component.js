@@ -36,8 +36,8 @@ System.register(['angular2/core', "./answer-component", "./models/answer", "./se
                 ng2_bootstrap_1 = ng2_bootstrap_1_1;
             }],
         execute: function() {
-            AnswerInputFormComponent = (function () {
-                function AnswerInputFormComponent(_parent, httpService) {
+            let AnswerInputFormComponent = class AnswerInputFormComponent {
+                constructor(_parent, httpService) {
                     this._parent = _parent;
                     this.httpService = httpService;
                     this.socket = null;
@@ -47,8 +47,7 @@ System.register(['angular2/core', "./answer-component", "./models/answer", "./se
                     this.selectedQuestion = _parent.question;
                     this.socket = io('/');
                 }
-                AnswerInputFormComponent.prototype.onSubmit = function () {
-                    var _this = this;
+                onSubmit() {
                     this.submitted = true;
                     this.now = new Date();
                     this.answerModel.user = JSON.parse(localStorage.getItem('profile')).user_id;
@@ -58,28 +57,27 @@ System.register(['angular2/core', "./answer-component", "./models/answer", "./se
                     console.log(this.selectedQuestion);
                     if (this.answerModel.answer != "") {
                         var json = JSON.stringify(this.selectedQuestion);
-                        this.httpService.updateQuestion(json).subscribe(function (data) { return console.log(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.sendUpdate(); });
+                        this.httpService.updateQuestion(json).subscribe(data => console.log(JSON.stringify(data)), error => alert(error), () => this.sendUpdate());
                         this.answerModel = new answer_1.Answer("", "", "", "", JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture);
                         this._parent.isCollapsedAnswer = true;
                     }
-                };
-                AnswerInputFormComponent.prototype.sendUpdate = function () {
+                }
+                sendUpdate() {
                     console.log("post answer success");
                     this.socket.emit('update', 'answer');
-                };
-                AnswerInputFormComponent = __decorate([
-                    core_1.Component({
-                        selector: 'answer-input-form',
-                        templateUrl: 'views/answer_input_form.html',
-                        inputs: ['selectedQuestion'],
-                        providers: [http_service_1.HTTPService],
-                        directives: [ng2_bootstrap_1.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-                    }),
-                    __param(0, core_1.Inject(core_1.forwardRef(function () { return answer_component_1.AnswerQuestionComponent; }))), 
-                    __metadata('design:paramtypes', [answer_component_1.AnswerQuestionComponent, http_service_1.HTTPService])
-                ], AnswerInputFormComponent);
-                return AnswerInputFormComponent;
-            }());
+                }
+            };
+            AnswerInputFormComponent = __decorate([
+                core_1.Component({
+                    selector: 'answer-input-form',
+                    templateUrl: 'views/answer_input_form.html',
+                    inputs: ['selectedQuestion'],
+                    providers: [http_service_1.HTTPService],
+                    directives: [ng2_bootstrap_1.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+                }),
+                __param(0, core_1.Inject(core_1.forwardRef(() => answer_component_1.AnswerQuestionComponent))), 
+                __metadata('design:paramtypes', [answer_component_1.AnswerQuestionComponent, http_service_1.HTTPService])
+            ], AnswerInputFormComponent);
             exports_1("AnswerInputFormComponent", AnswerInputFormComponent);
         }
     }
