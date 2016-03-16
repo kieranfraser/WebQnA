@@ -76,7 +76,7 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                      * The lock instantiation requires the client id and domain respectively.
                      * ToDo: These hardcoded authentication values need to be removed from GitHub!
                      */
-                    this.lock = new Auth0Lock('deuLbU0yLQDPCVHPaDrT8cA61JB8PCZ5', 'qanda.eu.auth0.com');
+                    this.lock = new Auth0Lock('8IYkTjEb8T85oLK0XOuo2wTytwJm9Qxs', 'qanda.eu.auth0.com');
                     this.hash = this.lock.parseHash();
                     this.jwtHelper = new angular2_jwt_1.JwtHelper();
                     /**
