@@ -1,12 +1,12 @@
 <link rel='stylesheet' href = '../stylesheets/form-input.css'/>
 
 <div class="modal-content">
-    <form class="form-basic" (ngSubmit)="onSubmit()">
-
-        <div class="form-title-row">
-            <h1>Question</h1>
-        </div>
-
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" style="text-align: center">Question</h4>
+    </div>
+    <div class="modal-body">
+    <form class="form-basic" (ngSubmit)="onSubmit()" style="padding-top: 1%;">
         <div class="form-row">
             <label>
                 <span>Class</span>
@@ -73,10 +73,10 @@
                 <input type="checkbox" name="anonymous" checked [(ngModel)]="questionModel.anonymous">
             </label>
         </div>
-
-        <div class="form-row">
-            <button type="submit">Submit Form</button>
-        </div>
+    <div class="form-row">
+        <button class="btn btn-default" type="submit">Submit Form</button>
+    </div>
 
     </form>
+    </div>
 </div>
