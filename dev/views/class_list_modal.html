@@ -1,28 +1,23 @@
 <div class="modal-content answer-feed-background" >
     <div class="modal-header">
-        <div class="row">
-            <div style="text-align: center">
-                <h4><small>Select any number of classes below to have them added to your list of joined classes</small></h4>
-            </div>
-        </div>
-        <div style="text-align: center" *ngIf="auth === 'lecturer'">
-            <button type="button" class="btn btn-success" (click)="isCollapsedClass = !isCollapsedClass">Add Class</button>
-        </div>
+        <h4 class="modal-title" style="text-align: center">Select to join</h4>
     </div>
-
-    <div class="modal-body" style="text-align: center">
-        <div [collapse]="isCollapsedClass" class="card card-block card-header">
-            <div class="well well-lg">
+    <div class="modal-body">
+        <div style="text-align: center" *ngIf="auth === 'lecturer'">
+            <button type="button" class="btn btn-success" (click)="isCollapsedClass = !isCollapsedClass"><i class="fa fa-plus"></i></button>
+        </div>
+        <div style="text-align: center; margin: 3%;">
+            <div [collapse]="isCollapsedClass" class="panel panel-default">
                 <class-input></class-input>
             </div>
-        </div>
-        <div class="btn-group" >
-            <div class="row" style="width: 100%;" *ngFor="#class of classes">
-                <label style="width: 100%; margin: 5%; overflow-x: hidden; text-overflow: ellipsis" class="btn btn-primary" [(ngModel)]="class['joined']" btnCheckbox>{{class['class']}}</label>
+            <div class="btn-group">
+                <div class="row" style="width: 100%;" *ngFor="#class of classes">
+                    <label style="width: 100%; margin: 5%; overflow-x: hidden; text-overflow: ellipsis" class="btn btn-primary" [(ngModel)]="class['joined']" btnCheckbox>{{class['class']}}</label>
+                </div>
             </div>
         </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="save()">Save Changes</button>
+    <div class="modal-footer" style="text-align: center">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="save()">Done</button>
     </div>
 </div>

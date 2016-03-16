@@ -33,7 +33,7 @@ System.register(['angular2/platform/browser', 'angular2/core', 'angular2/router'
                 http_1.HTTP_PROVIDERS,
                 router_1.ROUTER_PROVIDERS,
                 core_1.provide(angular2_jwt_1.AuthHttp, {
-                    useFactory: function (http) {
+                    useFactory: (http) => {
                         return new angular2_jwt_1.AuthHttp(new angular2_jwt_1.AuthConfig(), http);
                     },
                     deps: [http_1.Http]

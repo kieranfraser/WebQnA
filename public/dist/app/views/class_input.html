@@ -1,6 +1,12 @@
-<div class="form-group">
-    <label for="classname">Class Name:</label>
-    <input type="text" [(ngModel)]="className" class="form-control" id="classname">
-</div>
+<div>
+    <form class="form-basic">
+        <div class="form-row">
+            <label>
+                <span for="classname">Class Name:</span>
+                <input type="text" [(ngModel)]="className" class="form-control" id="classname">
+            </label>
+        </div>
+    </form>
 
-<button type="button" class="btn btn-primary" (click)="addClass()">Add Class</button>
+    <button type="button" class="btn btn-success" (click)="addClass()">Add Class</button>
+</div>

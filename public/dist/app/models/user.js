@@ -11,8 +11,8 @@ System.register([], function(exports_1, context_1) {
             /**
              * Created by kfraser on 27/02/2016.
              */
-            User = (function () {
-                function User(userid, classes, questions, notifications, auth, anonymous) {
+            class User {
+                constructor(userid, classes, questions, notifications, auth, anonymous) {
                     this.userid = userid;
                     this.classes = classes;
                     this.questions = questions;
@@ -20,8 +20,7 @@ System.register([], function(exports_1, context_1) {
                     this.auth = auth;
                     this.anonymous = anonymous;
                 }
-                return User;
-            }());
+            }
             exports_1("User", User);
         }
     }

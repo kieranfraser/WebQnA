@@ -22,8 +22,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
             },
             function (_1) {}],
         execute: function() {
-            HTTPService = (function () {
-                function HTTPService(http) {
+            let HTTPService = class HTTPService {
+                constructor(http) {
                     this.http = http;
                 }
                 /**
@@ -32,74 +32,73 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                  * @param className
                  * @returns {Observable<R>}
                  */
-                HTTPService.prototype.getQuestion = function (className) {
-                    var queryString = '?classname=' + className;
+                getQuestion(className) {
+                    let queryString = '?classname=' + className;
                     return this.http.get('/api/getquestions' + queryString)
-                        .map(function (res) { return res.json(); });
-                };
-                HTTPService.prototype.getSelectedQuestion = function (json) {
+                        .map(res => res.json());
+                }
+                getSelectedQuestion(json) {
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
                     return this.http.post('/api/getselectedquestion', json, {
                         headers: headers
-                    }).map(function (res) { return res.json(); });
-                };
+                    }).map(res => res.json());
+                }
                 /**
                  * Adds new question to question table. Adds id to the given class
                  * table. Adds question id to the user.
                  * @param json
                  * @returns {Observable<R>}
                  */
-                HTTPService.prototype.addQuestion = function (json) {
+                addQuestion(json) {
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
                     return this.http.post('/api/addquestion', json, {
                         headers: headers
-                    }).map(function (res) { return res.json(); });
-                };
-                HTTPService.prototype.updateQuestion = function (json) {
+                    }).map(res => res.json());
+                }
+                updateQuestion(json) {
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
                     return this.http.post('/api/updatequestion', json, {
                         headers: headers
-                    }).map(function (res) { return res.json(); });
-                };
-                HTTPService.prototype.getUserDetails = function (userId) {
-                    var queryString = '?userid=' + userId;
+                    }).map(res => res.json());
+                }
+                getUserDetails(userId) {
+                    let queryString = '?userid=' + userId;
                     return this.http.get('/api/getuser' + queryString)
-                        .map(function (res) { return res.json(); });
-                };
-                HTTPService.prototype.addClass = function (json) {
+                        .map(res => res.json());
+                }
+                addClass(json) {
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
                     return this.http.post('/api/addclass', json, {
                         headers: headers
-                    }).map(function (res) { return res.json(); });
-                };
-                HTTPService.prototype.getAllClasses = function () {
+                    }).map(res => res.json());
+                }
+                getAllClasses() {
                     return this.http.get('/api/getclasses')
-                        .map(function (res) { return res.json(); });
-                };
-                HTTPService.prototype.updateUserClasses = function (json) {
+                        .map(res => res.json());
+                }
+                updateUserClasses(json) {
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
                     return this.http.post('/api/userclasses', json, {
                         headers: headers
-                    }).map(function (res) { return res.json(); });
-                };
-                HTTPService.prototype.sendAuthEmail = function (json) {
+                    }).map(res => res.json());
+                }
+                sendAuthEmail(json) {
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/json');
                     return this.http.post('/api/authorise', json, {
                         headers: headers
-                    }).map(function (res) { return res.json(); });
-                };
-                HTTPService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [http_1.Http])
-                ], HTTPService);
-                return HTTPService;
-            }());
+                    }).map(res => res.json());
+                }
+            };
+            HTTPService = __decorate([
+                core_1.Injectable(), 
+                __metadata('design:paramtypes', [http_1.Http])
+            ], HTTPService);
             exports_1("HTTPService", HTTPService);
         }
     }

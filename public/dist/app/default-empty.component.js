@@ -18,18 +18,15 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            DefaultEmptyComponent = (function () {
-                function DefaultEmptyComponent() {
-                }
-                DefaultEmptyComponent = __decorate([
-                    core_1.Component({
-                        selector: 'default-empty',
-                        template: ''
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], DefaultEmptyComponent);
-                return DefaultEmptyComponent;
-            }());
+            let DefaultEmptyComponent = class DefaultEmptyComponent {
+            };
+            DefaultEmptyComponent = __decorate([
+                core_1.Component({
+                    selector: 'default-empty',
+                    template: ''
+                }), 
+                __metadata('design:paramtypes', [])
+            ], DefaultEmptyComponent);
             exports_1("DefaultEmptyComponent", DefaultEmptyComponent);
         }
     }

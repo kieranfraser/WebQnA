@@ -21,19 +21,16 @@ System.register(['angular2/core', 'ng2-bootstrap/ng2-bootstrap'], function(expor
                 ng2_bootstrap_1 = ng2_bootstrap_1_1;
             }],
         execute: function() {
-            AboutComponent = (function () {
-                function AboutComponent() {
-                }
-                AboutComponent = __decorate([
-                    core_1.Component({
-                        selector: 'about',
-                        templateUrl: 'views/about.html',
-                        directives: [ng2_bootstrap_1.Alert]
-                    }), 
-                    __metadata('design:paramtypes', [])
-                ], AboutComponent);
-                return AboutComponent;
-            }());
+            let AboutComponent = class AboutComponent {
+            };
+            AboutComponent = __decorate([
+                core_1.Component({
+                    selector: 'about',
+                    templateUrl: 'views/about.html',
+                    directives: [ng2_bootstrap_1.Alert]
+                }), 
+                __metadata('design:paramtypes', [])
+            ], AboutComponent);
             exports_1("AboutComponent", AboutComponent);
         }
     }

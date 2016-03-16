@@ -8,14 +8,13 @@ System.register([], function(exports_1, context_1) {
             /**
              * Created by kfraser on 12/03/2016.
              */
-            OnlineUser = (function () {
-                function OnlineUser(name, picture, userId) {
+            class OnlineUser {
+                constructor(name, picture, userId) {
                     this.name = name;
                     this.picture = picture;
                     this.userId = userId;
                 }
-                return OnlineUser;
-            }());
+            }
             exports_1("OnlineUser", OnlineUser);
         }
     }

@@ -27,7 +27,7 @@ html {
   text-align: center;
   .form-row {
     text-align: left;
-    margin-bottom: 22px;
+    //margin-bottom: 22px;
     > label span {
       display: inline-block;
       //Instead of the line below you could use @include box-sizing($bs)

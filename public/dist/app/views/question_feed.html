@@ -5,24 +5,25 @@
                 <div class="chat-box-head"></div>
                 <div class="panel-body chat-box-main">
 
-                    <div class="well well-lg"  style="border-style: outset; border-color: rgba(19, 124, 158, 0.28); border-radius: 20px;"
+                    <div class="panel panel-default" style="padding: 3%"
                          *ngFor="#question of questions" data-toggle="modal" data-target="#answerModal" (click)="clickedQuestion(question)">
+                        <!--style="border-style: outset; border-color: rgba(19, 124, 158, 0.28); border-radius: 20px;-->
                         <div class="row">
-                            <div class="col-xs-6 col-md-4" *ngIf="question.anonymous === ''">
+                            <div class="col-xs-1 col-md-1" *ngIf="question.anonymous === ''">
                                 <img class="img-circle" src="{{question.picture}}" alt="{{question.username}}" height="35px" width="35px">
                             </div>
-                            <div class="col-xs-6 col-md-4" *ngIf="question.anonymous === 'true'">
+                            <div class="col-xs-1 col-md-1" *ngIf="question.anonymous === 'true'">
                                 <h5><small>Anonymous</small></h5>
                             </div>
-                            <div class="col-xs-6 col-md-4">
+                            <div class="col-xs-9 col-md-9">
                                 <div class="chat-box-left">
-                                    <h5 style="text-align: center">{{question.summary}}</h5>
+                                    <h5 style="text-align: left">{{question.summary}}</h5>
                                 </div>
                                 <div class="chat-box-name-left" *ngIf="question.anonymous === ''">
-                                    <h4 style="text-align: center"><small> - {{question.username}}</small></h4>
+                                    <h4 style="text-align: left"><small> - {{question.username}}</small></h4>
                                 </div>
                             </div>
-                            <div class="col-xs-6 col-md-4">
+                            <div class="col-xs-2 col-md-2">
                                 <h5 style="text-align: center"><small>{{question.answers.length}} replies</small></h5>
                             </div>
                         </div>

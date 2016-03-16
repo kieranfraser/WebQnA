@@ -11,8 +11,7 @@ html {
   font: bold 14px sans-serif;
   text-align: center; }
   .form-basic .form-row {
-    text-align: left;
-    margin-bottom: 22px; }
+    text-align: left; }
     .form-basic .form-row > label span {
       display: inline-block;
       box-sizing: border-box;
