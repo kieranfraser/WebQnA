@@ -1,6 +1,9 @@
 {
   "name": "WebstormProjectsQnA",
   "version": "0.0.0",
+  "engines": {
+    "node": "4.2.3"
+  },
   "private": true,
   "scripts": {
     "tslint": "tslint -c tslint.json app/**/*.ts",
