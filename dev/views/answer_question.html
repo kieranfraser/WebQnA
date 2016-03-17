@@ -7,8 +7,8 @@
                 <img style="align-content: center;margin-top:30px;margin-left:15px;" class="img-circle" src="{{question.picture}}" alt="{{question.username}}" height="35px" width="35px">
             </div>
             <div class="col-xs-11 col-sm-11">
-                <h4 *ngIf="question.anonymous === 'true'">{{question.summary}}<small> - Anonymous</small></h4>
-                <h4 *ngIf="question.anonymous === ''">{{question.summary}}<small> - {{question.username}}</small></h4>
+                <h4 style="margin-left: 3%;" *ngIf="question.anonymous === 'true'">{{question.summary}}<small> - Anon</small></h4>
+                <h4 style="margin-left: 3%;" *ngIf="question.anonymous === ''">{{question.summary}}<small> - {{question.username}}</small></h4>
             </div>
         </div>
         <div class="row">
@@ -55,7 +55,7 @@
                     <img class="img-circle" src="{{answer.picture}}" alt="Too good-looking" height="35px" width="35px">
                 </div>
                 <div class="col-xs-1 col-md-1" *ngIf="answer.anonymous === 'true'">
-                    <h5><small>Anonymous</small></h5>
+                    <h5><small>Anon</small></h5>
                 </div>
                 <div class="col-xs-11 col-md-11">
                     <div class="chat-box-left">
