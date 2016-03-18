@@ -2,9 +2,11 @@
     <div class="form-group">
         <label *ngIf="selectedQuestion.type === 'Free-text'" for="answer">Answer:</label>
         <label *ngIf="selectedQuestion.type === 'Multi-choice'" for="answer">Select an answer:</label>
+
         <textarea *ngIf="selectedQuestion.type === 'Free-text'" id="answer" class="form-control" [(ngModel)]="answerModel.answer" required></textarea>
+
         <div *ngIf="selectedQuestion.type === 'Multi-text'" class="btn-group" *ngFor="#choice of selectedQuestion.choices">
-            <label class="btn btn-primary" [(ngModel)]="answerModel.answer" btnRadio="{{choice}}">{{choice}}</label>
+            <label class="btn btn-primary" [(ngModel)]="answerModel.answer" btnRadio="{{choice}}" style="margin-left:2%; margin-right:2%;">{{choice}}</label>
         </div>
     </div>
     <div class="checkbox">
