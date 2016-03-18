@@ -12,9 +12,12 @@ html
 
       // 1. Load libraries
       // IE required polyfills, in this exact order
-      script(src='dist/lib/moment.js')
       script(src='dist/lib/es6-shim.min.js')
       script(src='dist/lib/system-polyfills.js')
+      script(src="dist/lib/shims_for_IE.js")
+      script(src='dist/lib/moment.js')
+
+
 
       script(src='//code.jquery.com/jquery-2.2.1.min.js')
 

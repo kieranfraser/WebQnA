@@ -55,14 +55,14 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                 lecturer_auth_component_1 = lecturer_auth_component_1_1;
             }],
         execute: function() {
-            let DashboardComponent = class DashboardComponent {
+            DashboardComponent = (function () {
                 /**
                  * For the constructor must inject the parent "loginComponent" as
                  * need to change parent variables which control button states (e.g.
                  * the login/logout button in this case)
                  * @param _parent
                  */
-                constructor(_parent, httpService) {
+                function DashboardComponent(_parent, httpService) {
                     this._parent = _parent;
                     this.httpService = httpService;
                     this.emptyFeed = true;
@@ -99,33 +99,36 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                  * @param next
                  * @param prev
                  */
-                ngOnInit() {
+                DashboardComponent.prototype.ngOnInit = function () {
                     console.log("Navigated to dashboard");
                     this.id_token = localStorage.getItem('id_token');
                     // populate the class dropdown box and load the question feed
                     this.getClassList();
                     // get all user questions
                     this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;
-                }
-                classChange(value) {
+                };
+                DashboardComponent.prototype.classChange = function (value) {
                     console.log("changed");
                     console.log(value);
                     this.selectedClass = value['class'];
                     this.getQuestions();
-                }
-                getClassList() {
+                };
+                DashboardComponent.prototype.getClassList = function () {
+                    var _this = this;
                     var classListArray = [];
-                    this.httpService.getAllClasses().subscribe(data => classListArray = JSON.parse(JSON.stringify(data)), error => alert(error), () => this.getUpdatedUser(classListArray));
-                }
-                getUpdatedUser(classListArray) {
+                    this.httpService.getAllClasses().subscribe(function (data) { return classListArray = JSON.parse(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.getUpdatedUser(classListArray); });
+                };
+                DashboardComponent.prototype.getUpdatedUser = function (classListArray) {
+                    var _this = this;
                     // Get user details (joined classes, questions asked) from database
                     var userid = JSON.parse(localStorage.getItem('profile')).user_id;
-                    this.httpService.getUserDetails(userid).subscribe(data => localStorage.setItem('user', JSON.stringify(data)), error => alert(error), () => this.populateAllClassesModal(classListArray));
-                }
-                populateAllClassesModal(classListArray) {
+                    this.httpService.getUserDetails(userid).subscribe(function (data) { return localStorage.setItem('user', JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.populateAllClassesModal(classListArray); });
+                };
+                DashboardComponent.prototype.populateAllClassesModal = function (classListArray) {
                     this.classes = [];
                     this.userClasses = JSON.parse(localStorage.getItem('user')).lectures;
-                    for (var item of classListArray) {
+                    for (var _i = 0, classListArray_1 = classListArray; _i < classListArray_1.length; _i++) {
+                        var item = classListArray_1[_i];
                         var joined = true;
                         if (this.userClasses != null) {
                             if (this.userClasses.indexOf(JSON.parse(JSON.stringify(item)).name) === -1) {
@@ -138,14 +141,16 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                         this.classes.push({ 'class': JSON.parse(JSON.stringify(item)).name, 'joined': joined, 'tags': JSON.parse(JSON.stringify(item)).tags });
                     }
                     this.getQuestions();
-                }
-                getQuestions() {
+                };
+                DashboardComponent.prototype.getQuestions = function () {
+                    var _this = this;
                     var questionListArray = [];
-                    this.httpService.getQuestion(this.selectedClass).subscribe(data => questionListArray = JSON.parse(JSON.stringify(data)), error => alert(error), () => this.populateFeed(questionListArray));
-                }
-                populateFeed(questionArray) {
+                    this.httpService.getQuestion(this.selectedClass).subscribe(function (data) { return questionListArray = JSON.parse(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.populateFeed(questionListArray); });
+                };
+                DashboardComponent.prototype.populateFeed = function (questionArray) {
                     this.questions = [];
-                    for (var item of questionArray) {
+                    for (var _i = 0, questionArray_1 = questionArray; _i < questionArray_1.length; _i++) {
+                        var item = questionArray_1[_i];
                         console.log((JSON.parse(JSON.stringify(item)).classid));
                         var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous), (JSON.parse(JSON.stringify(item)).username), (JSON.parse(JSON.stringify(item)).picture), (JSON.parse(JSON.stringify(item)).tags));
                         this.questions.push(question);
@@ -156,22 +161,23 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     else {
                         this.emptyFeed = true;
                     }
-                }
-            };
-            DashboardComponent = __decorate([
-                core_1.Component({
-                    selector: 'dashboard',
-                    providers: [http_service_1.HTTPService]
-                }),
-                core_1.View({
-                    templateUrl: 'views/dashboard.html',
-                    directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.Alert, question_feed_component_1.QuestionFeedComponent,
-                        question_form_component_1.QuestionInputFormComponent, class_list_component_1.ClassListComponent, lecturer_auth_component_1.LecturerAuthComponent,
-                        ng2_bootstrap_1.Collapse, ng2_bootstrap_2.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-                }),
-                __param(0, core_1.Inject(core_1.forwardRef(() => app_component_1.AppComponent))), 
-                __metadata('design:paramtypes', [app_component_1.AppComponent, http_service_1.HTTPService])
-            ], DashboardComponent);
+                };
+                DashboardComponent = __decorate([
+                    core_1.Component({
+                        selector: 'dashboard',
+                        providers: [http_service_1.HTTPService]
+                    }),
+                    core_1.View({
+                        templateUrl: 'views/dashboard.html',
+                        directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.Alert, question_feed_component_1.QuestionFeedComponent,
+                            question_form_component_1.QuestionInputFormComponent, class_list_component_1.ClassListComponent, lecturer_auth_component_1.LecturerAuthComponent,
+                            ng2_bootstrap_1.Collapse, ng2_bootstrap_2.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+                    }),
+                    __param(0, core_1.Inject(core_1.forwardRef(function () { return app_component_1.AppComponent; }))), 
+                    __metadata('design:paramtypes', [app_component_1.AppComponent, http_service_1.HTTPService])
+                ], DashboardComponent);
+                return DashboardComponent;
+            }());
             exports_1("DashboardComponent", DashboardComponent);
         }
     }

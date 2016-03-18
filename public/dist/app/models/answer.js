@@ -8,8 +8,8 @@ System.register([], function(exports_1, context_1) {
     return {
         setters:[],
         execute: function() {
-            class Answer {
-                constructor(answer, user, date, anonymous, username, picture) {
+            Answer = (function () {
+                function Answer(answer, user, date, anonymous, username, picture) {
                     this.answer = answer;
                     this.user = user;
                     this.date = date;
@@ -17,7 +17,8 @@ System.register([], function(exports_1, context_1) {
                     this.username = username;
                     this.picture = picture;
                 }
-            }
+                return Answer;
+            }());
             exports_1("Answer", Answer);
         }
     }

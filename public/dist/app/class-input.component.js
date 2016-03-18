@@ -33,46 +33,47 @@ System.register(['angular2/core', "./models/lecture", "./services/http-service",
                 tag_input_component_1 = tag_input_component_1_1;
             }],
         execute: function() {
-            let ClassInputComponent = class ClassInputComponent {
+            ClassInputComponent = (function () {
                 /**
                  * Inject the dashboard to change the toggle button for viewing the
                  * class creation well (disappears on submission).
                  * @param _parent - Dashboard component
                  */
-                constructor(_parent, httpService) {
+                function ClassInputComponent(_parent, httpService) {
                     this._parent = _parent;
                     this.httpService = httpService;
                     this.className = "";
                     this.tags = [];
                 }
-                ngOnInit() { }
+                ClassInputComponent.prototype.ngOnInit = function () { };
                 /**
                  * Used to create a new class - TODO: change from profile to user when user is completed
                  * Creator of the class is added as a participant.
                  * @param value - input class name
                  */
-                addClass() {
+                ClassInputComponent.prototype.addClass = function () {
                     this.newClass = new lecture_1.Lecture(this.className, [JSON.parse(localStorage.getItem('profile')).user_id], [], this.tags);
                     console.log(this.tags);
                     var json = JSON.stringify(this.newClass);
-                    this.httpService.addClass(json).subscribe(data => console.log(JSON.stringify(data)), error => alert(error), () => console.log("Class added"));
+                    this.httpService.addClass(json).subscribe(function (data) { return console.log(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("Class added"); });
                     console.log(JSON.stringify(this.newClass));
                     this.className = "";
                     this.tags = [];
                     this._parent.refresh();
                     this._parent.isCollapsedClass = !this._parent.isCollapsedClass;
-                }
-            };
-            ClassInputComponent = __decorate([
-                core_1.Component({
-                    selector: 'class-input',
-                    providers: [http_service_1.HTTPService],
-                    templateUrl: 'views/class_input.html',
-                    directives: [tag_input_component_1.TagInputComponent]
-                }),
-                __param(0, core_1.Inject(core_1.forwardRef(() => class_list_component_1.ClassListComponent))), 
-                __metadata('design:paramtypes', [class_list_component_1.ClassListComponent, http_service_1.HTTPService])
-            ], ClassInputComponent);
+                };
+                ClassInputComponent = __decorate([
+                    core_1.Component({
+                        selector: 'class-input',
+                        providers: [http_service_1.HTTPService],
+                        templateUrl: 'views/class_input.html',
+                        directives: [tag_input_component_1.TagInputComponent]
+                    }),
+                    __param(0, core_1.Inject(core_1.forwardRef(function () { return class_list_component_1.ClassListComponent; }))), 
+                    __metadata('design:paramtypes', [class_list_component_1.ClassListComponent, http_service_1.HTTPService])
+                ], ClassInputComponent);
+                return ClassInputComponent;
+            }());
             exports_1("ClassInputComponent", ClassInputComponent);
         }
     }

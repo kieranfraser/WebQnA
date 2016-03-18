@@ -24,8 +24,8 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                 ng2_bootstrap_1 = ng2_bootstrap_1_1;
             }],
         execute: function() {
-            let TagInputComponent = class TagInputComponent {
-                constructor() {
+            TagInputComponent = (function () {
+                function TagInputComponent() {
                     /**
                      * Typeahead and tag input
                      */
@@ -36,19 +36,19 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                     this.states = [];
                     this.statesComplex = [];
                 }
-                getContext() {
+                TagInputComponent.prototype.getContext = function () {
                     return this;
-                }
-                getAsyncData(context) {
+                };
+                TagInputComponent.prototype.getAsyncData = function (context) {
                     if (this._prevContext === context) {
                         return this._cache;
                     }
                     this._prevContext = context;
-                    let f = function () {
-                        let p = new Promise((resolve) => {
-                            setTimeout(() => {
-                                let query = new RegExp(context.asyncSelected, 'ig');
-                                return resolve(context.states.filter((state) => {
+                    var f = function () {
+                        var p = new Promise(function (resolve) {
+                            setTimeout(function () {
+                                var query = new RegExp(context.asyncSelected, 'ig');
+                                return resolve(context.states.filter(function (state) {
                                     return query.test(state);
                                 }));
                             }, 200);
@@ -57,17 +57,17 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                     };
                     this._cache = f;
                     return this._cache;
-                }
-                changeTypeaheadLoading(e) {
+                };
+                TagInputComponent.prototype.changeTypeaheadLoading = function (e) {
                     this.typeaheadLoading = e;
-                }
-                changeTypeaheadNoResults(e) {
+                };
+                TagInputComponent.prototype.changeTypeaheadNoResults = function (e) {
                     this.typeaheadNoResults = e;
-                }
-                typeaheadOnSelect(e) {
-                    console.log(`Selected value: ${e.item}`);
-                }
-                onKey(value) {
+                };
+                TagInputComponent.prototype.typeaheadOnSelect = function (e) {
+                    console.log("Selected value: " + e.item);
+                };
+                TagInputComponent.prototype.onKey = function (value) {
                     if (value.code === 'Comma') {
                         var newTag = this.selected.substring(0, this.selected.length - 1);
                         var index = this.tags.indexOf(newTag, 0);
@@ -81,20 +81,21 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                     if (value.code === 'Enter') {
                         return false;
                     }
-                }
-                addToTypeahead(newTag) {
+                };
+                TagInputComponent.prototype.addToTypeahead = function (newTag) {
                     var index = this.states.indexOf(newTag, 0);
                     if (index === -1) {
                         this.states.push(newTag);
                         this.statesComplex = [];
                         var counter = 1;
-                        for (var state of this.states) {
+                        for (var _i = 0, _a = this.states; _i < _a.length; _i++) {
+                            var state = _a[_i];
                             this.statesComplex.push({ id: counter, name: state });
                             counter++;
                         }
                     }
-                }
-                removeTag(tag) {
+                };
+                TagInputComponent.prototype.removeTag = function (tag) {
                     var index = this.tags.indexOf(tag, 0);
                     if (index > -1) {
                         this.tags.splice(index, 1);
@@ -107,19 +108,20 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                         return obj.name == tag;
                     })[0];
                     this.statesComplex.splice(result.id - 1, 1);
-                }
-            };
-            TagInputComponent = __decorate([
-                core_1.Component({
-                    selector: 'tag-input',
-                    inputs: ['tags'],
-                }),
-                core_1.View({
-                    templateUrl: 'views/form-utilities/tag_input.html',
-                    directives: [ng2_bootstrap_1.TYPEAHEAD_DIRECTIVES, common_1.FORM_DIRECTIVES, common_1.CORE_DIRECTIVES]
-                }), 
-                __metadata('design:paramtypes', [])
-            ], TagInputComponent);
+                };
+                TagInputComponent = __decorate([
+                    core_1.Component({
+                        selector: 'tag-input',
+                        inputs: ['tags'],
+                    }),
+                    core_1.View({
+                        templateUrl: 'views/form-utilities/tag_input.html',
+                        directives: [ng2_bootstrap_1.TYPEAHEAD_DIRECTIVES, common_1.FORM_DIRECTIVES, common_1.CORE_DIRECTIVES]
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], TagInputComponent);
+                return TagInputComponent;
+            }());
             exports_1("TagInputComponent", TagInputComponent);
         }
     }

@@ -8,8 +8,8 @@ System.register([], function(exports_1, context_1) {
             /**
              * Created by kfraser on 26/02/2016.
              */
-            class Question {
-                constructor(classid, question, summary, choices, answers, user, date, type, anonymous, username, picture, tags) {
+            Question = (function () {
+                function Question(classid, question, summary, choices, answers, user, date, type, anonymous, username, picture, tags) {
                     this.classid = classid;
                     this.question = question;
                     this.summary = summary;
@@ -23,7 +23,8 @@ System.register([], function(exports_1, context_1) {
                     this.picture = picture;
                     this.tags = tags;
                 }
-            }
+                return Question;
+            }());
             exports_1("Question", Question);
         }
     }
