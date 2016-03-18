@@ -55,7 +55,7 @@ System.register(['angular2/core', "./question-feed.component", "./models/questio
                     this.socket = null;
                     this.isCollapsedAnswer = true;
                     this.isCollapsedStats = true;
-                    this.question = new question_1.Question("", "", "", [], [], "", "", "", "", "", "");
+                    this.question = new question_1.Question("", "", "", [], [], "", "", "", "", "", "", []);
                     this.socket = _parent.socket;
                     this.socket.on('answer', function () {
                         console.log('Message from server: answer feed to be updated!!');
@@ -78,7 +78,7 @@ System.register(['angular2/core', "./question-feed.component", "./models/questio
                     var questionArray = [];
                     for (var item of updatedQuestion) {
                         console.log((JSON.parse(JSON.stringify(item)).classid));
-                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous), (JSON.parse(JSON.stringify(item)).username), (JSON.parse(JSON.stringify(item)).picture));
+                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous), (JSON.parse(JSON.stringify(item)).username), (JSON.parse(JSON.stringify(item)).picture), (JSON.parse(JSON.stringify(item)).tags));
                         this.question = question;
                     }
                     //this.question.answers = answers;answers;

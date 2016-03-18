@@ -14,6 +14,7 @@ export class Question {
         public type: string,
         public anonymous: string,
         public username: string,
-        public picture: string
+        public picture: string,
+        public tags: string[]
     ) {}
 }

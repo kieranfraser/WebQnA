@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', "./models/question", "./services/http-service", "./dashboard.component"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', "./models/question", "./services/http-service", "./dashboard.component", "./form-utilities/tag-input.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, http_1, question_1, http_service_1, dashboard_component_1;
+    var core_1, http_1, question_1, http_service_1, dashboard_component_1, tag_input_component_1;
     var QuestionInputFormComponent;
     return {
         setters:[
@@ -31,6 +31,9 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
             },
             function (dashboard_component_1_1) {
                 dashboard_component_1 = dashboard_component_1_1;
+            },
+            function (tag_input_component_1_1) {
+                tag_input_component_1 = tag_input_component_1_1;
             }],
         execute: function() {
             let QuestionInputFormComponent = class QuestionInputFormComponent {
@@ -41,11 +44,12 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
                     this.types = ["Free-text", "Multi-choice"];
                     this.today = new Date();
                     this.socket = null;
-                    this.questionModel = new question_1.Question(this.selectedClass, "", "", [], [], JSON.parse(localStorage.getItem('profile')).user_id, this.today.toString(), this.types[0], "", JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture);
+                    this.questionModel = new question_1.Question(this.selectedClass, "", "", [], [], JSON.parse(localStorage.getItem('profile')).user_id, this.today.toString(), this.types[0], "", JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture, []);
                     this.choiceOne = "";
                     this.choiceTwo = "";
                     this.choiceThree = "";
                     this.choiceFour = "";
+                    this.questionTags = [];
                     this.submitted = false;
                     this.selectedClass = this._parent.selectedClass;
                     this.socket = _parent.socket;
@@ -60,6 +64,7 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
                     console.log(this.questionModel);
                     console.log(this.selectedClass);
                     this.questionModel.classid = this.selectedClass;
+                    this.questionModel.tags = this.questionTags;
                     // logic for choices
                     if (this.questionModel.type === 'Multi-choice') {
                         console.log("the choices are:");
@@ -70,7 +75,7 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
                     console.log(json);
                     this.httpService.addQuestion(json).subscribe(data => console.log(JSON.stringify(data)), error => alert(error), () => console.log("post question success"));
                     console.log(JSON.stringify(this.questionModel));
-                    this.questionModel = new question_1.Question(this.selectedClass, "", "", [], [], JSON.parse(localStorage.getItem('profile')).user_id, this.today.toString(), this.types[0], "", JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture);
+                    this.questionModel = new question_1.Question(this.selectedClass, "", "", [], [], JSON.parse(localStorage.getItem('profile')).user_id, this.today.toString(), this.types[0], "", JSON.parse(localStorage.getItem('profile')).name, JSON.parse(localStorage.getItem('profile')).picture, []);
                     this.socket.emit('update', 'question');
                     this._parent.isCollapsedQuestion = !this._parent.isCollapsedQuestion;
                     this._parent.getQuestions();
@@ -80,11 +85,9 @@ System.register(['angular2/core', 'angular2/http', "./models/question", "./servi
                 core_1.Component({
                     selector: 'question-input-form',
                     providers: [http_service_1.HTTPService],
-                    inputs: ['selectedClass']
-                }),
-                core_1.View({
+                    inputs: ['selectedClass'],
                     templateUrl: 'views/question_input_form.html',
-                    directives: []
+                    directives: [tag_input_component_1.TagInputComponent]
                 }),
                 __param(0, core_1.Inject(core_1.forwardRef(() => dashboard_component_1.DashboardComponent))), 
                 __metadata('design:paramtypes', [dashboard_component_1.DashboardComponent, http_1.Http, http_service_1.HTTPService])

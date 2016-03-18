@@ -8,14 +8,13 @@ import {DashboardComponent} from "./dashboard.component";
 import {Lecture} from "./models/lecture";
 import {HTTPService} from "./services/http-service";
 import {ClassListComponent} from "./class-list.component";
+import {TagInputComponent} from "./form-utilities/tag-input.component";
 
 @Component({
     selector: 'class-input',
-    providers: [HTTPService]
-})
-
-@View({
-    templateUrl: 'views/class_input.html'
+    providers: [HTTPService],
+    templateUrl: 'views/class_input.html',
+    directives: [TagInputComponent]
 })
 
 /**
@@ -39,6 +38,7 @@ export class ClassInputComponent implements OnInit {
      * Lecture is synonymous with class
      */
     newClass: Lecture;
+    tags: string[] = [];
 
     ngOnInit() {}
 
@@ -48,8 +48,8 @@ export class ClassInputComponent implements OnInit {
      * @param value - input class name
      */
     addClass(){
-        this.newClass = new Lecture(this.className, [JSON.parse(localStorage.getItem('profile')).user_id], []);
-
+        this.newClass = new Lecture(this.className, [JSON.parse(localStorage.getItem('profile')).user_id], [], this.tags);
+        console.log(this.tags);
         var json = JSON.stringify(this.newClass);
         this.httpService.addClass(json).subscribe(
             data => console.log(JSON.stringify(data)),
@@ -58,6 +58,7 @@ export class ClassInputComponent implements OnInit {
         );
         console.log(JSON.stringify(this.newClass));
         this.className = "";
+        this.tags = [];
         this._parent.refresh();
         this._parent.isCollapsedClass = !this._parent.isCollapsedClass;
     }

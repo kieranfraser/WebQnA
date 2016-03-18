@@ -9,10 +9,11 @@ System.register([], function(exports_1, context_1) {
              * Created by kfraser on 27/02/2016.
              */
             class Lecture {
-                constructor(name, participants, questions) {
+                constructor(name, participants, questions, tags) {
                     this.name = name;
                     this.participants = participants;
                     this.questions = questions;
+                    this.tags = tags;
                 }
             }
             exports_1("Lecture", Lecture);

@@ -2602,3 +2602,67 @@ span.stButton_gradient,
   border-radius: 100%;
   margin: 10px 0;
 }
+
+//colors
+$color_silver_chalice_approx: #aaa;
+
+.chosen-choices {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 5px;
+  width: 100%;
+  height: auto !important;
+  height: 1%;
+  li {
+    float: left;
+    list-style: none;
+    &.search-choice {
+      span {
+        word-wrap: break-word;
+      }
+    }
+  }
+}
+.chosen-choices {
+  position: relative;
+  margin: 3px 5px 3px 0;
+  padding: 3px 20px 3px 5px;
+  max-width: 100%;
+  line-height: 13px;
+  cursor: default;
+}
+
+li.search-choice {
+  margin-bottom: 4%;
+  margin-right: 1%;
+  max-width: 100%;
+}
+
+//colors
+$color_pink_swan_approx: #bbb;
+$white: #fff;
+
+.tag {
+  padding: .3em .4em .4em;
+  a {
+    color: $color_pink_swan_approx;
+    cursor: pointer;
+    opacity: 0.6;
+    margin: 0 0 0 .3em;
+    &:hover {
+      opacity: 1.0;
+    }
+    .glyphicon-white {
+      color: $white;
+      margin-bottom: 2px;
+    }
+  }
+  .remove {
+    vertical-align: middle;
+    top: 0;
+  }
+}
+.label-info {
+  background-color: #1E8EE4;
+}

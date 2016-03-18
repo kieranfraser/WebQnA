@@ -156,7 +156,7 @@ export class DashboardComponent implements OnInit {
             else{
                 joined = false;
             }
-            this.classes.push({'class':JSON.parse(JSON.stringify(item)).name, 'joined': joined});
+            this.classes.push({'class':JSON.parse(JSON.stringify(item)).name, 'joined': joined, 'tags':JSON.parse(JSON.stringify(item)).tags});
         }
         this.getQuestions();
     }
@@ -185,7 +185,8 @@ export class DashboardComponent implements OnInit {
                 (JSON.parse(JSON.stringify(item)).type),
                 (JSON.parse(JSON.stringify(item)).anonymous),
                 (JSON.parse(JSON.stringify(item)).username),
-                (JSON.parse(JSON.stringify(item)).picture));
+                (JSON.parse(JSON.stringify(item)).picture),
+                (JSON.parse(JSON.stringify(item)).tags));
             this.questions.push(question);
         }
         if(this.questions.length > 0){

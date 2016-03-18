@@ -135,7 +135,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                         else {
                             joined = false;
                         }
-                        this.classes.push({ 'class': JSON.parse(JSON.stringify(item)).name, 'joined': joined });
+                        this.classes.push({ 'class': JSON.parse(JSON.stringify(item)).name, 'joined': joined, 'tags': JSON.parse(JSON.stringify(item)).tags });
                     }
                     this.getQuestions();
                 }
@@ -147,7 +147,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     this.questions = [];
                     for (var item of questionArray) {
                         console.log((JSON.parse(JSON.stringify(item)).classid));
-                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous), (JSON.parse(JSON.stringify(item)).username), (JSON.parse(JSON.stringify(item)).picture));
+                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous), (JSON.parse(JSON.stringify(item)).username), (JSON.parse(JSON.stringify(item)).picture), (JSON.parse(JSON.stringify(item)).tags));
                         this.questions.push(question);
                     }
                     if (this.questions.length > 0) {

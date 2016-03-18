@@ -22,6 +22,15 @@
                                 <div class="chat-box-name-left" *ngIf="question.anonymous === ''">
                                     <h4 style="text-align: left"><small> - {{question.username}}</small></h4>
                                 </div>
+                                <div>
+                                    <ul class="chosen-choices">
+                                        <li class="search-choice" *ngFor="#tag of question.tags">
+                                            <span class="tag label label-info">
+                                              <span>{{tag}}</span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                             <div class="col-xs-2 col-md-2">
                                 <h5 style="text-align: center"><small>{{question.answers.length}} replies</small></h5>

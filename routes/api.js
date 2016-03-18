@@ -126,6 +126,7 @@ router.post('/userclasses',jsonParser, function(req, res, next) {
 /**
  * Create a question. Add the question to the question table.
  * Add the reference to the lecture and user tables.
+ * TODO: add question referece to the tag table.
  */
 router.post('/addquestion',jsonParser, function(req, res, next) {
 
@@ -143,7 +144,8 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
         type: req.body.type,
         anonymous: req.body.anonymous,
         username: req.body.username,
-        picture: req.body.picture
+        picture: req.body.picture,
+        tags: req.body.tags
     });
     var promise = newQuestion.save();
 
@@ -235,7 +237,8 @@ router.post('/addclass',jsonParser, function(req, res, next) {
     var newLecture = Lecture({
         name: req.body.name,
         participants: req.body.participants,
-        questions: []
+        questions: [],
+        tags: req.body.tags
     });
 
     newLecture.save(function(err){

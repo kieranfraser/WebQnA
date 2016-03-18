@@ -1,4 +1,4 @@
-System.register(['angular2/core', "./models/lecture", "./services/http-service", "./class-list.component"], function(exports_1, context_1) {
+System.register(['angular2/core', "./models/lecture", "./services/http-service", "./class-list.component", "./form-utilities/tag-input.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', "./models/lecture", "./services/http-service",
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, lecture_1, http_service_1, class_list_component_1;
+    var core_1, lecture_1, http_service_1, class_list_component_1, tag_input_component_1;
     var ClassInputComponent;
     return {
         setters:[
@@ -28,6 +28,9 @@ System.register(['angular2/core', "./models/lecture", "./services/http-service",
             },
             function (class_list_component_1_1) {
                 class_list_component_1 = class_list_component_1_1;
+            },
+            function (tag_input_component_1_1) {
+                tag_input_component_1 = tag_input_component_1_1;
             }],
         execute: function() {
             let ClassInputComponent = class ClassInputComponent {
@@ -40,6 +43,7 @@ System.register(['angular2/core', "./models/lecture", "./services/http-service",
                     this._parent = _parent;
                     this.httpService = httpService;
                     this.className = "";
+                    this.tags = [];
                 }
                 ngOnInit() { }
                 /**
@@ -48,11 +52,13 @@ System.register(['angular2/core', "./models/lecture", "./services/http-service",
                  * @param value - input class name
                  */
                 addClass() {
-                    this.newClass = new lecture_1.Lecture(this.className, [JSON.parse(localStorage.getItem('profile')).user_id], []);
+                    this.newClass = new lecture_1.Lecture(this.className, [JSON.parse(localStorage.getItem('profile')).user_id], [], this.tags);
+                    console.log(this.tags);
                     var json = JSON.stringify(this.newClass);
                     this.httpService.addClass(json).subscribe(data => console.log(JSON.stringify(data)), error => alert(error), () => console.log("Class added"));
                     console.log(JSON.stringify(this.newClass));
                     this.className = "";
+                    this.tags = [];
                     this._parent.refresh();
                     this._parent.isCollapsedClass = !this._parent.isCollapsedClass;
                 }
@@ -60,10 +66,9 @@ System.register(['angular2/core', "./models/lecture", "./services/http-service",
             ClassInputComponent = __decorate([
                 core_1.Component({
                     selector: 'class-input',
-                    providers: [http_service_1.HTTPService]
-                }),
-                core_1.View({
-                    templateUrl: 'views/class_input.html'
+                    providers: [http_service_1.HTTPService],
+                    templateUrl: 'views/class_input.html',
+                    directives: [tag_input_component_1.TagInputComponent]
                 }),
                 __param(0, core_1.Inject(core_1.forwardRef(() => class_list_component_1.ClassListComponent))), 
                 __metadata('design:paramtypes', [class_list_component_1.ClassListComponent, http_service_1.HTTPService])

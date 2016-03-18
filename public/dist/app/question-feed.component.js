@@ -48,7 +48,7 @@ System.register(['angular2/core', 'angular2/common', "ng2-bootstrap/ng2-bootstra
                 }
                 ngOnInit() {
                     console.log("Feed Loaded");
-                    this.selectedQuestion = new question_1.Question("", "", "", [], [], "", "", "", "", "", "");
+                    this.selectedQuestion = new question_1.Question("", "", "", [], [], "", "", "", "", "", "", []);
                     // get the list of questions for the given class
                 }
                 clickedQuestion(question) {
