@@ -1,4 +1,4 @@
-import {Component, View, Inject, forwardRef, OnInit} from 'angular2/core';
+import {Component, View, Inject, forwardRef, OnInit, OnChanges} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {tokenNotExpired} from 'angular2-jwt';
 import {CanActivate} from "angular2/router";
@@ -17,6 +17,7 @@ import {OnlineUser} from "./models/online-user";
 import {ClassListComponent} from "./class-list.component";
 import {LecturerAuthComponent} from "./lecturer-auth.component";
 import {User} from "./models/user";
+import {TagSearchComponent} from "./form-utilities/tag-search";
 
 declare var io: any;
 
@@ -29,7 +30,7 @@ declare var io: any;
     templateUrl: 'views/dashboard.html',
     directives: [ ROUTER_DIRECTIVES, Alert, QuestionFeedComponent,
         QuestionInputFormComponent, ClassListComponent, LecturerAuthComponent,
-        Collapse,BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES ]
+        Collapse,BUTTON_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, TagSearchComponent ]
 })
 
 /**
@@ -47,7 +48,7 @@ declare var io: any;
  * TODO: Important! investigate why slow/hanging requests when two instances
  * TODO: of the application are open on the same machine (possibly socket.io problem)
  */
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnChanges {
 
     /**
      * This is the JWT for the user's authentication
@@ -73,6 +74,30 @@ export class DashboardComponent implements OnInit {
      */
     public userClasses = [];
 
+    public searchTags = [];
+
+    /**
+     * Update the filter for search tags
+     */
+    updateTagSearchFilter(count: number){
+        this.questions = [];
+        console.log('update tags filter');
+        this.getTaggedQuestions(this.searchTags, -1);
+    }
+
+    /**
+     * Get tagged questions
+     */
+    getTaggedQuestions(array, counter){
+        counter++;
+        if(counter < array.length){
+            this.httpService.getQuestionsForTags(array[counter]).subscribe(
+                data => this.populateFeedForTag(JSON.parse(JSON.stringify(data))),
+                error => alert(error),
+                () => this.getTaggedQuestions(array, counter)
+            );
+        }
+    }
     /**
      * For the constructor must inject the parent "loginComponent" as
      * need to change parent variables which control button states (e.g.
@@ -115,6 +140,10 @@ export class DashboardComponent implements OnInit {
         this.getClassList();
         // get all user questions
         this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;
+    }
+
+    ngOnChanges(){
+        console.log("onchange");
     }
 
     classChange(value:string){
@@ -191,6 +220,54 @@ export class DashboardComponent implements OnInit {
         }
         if(this.questions.length > 0){
             this.emptyFeed = false;
+        }
+        else{
+            this.emptyFeed = true;
+        }
+    }
+
+    /**
+     * remove duplicates - necessary for when multiple tags are selected
+     */
+    removeDuplicates(){
+        for(var i=0; i < this.questions.length; i++){
+            var question = this.questions[i];
+            var counter = 0;
+            for(var j=0; j < this.questions.length; j++){
+                var checkDuplicate = this.questions[j];
+                if(question.user === checkDuplicate.user &&
+                question.date === checkDuplicate.date){
+                    counter++;
+                }
+            }
+            if(counter > 1){
+                this.questions.splice(i, 1);
+            }
+        }
+    }
+
+    populateFeedForTag(questionArray: JSON[]){
+        console.log(questionArray);
+        for(var item of questionArray){
+            console.log((JSON.parse(JSON.stringify(item)).classid));
+            var question = new Question(
+                (JSON.parse(JSON.stringify(item)).classid),
+                (JSON.parse(JSON.stringify(item)).question),
+                (JSON.parse(JSON.stringify(item)).summary),
+                (JSON.parse(JSON.stringify(item)).choices),
+                (JSON.parse(JSON.stringify(item)).answers),
+                (JSON.parse(JSON.stringify(item)).userid),
+                (JSON.parse(JSON.stringify(item)).date),
+                (JSON.parse(JSON.stringify(item)).type),
+                (JSON.parse(JSON.stringify(item)).anonymous),
+                (JSON.parse(JSON.stringify(item)).username),
+                (JSON.parse(JSON.stringify(item)).picture),
+                (JSON.parse(JSON.stringify(item)).tags));
+            this.questions.push(question);
+        }
+        if(this.questions.length > 0){
+            this.emptyFeed = false;
+            this.removeDuplicates();
         }
         else{
             this.emptyFeed = true;

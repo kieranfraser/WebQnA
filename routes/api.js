@@ -11,6 +11,8 @@ var jsonParser = bodyParser.json();
 var Question = require('../models/question');
 var User = require('../models/user');
 var Lecture = require('../models/lecture');
+var Tag = require('../models/tag');
+var async = require("async");
 
 // Used for sending lecture authorisation mail
 var nodemailer = require('nodemailer');
@@ -168,6 +170,11 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
                     console.log('user updated.');
                 });
             });
+
+            //for every tag, check if it exists in tags table
+            //if not create, if it does, add the question id.
+            updateTagForQuestion(question._id, question.tags, 0);
+
             res.send(question);
         })
         .catch(function(err){
@@ -175,6 +182,74 @@ router.post('/addquestion',jsonParser, function(req, res, next) {
             console.log('the error:', err);
         });
 });
+
+/**
+ * Update tag for question
+ */
+function updateTagForQuestion(id, array, count){
+    if(count < array.length){
+        Tag.findOne({name: array[count] }, function(err, tag) {
+            if (err) console.log("error searching tag "+err);
+
+            if(tag === null){
+                console.log('null');
+                var newTag = Tag({
+                    name: array[count],
+                    classes: [],
+                    questions: [id]
+                });
+
+                newTag.save(function(err){
+                    if(err) console.log("error: "+err);
+                    console.log("No tag found. New tag created.");
+                });
+                updateTagForQuestion(id, array, count + 1);
+            }
+            else{
+                tag.questions.push(id);
+                tag.save(function(err){
+                    if(err) throw err;
+                    console.log('Tag updated with question id');
+                });
+                updateTagForQuestion(id, array, count + 1);
+            }
+        });
+    }
+}
+
+/**
+ * Update tag for classes
+ */
+function updateTagForClasses(id, array, count){
+    if(count < array.length){
+        Tag.findOne({name: array[count] }, function(err, tag) {
+            if (err) console.log("error searching tag "+err);
+
+            if(tag === null){
+                console.log('null');
+                var newTag = Tag({
+                    name: array[count],
+                    classes: [id],
+                    questions: []
+                });
+
+                newTag.save(function(err){
+                    if(err) console.log("error: "+err);
+                    console.log("No tag found. New tag created.");
+                });
+                updateTagForClasses(id, array, count + 1);
+            }
+            else{
+                tag.classes.push(id);
+                tag.save(function(err){
+                    if(err) throw err;
+                    console.log('Tag updated with class id');
+                });
+                updateTagForClasses(id, array, count + 1);
+            }
+        });
+    }
+}
 
 /**
  * Update a question with new answers
@@ -241,10 +316,18 @@ router.post('/addclass',jsonParser, function(req, res, next) {
         tags: req.body.tags
     });
 
-    newLecture.save(function(err){
-        if(err) throw err;
+    var promise = newLecture.save();
+
+    promise.then(function(lecture) {
+
         console.log('Class saved.');
+        updateTagForClasses(lecture.name, lecture.tags, 0);
+    })
+    .catch(function(err){
+        // just need one of these
+        console.log('the error from saving class:', err);
     });
+
     res.send(req.body);
 });
 
@@ -304,6 +387,61 @@ router.post('/authorise',jsonParser, function(req, res, next) {
         };
     });
 });
+
+var tagQuestionArray = [];
+/**
+ * Get a list of questions for the selected tags
+ */
+router.get('/tagquestions', function(req, res, next) {
+    tagQuestionArray = [];
+    console.log(req.query.tag);
+
+    Tag.findOne({ name: req.query.tag}, function(err, tag) {
+        if(err) console.log("Could not find tag name");
+        if(tag != null) {
+            console.log(tag.questions);
+            if(tag.questions != null){
+                questionIds = tag.questions;
+
+                async.each(questionIds,
+                    // 2nd param is the function that each item is passed to
+                    function (item, callback){
+                        Question.findOne({ _id: item }, function(err, question) {
+                            if (err) console.log("error getting selected question for tag "+err);
+                            tagQuestionArray.push(question);
+                            callback();
+                        });
+                    },
+                    // 3rd param is the function to call when everything's done
+
+                    function(err) {
+                        res.send(tagQuestionArray);
+                });
+            }
+            else{
+                res.send({none: 'none'});
+            }
+        }
+        else{
+            res.send({none: 'none'});
+        }
+    });
+});
+
+function getQuestionById(id, callback){
+
+}
+
+function getTheQuestion(id){
+    var watcher = Question({
+        userid: "watcher"
+    });
+
+    while(watcher.userid === "watcher"){
+        console.log("waiting");
+    }
+    return watcher;
+}
 
 module.exports = router;
 

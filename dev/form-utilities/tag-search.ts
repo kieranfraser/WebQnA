@@ -6,14 +6,17 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
 import {Alert, DROPDOWN_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {ClassInputComponent} from "../class-input.component";
+import {DashboardComponent} from "../dashboard.component";
+import {forwardRef} from "angular2/core";
+import {Inject} from "angular2/core";
 
 @Component({
-    selector: 'tag-input',
+    selector: 'tag-search',
     inputs: ['tags'],
 })
 
 @View({
-    templateUrl: 'views/form-utilities/tag_input.html',
+    templateUrl: 'views/form-utilities/tag_search.html',
     directives: [TYPEAHEAD_DIRECTIVES, FORM_DIRECTIVES, CORE_DIRECTIVES]
 })
 
@@ -22,7 +25,7 @@ import {ClassInputComponent} from "../class-input.component";
  * TODO: this is so the lecturers and students can be distinguished - only give
  * TODO: the lecturers the power to use this component.
  */
-export class TagInputComponent{
+export class TagSearchComponent{
 
     /**
      * Typeahead and tag input
@@ -46,6 +49,8 @@ export class TagInputComponent{
 
     private _cache:any;
     private _prevContext:any;
+
+    constructor(@Inject(forwardRef(() => DashboardComponent)) private _parent:DashboardComponent) {}
 
     private getAsyncData(context:any):Function {
         if (this._prevContext === context) {
@@ -88,6 +93,7 @@ export class TagInputComponent{
                 this.tags.push(newTag);
                 this.addToTypeahead(newTag);
                 this.selected = '';
+                this._parent.updateTagSearchFilter(0);
             }
         }
 
@@ -121,6 +127,7 @@ export class TagInputComponent{
         var result = this.statesComplex.filter(function( obj ) {
             return obj.name == tag; })[0];
         this.statesComplex.splice(result.id-1, 1);
+        this._parent.updateTagSearchFilter(0);
     }
 }
 

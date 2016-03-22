@@ -94,6 +94,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/add/operator/map'], fun
                         headers: headers
                     }).map(function (res) { return res.json(); });
                 };
+                HTTPService.prototype.getQuestionsForTags = function (tag) {
+                    var queryString = '?tag=' + tag;
+                    return this.http.get('/api/tagquestions' + queryString)
+                        .map(function (res) { return res.json(); });
+                };
                 HTTPService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

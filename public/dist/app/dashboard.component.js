@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./services/http-service", "./models/question", "./models/online-user", "./class-list.component", "./lecturer-auth.component"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.component", "ng2-bootstrap/ng2-bootstrap", "./question-feed.component", "./question-form.component", "./services/http-service", "./models/question", "./models/online-user", "./class-list.component", "./lecturer-auth.component", "./form-utilities/tag-search"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -13,7 +13,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
     var __param = (this && this.__param) || function (paramIndex, decorator) {
         return function (target, key) { decorator(target, key, paramIndex); }
     };
-    var core_1, router_1, common_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, http_service_1, question_1, ng2_bootstrap_2, online_user_1, class_list_component_1, lecturer_auth_component_1;
+    var core_1, router_1, common_1, app_component_1, ng2_bootstrap_1, question_feed_component_1, question_form_component_1, http_service_1, question_1, ng2_bootstrap_2, online_user_1, class_list_component_1, lecturer_auth_component_1, tag_search_1;
     var DashboardComponent;
     return {
         setters:[
@@ -53,6 +53,9 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
             },
             function (lecturer_auth_component_1_1) {
                 lecturer_auth_component_1 = lecturer_auth_component_1_1;
+            },
+            function (tag_search_1_1) {
+                tag_search_1 = tag_search_1_1;
             }],
         execute: function() {
             DashboardComponent = (function () {
@@ -78,6 +81,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                      * User
                      */
                     this.userClasses = [];
+                    this.searchTags = [];
                     console.log("Set user as logged in (button state)");
                     _parent.setLoggedIn();
                     this.socket = _parent.socket;
@@ -90,6 +94,24 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     console.log("adding self to online user list");
                     this.onlineUsers.push(newUserOnline);
                 }
+                /**
+                 * Update the filter for search tags
+                 */
+                DashboardComponent.prototype.updateTagSearchFilter = function (count) {
+                    this.questions = [];
+                    console.log('update tags filter');
+                    this.getTaggedQuestions(this.searchTags, -1);
+                };
+                /**
+                 * Get tagged questions
+                 */
+                DashboardComponent.prototype.getTaggedQuestions = function (array, counter) {
+                    var _this = this;
+                    counter++;
+                    if (counter < array.length) {
+                        this.httpService.getQuestionsForTags(array[counter]).subscribe(function (data) { return _this.populateFeedForTag(JSON.parse(JSON.stringify(data))); }, function (error) { return alert(error); }, function () { return _this.getTaggedQuestions(array, counter); });
+                    }
+                };
                 /**
                  * This is called in child component instead of onInit because
                  * it's called when this component is routed to while onInit isn't
@@ -106,6 +128,9 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                     this.getClassList();
                     // get all user questions
                     this.userQuestionIds = JSON.parse(localStorage.getItem('user')).questions;
+                };
+                DashboardComponent.prototype.ngOnChanges = function () {
+                    console.log("onchange");
                 };
                 DashboardComponent.prototype.classChange = function (value) {
                     console.log("changed");
@@ -162,6 +187,38 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                         this.emptyFeed = true;
                     }
                 };
+                DashboardComponent.prototype.removeDuplicates = function () {
+                    for (var i = 0; i < this.questions.length; i++) {
+                        var question = this.questions[i];
+                        var counter = 0;
+                        for (var j = 0; j < this.questions.length; j++) {
+                            var checkDuplicate = this.questions[j];
+                            if (question.user === checkDuplicate.user &&
+                                question.date === checkDuplicate.date) {
+                                counter++;
+                            }
+                        }
+                        if (counter > 1) {
+                            this.questions.splice(i, 1);
+                        }
+                    }
+                };
+                DashboardComponent.prototype.populateFeedForTag = function (questionArray) {
+                    console.log(questionArray);
+                    for (var _i = 0, questionArray_2 = questionArray; _i < questionArray_2.length; _i++) {
+                        var item = questionArray_2[_i];
+                        console.log((JSON.parse(JSON.stringify(item)).classid));
+                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous), (JSON.parse(JSON.stringify(item)).username), (JSON.parse(JSON.stringify(item)).picture), (JSON.parse(JSON.stringify(item)).tags));
+                        this.questions.push(question);
+                    }
+                    if (this.questions.length > 0) {
+                        this.emptyFeed = false;
+                        this.removeDuplicates();
+                    }
+                    else {
+                        this.emptyFeed = true;
+                    }
+                };
                 DashboardComponent = __decorate([
                     core_1.Component({
                         selector: 'dashboard',
@@ -171,7 +228,7 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                         templateUrl: 'views/dashboard.html',
                         directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.Alert, question_feed_component_1.QuestionFeedComponent,
                             question_form_component_1.QuestionInputFormComponent, class_list_component_1.ClassListComponent, lecturer_auth_component_1.LecturerAuthComponent,
-                            ng2_bootstrap_1.Collapse, ng2_bootstrap_2.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+                            ng2_bootstrap_1.Collapse, ng2_bootstrap_2.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, tag_search_1.TagSearchComponent]
                     }),
                     __param(0, core_1.Inject(core_1.forwardRef(function () { return app_component_1.AppComponent; }))), 
                     __metadata('design:paramtypes', [app_component_1.AppComponent, http_service_1.HTTPService])
