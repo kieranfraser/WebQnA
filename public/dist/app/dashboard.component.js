@@ -187,6 +187,9 @@ System.register(['angular2/core', 'angular2/router', "angular2/common", "./app.c
                         this.emptyFeed = true;
                     }
                 };
+                /**
+                 * remove duplicates - necessary for when multiple tags are selected
+                 */
                 DashboardComponent.prototype.removeDuplicates = function () {
                     for (var i = 0; i < this.questions.length; i++) {
                         var question = this.questions[i];
