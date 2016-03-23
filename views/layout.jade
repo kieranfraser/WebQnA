@@ -12,9 +12,12 @@ html
 
       // 1. Load libraries
       // IE required polyfills, in this exact order
-      script(src='dist/lib/moment.js')
       script(src='dist/lib/es6-shim.min.js')
       script(src='dist/lib/system-polyfills.js')
+      script(src="dist/lib/shims_for_IE.js")
+      script(src='dist/lib/moment.js')
+
+
 
       script(src='//code.jquery.com/jquery-2.2.1.min.js')
 
@@ -39,6 +42,8 @@ html
       link(rel="apple-touch-icon-precomposed", sizes="114x114", href="../images/ico/apple-touch-icon-114-precomposed.png")
       link(rel="apple-touch-icon-precomposed", sizes="72x72", href="../images/ico/apple-touch-icon-72-precomposed.png")
       link(rel="apple-touch-icon-precomposed", href="../images/ico/apple-touch-icon-57-precomposed.png")
+
+      link(href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic", rel="stylesheet", type="text/css")
 
       // 2. Configure SystemJS
       script.
@@ -78,5 +83,3 @@ script.
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-74948322-1', 'auto');
     ga('send', 'pageview');
-
-

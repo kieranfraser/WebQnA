@@ -32,7 +32,7 @@ export class AnswerQuestionComponent{
     public isCollapsedAnswer:boolean = true;
     public isCollapsedStats:boolean = true;
 
-    question = new Question("","","",[],[],"","","","","","");
+    question = new Question("","","",[],[],"","","","","","",[]);
     /**
      * 1. Get the question that was clicked.
      * 2. Create wells for each answer in the question.answer array.
@@ -82,7 +82,8 @@ export class AnswerQuestionComponent{
                 (JSON.parse(JSON.stringify(item)).type),
                 (JSON.parse(JSON.stringify(item)).anonymous),
                 (JSON.parse(JSON.stringify(item)).username),
-                (JSON.parse(JSON.stringify(item)).picture));
+                (JSON.parse(JSON.stringify(item)).picture),
+                (JSON.parse(JSON.stringify(item)).tags));
             this.question = question;
         }
 

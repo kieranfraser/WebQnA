@@ -1,0 +1,44 @@
+<style>
+    input::-webkit-input-placeholder {
+        color: black !important;
+    }
+
+    input:-moz-placeholder { /* Firefox 18- */
+        color: black !important;
+    }
+
+    input::-moz-placeholder {  /* Firefox 19+ */
+        color: black !important;
+    }
+
+    input:-ms-input-placeholder {
+        color: black !important;
+    }
+</style>
+
+<link rel='stylesheet' href = '/stylesheets/main.css'/>
+<div class="container-fluid" title="">
+    <div class="search-field">
+        <input [(ngModel)]="selected"
+               [typeahead]="statesComplex"
+               (typeaheadOnSelect)="typeaheadOnSelect($event)"
+               [typeaheadOptionField]="'name'"
+               class="form-control"
+               (keyup)="onKey($event)"
+                placeholder="Search all questions by Tag (Comma seperated list)">
+        <div [hidden]="typeaheadLoading!==true">
+            <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
+        </div>
+        <div [hidden]="typeaheadNoResults!==true" class="" style="">
+            <i class="glyphicon glyphicon-remove"></i> No Results Found
+        </div>
+    </div>
+    <ul class="chosen-choices">
+        <li class="search-choice" *ngFor="#tag of tags">
+            <span class="tag label label-info">
+              <span>{{tag}}</span>
+              <a><i class="remove glyphicon glyphicon-remove-sign glyphicon-white" (click)="removeTag(tag)"></i></a>
+            </span>
+        </li>
+    </ul>
+</div>

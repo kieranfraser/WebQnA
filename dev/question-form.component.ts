@@ -8,18 +8,16 @@ import {Question} from "./models/question";
 import {HTTPService} from "./services/http-service";
 import {DatePipe} from "angular2/common";
 import {DashboardComponent} from "./dashboard.component";
+import {TagInputComponent} from "./form-utilities/tag-input.component";
 
 declare var io: any;
 
 @Component({
     selector: 'question-input-form',
     providers: [HTTPService],
-    inputs: ['selectedClass']
-})
-
-@View({
+    inputs: ['selectedClass'],
     templateUrl: 'views/question_input_form.html',
-    directives: []
+    directives: [TagInputComponent]
 })
 
 /**
@@ -45,14 +43,15 @@ export class QuestionInputFormComponent{
         this.types[0],
         "",
         JSON.parse(localStorage.getItem('profile')).name,
-        JSON.parse(localStorage.getItem('profile')).picture);
+        JSON.parse(localStorage.getItem('profile')).picture,
+        []);
 
     choiceOne: string = "";
     choiceTwo: string = "";
     choiceThree: string = "";
     choiceFour: string = "";
 
-
+    questionTags: string[] = [];
 
     constructor(@Inject(forwardRef(() => DashboardComponent)) private _parent:DashboardComponent,
                 private http: Http, private httpService: HTTPService){
@@ -75,6 +74,7 @@ export class QuestionInputFormComponent{
         console.log(this.questionModel);
         console.log(this.selectedClass);
         this.questionModel.classid = this.selectedClass;
+        this.questionModel.tags = this.questionTags;
 
         // logic for choices
         if(this.questionModel.type === 'Multi-choice'){
@@ -102,7 +102,8 @@ export class QuestionInputFormComponent{
             this.types[0],
             "",
             JSON.parse(localStorage.getItem('profile')).name,
-            JSON.parse(localStorage.getItem('profile')).picture);
+            JSON.parse(localStorage.getItem('profile')).picture,
+            []);
 
         this.socket.emit('update', 'question');
         this._parent.isCollapsedQuestion = !this._parent.isCollapsedQuestion;

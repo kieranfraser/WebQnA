@@ -47,8 +47,8 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                 http_service_1 = http_service_1_1;
             }],
         execute: function() {
-            let AppComponent = class AppComponent {
-                constructor(_router, http, authHttp, httpService) {
+            AppComponent = (function () {
+                function AppComponent(_router, http, authHttp, httpService) {
                     this._router = _router;
                     this.http = http;
                     this.authHttp = authHttp;
@@ -92,13 +92,13 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                  * ToDo: redirect to the dashboard if the user is already logged in.
                  *
                  */
-                ngOnInit() {
+                AppComponent.prototype.ngOnInit = function () {
                     console.log('Checking if the user is logged in on init.');
                     if (angular2_jwt_1.tokenNotExpired()) {
                         this.userLoggedIn = true;
                         this._router.navigateByUrl('/dash');
                     }
-                }
+                };
                 /**
                  * Function fired when the login button is pressed.
                  *
@@ -110,22 +110,23 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                  * User then redirected to the dashboardComponent (child component of
                  * app.component)
                  */
-                login() {
+                AppComponent.prototype.login = function () {
+                    var _this = this;
                     console.log("Initializing the Auth0 form.");
                     //this._parent.userLoggedIn = true;
-                    this.lock.show(this.options, (err, profile, id_token) => {
+                    this.lock.show(this.options, function (err, profile, id_token) {
                         if (err) {
                             throw new Error(err);
                         }
                         localStorage.setItem('profile', JSON.stringify(profile));
                         localStorage.setItem('id_token', id_token);
-                        console.log(this.jwtHelper.decodeToken(id_token), this.jwtHelper.getTokenExpirationDate(id_token));
+                        console.log(_this.jwtHelper.decodeToken(id_token), _this.jwtHelper.getTokenExpirationDate(id_token));
                         var userId = JSON.parse(localStorage.getItem('profile')).user_id;
                         // Get user details (joined classes, questions asked) from database
-                        this.httpService.getUserDetails(userId).subscribe(data => localStorage.setItem('user', JSON.stringify(data)), error => alert(error), () => this.navigateToDashboard());
+                        _this.httpService.getUserDetails(userId).subscribe(function (data) { return localStorage.setItem('user', JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.navigateToDashboard(); });
                     });
-                }
-                navigateToDashboard() {
+                };
+                AppComponent.prototype.navigateToDashboard = function () {
                     console.log("get user details failure");
                     console.log((JSON.parse(localStorage.getItem('user')).userid));
                     console.log((JSON.parse(localStorage.getItem('user')).lectures));
@@ -133,85 +134,86 @@ System.register(["./dashboard.component", 'angular2/core', 'angular2/router', 'a
                     this.userLoggedIn = true;
                     console.log("Login successful, redirecting to the dashboard.");
                     this._router.navigate(['Dashboard']);
-                }
+                };
                 /**
                  * Function fired when the logout button is pressed. Deletes the user's JWT
                  * and profile from local storage, sets the logged in boolean as false so the
                  * login button is redisplayed and redirects to the landing page of the site.
                  */
-                logout() {
+                AppComponent.prototype.logout = function () {
                     console.log('User has logged out. Redirect to landing page.');
                     this.socket.emit('userLogout', JSON.parse(localStorage.getItem('profile')).user_id);
                     localStorage.removeItem('profile');
                     localStorage.removeItem('id_token');
                     this.userLoggedIn = false;
                     this._router.navigate(['Landing']);
-                }
+                };
                 /**
                  * Utility function to change the state of the userLoggedIn
                  * boolean which controls the state of the Login/Logout buttons
                  * on the nav bar. This
                  */
-                setLoggedOut() {
+                AppComponent.prototype.setLoggedOut = function () {
                     this.userLoggedIn = false;
-                }
+                };
                 /**
                  * Utility function to change the state of the userLoggedIn
                  * boolean which controls the state of the Login/Logout buttons
                  * on the nav bar. This
                  */
-                setLoggedIn() {
+                AppComponent.prototype.setLoggedIn = function () {
                     this.userLoggedIn = true;
                     this.userProfile = JSON.parse(localStorage.getItem('profile')).picture;
-                }
+                };
                 /**
                  * Non-Authenticated api request example
                  */
-                getThing() {
+                AppComponent.prototype.getThing = function () {
                     this.http.get('/ping')
-                        .subscribe(data => console.log(data.json()), err => console.log(err), () => console.log('Complete'));
-                }
+                        .subscribe(function (data) { return console.log(data.json()); }, function (err) { return console.log(err); }, function () { return console.log('Complete'); });
+                };
                 /**
                  * Authenticated api request example:
                  * ToDo: Save the user's id in the database - api request to express route
                  */
-                getSecretThing() {
+                AppComponent.prototype.getSecretThing = function () {
                     this.authHttp.get('/secured/ping')
-                        .subscribe(data => console.log(data.json()), err => console.log(err), () => console.log('Complete'));
-                }
+                        .subscribe(function (data) { return console.log(data.json()); }, function (err) { return console.log(err); }, function () { return console.log('Complete'); });
+                };
                 /**
                  * Not sure what this does yet.. will come back to it!
                  */
-                tokenSubscription() {
-                    this.authHttp.tokenStream.subscribe(data => console.log(data), err => console.log(err), () => console.log('Complete'));
-                }
+                AppComponent.prototype.tokenSubscription = function () {
+                    this.authHttp.tokenStream.subscribe(function (data) { return console.log(data); }, function (err) { return console.log(err); }, function () { return console.log('Complete'); });
+                };
                 /**
                  * Helper method for getting the JWT from storage and getting
                  * various details from it such as the expiration etc.
                  * Can call for a refresh of the token if going to be expired and
                  * user is still logged in - ToDo: Refresh token
                  */
-                useJwtHelper() {
+                AppComponent.prototype.useJwtHelper = function () {
                     var token = localStorage.getItem('id_token');
                     console.log(this.jwtHelper.decodeToken(token), this.jwtHelper.getTokenExpirationDate(token), this.jwtHelper.isTokenExpired(token));
-                }
-            };
-            AppComponent = __decorate([
-                core_1.Component({
-                    selector: 'app',
-                    providers: [http_service_1.HTTPService]
-                }),
-                core_1.View({
-                    directives: [router_1.ROUTER_DIRECTIVES, dashboard_component_1.DashboardComponent, ng2_bootstrap_1.Alert],
-                    templateUrl: 'views/app.html'
-                }),
-                router_1.RouteConfig([
-                    { path: '/', name: 'Landing', component: landing_component_1.LandingComponent, useAsDefault: true },
-                    { path: '/about', name: 'About', component: about_component_1.AboutComponent },
-                    { path: '/dash', name: 'Dashboard', component: dashboard_component_1.DashboardComponent }
-                ]), 
-                __metadata('design:paramtypes', [router_1.Router, http_1.Http, angular2_jwt_1.AuthHttp, http_service_1.HTTPService])
-            ], AppComponent);
+                };
+                AppComponent = __decorate([
+                    core_1.Component({
+                        selector: 'app',
+                        providers: [http_service_1.HTTPService]
+                    }),
+                    core_1.View({
+                        directives: [router_1.ROUTER_DIRECTIVES, dashboard_component_1.DashboardComponent, ng2_bootstrap_1.Alert],
+                        templateUrl: 'views/app.html'
+                    }),
+                    router_1.RouteConfig([
+                        { path: '/', name: 'Landing', component: landing_component_1.LandingComponent, useAsDefault: true },
+                        { path: '/about', name: 'About', component: about_component_1.AboutComponent },
+                        { path: '/dash', name: 'Dashboard', component: dashboard_component_1.DashboardComponent }
+                    ]), 
+                    __metadata('design:paramtypes', [router_1.Router, http_1.Http, angular2_jwt_1.AuthHttp, http_service_1.HTTPService])
+                ], AppComponent);
+                return AppComponent;
+            }());
             exports_1("AppComponent", AppComponent);
         }
     }

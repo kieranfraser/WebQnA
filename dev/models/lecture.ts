@@ -5,6 +5,7 @@ export class Lecture {
     constructor(
         public name: string,
         public participants: string[],
-        public questions: string[]
+        public questions: string[],
+        public tags: string[]
     ) {}
 }

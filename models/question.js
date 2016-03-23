@@ -23,7 +23,8 @@ var questionSchema = Schema({
     type: String,
     anonymous: String,
     username: String,
-    picture: String
+    picture: String,
+    tags: [String]
 });
 
 var Question = mongoose.model('questions', questionSchema);

@@ -42,60 +42,63 @@ System.register(['angular2/core', "./question-feed.component", "./models/questio
                 doughnut_chart_component_1 = doughnut_chart_component_1_1;
             }],
         execute: function() {
-            let AnswerQuestionComponent = class AnswerQuestionComponent {
+            AnswerQuestionComponent = (function () {
                 /**
                  * 1. Get the question that was clicked.
                  * 2. Create wells for each answer in the question.answer array.
                  * 3. Create an input field for adding an answer.
                  * 4. On submit, add the the answer to the question.answer array and update the question.
                  */
-                constructor(_parent, httpService) {
+                function AnswerQuestionComponent(_parent, httpService) {
                     this._parent = _parent;
                     this.httpService = httpService;
                     this.socket = null;
                     this.isCollapsedAnswer = true;
                     this.isCollapsedStats = true;
-                    this.question = new question_1.Question("", "", "", [], [], "", "", "", "", "", "");
+                    this.question = new question_1.Question("", "", "", [], [], "", "", "", "", "", "", []);
                     this.socket = _parent.socket;
                     this.socket.on('answer', function () {
                         console.log('Message from server: answer feed to be updated!!');
                         this.getUpdatedSelectedQuestion();
                     }.bind(this));
                 }
-                updateQuestions() {
+                AnswerQuestionComponent.prototype.updateQuestions = function () {
                     this._parent.updateQuestions();
-                }
-                getUpdatedSelectedQuestion() {
+                };
+                AnswerQuestionComponent.prototype.getUpdatedSelectedQuestion = function () {
+                    var _this = this;
                     var updatedQuestion;
                     var json = JSON.stringify(this.question);
-                    this.httpService.getSelectedQuestion(json).subscribe(data => updatedQuestion = JSON.parse(JSON.stringify(data)), error => alert(error), () => this.setQuestion(updatedQuestion));
-                }
+                    this.httpService.getSelectedQuestion(json).subscribe(function (data) { return updatedQuestion = JSON.parse(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return _this.setQuestion(updatedQuestion); });
+                };
                 /**
                  * ToDo: This could be cleaned up to be more efficient.
                  * @param updatedQuestion
                  */
-                setQuestion(updatedQuestion) {
+                AnswerQuestionComponent.prototype.setQuestion = function (updatedQuestion) {
                     var questionArray = [];
-                    for (var item of updatedQuestion) {
+                    for (var _i = 0, updatedQuestion_1 = updatedQuestion; _i < updatedQuestion_1.length; _i++) {
+                        var item = updatedQuestion_1[_i];
                         console.log((JSON.parse(JSON.stringify(item)).classid));
-                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous), (JSON.parse(JSON.stringify(item)).username), (JSON.parse(JSON.stringify(item)).picture));
+                        var question = new question_1.Question((JSON.parse(JSON.stringify(item)).classid), (JSON.parse(JSON.stringify(item)).question), (JSON.parse(JSON.stringify(item)).summary), (JSON.parse(JSON.stringify(item)).choices), (JSON.parse(JSON.stringify(item)).answers), (JSON.parse(JSON.stringify(item)).userid), (JSON.parse(JSON.stringify(item)).date), (JSON.parse(JSON.stringify(item)).type), (JSON.parse(JSON.stringify(item)).anonymous), (JSON.parse(JSON.stringify(item)).username), (JSON.parse(JSON.stringify(item)).picture), (JSON.parse(JSON.stringify(item)).tags));
                         this.question = question;
                     }
                     //this.question.answers = answers;answers;
                     console.log(this.question);
-                }
-            };
-            AnswerQuestionComponent = __decorate([
-                core_1.Component({
-                    selector: 'answer-question',
-                    templateUrl: 'views/answer_question.html',
-                    inputs: ['question'],
-                    directives: [ng2_bootstrap_1.Collapse, bar_graph_component_1.BarGraphComponent, answer_form_component_1.AnswerInputFormComponent, doughnut_chart_component_1.DoughnutChartComponent],
-                    providers: [http_service_1.HTTPService]
-                }),
-                __param(0, core_1.Inject(core_1.forwardRef(() => question_feed_component_1.QuestionFeedComponent))), 
-                __metadata('design:paramtypes', [question_feed_component_1.QuestionFeedComponent, http_service_1.HTTPService])
-            ], AnswerQuestionComponent);
+                };
+                AnswerQuestionComponent = __decorate([
+                    core_1.Component({
+                        selector: 'answer-question',
+                        templateUrl: 'views/answer_question.html',
+                        inputs: ['question'],
+                        directives: [ng2_bootstrap_1.Collapse, bar_graph_component_1.BarGraphComponent, answer_form_component_1.AnswerInputFormComponent, doughnut_chart_component_1.DoughnutChartComponent],
+                        providers: [http_service_1.HTTPService]
+                    }),
+                    __param(0, core_1.Inject(core_1.forwardRef(function () { return question_feed_component_1.QuestionFeedComponent; }))), 
+                    __metadata('design:paramtypes', [question_feed_component_1.QuestionFeedComponent, http_service_1.HTTPService])
+                ], AnswerQuestionComponent);
+                return AnswerQuestionComponent;
+            }());
             exports_1("AnswerQuestionComponent", AnswerQuestionComponent);
         }
     }

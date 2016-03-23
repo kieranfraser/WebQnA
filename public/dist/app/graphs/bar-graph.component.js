@@ -35,8 +35,8 @@ System.register(['angular2/core', 'angular2/common', 'ng2-charts', "../answer-co
                 http_service_1 = http_service_1_1;
             }],
         execute: function() {
-            let BarGraphComponent = class BarGraphComponent {
-                constructor(_parent, httpService) {
+            BarGraphComponent = (function () {
+                function BarGraphComponent(_parent, httpService) {
                     this._parent = _parent;
                     this.httpService = httpService;
                     this.socket = null;
@@ -59,28 +59,29 @@ System.register(['angular2/core', 'angular2/common', 'ng2-charts', "../answer-co
                         this.getChoiceData();
                     }.bind(this));
                 }
-                ngOnInit() {
+                BarGraphComponent.prototype.ngOnInit = function () {
                     this.barChartLabels = this.selectedQuestion.choices;
                     this.getChoiceData();
-                }
-                ngOnChanges() {
+                };
+                BarGraphComponent.prototype.ngOnChanges = function () {
                     this.barChartLabels = this.selectedQuestion.choices;
                     this.getChoiceData();
-                }
+                };
                 // events
-                chartClicked(e) {
+                BarGraphComponent.prototype.chartClicked = function (e) {
                     console.log(e);
-                }
-                chartHovered(e) {
+                };
+                BarGraphComponent.prototype.chartHovered = function (e) {
                     console.log(e);
-                }
-                getChoiceData() {
+                };
+                BarGraphComponent.prototype.getChoiceData = function () {
                     var choiceOne = 0;
                     var choiceTwo = 0;
                     var choiceThree = 0;
                     var choiceFour = 0;
                     var answers = this.selectedQuestion.answers;
-                    for (var answer of answers) {
+                    for (var _i = 0, answers_1 = answers; _i < answers_1.length; _i++) {
+                        var answer = answers_1[_i];
                         if (answer.answer === this.selectedQuestion.choices[0]) {
                             choiceOne = choiceOne + 1;
                         }
@@ -96,18 +97,19 @@ System.register(['angular2/core', 'angular2/common', 'ng2-charts', "../answer-co
                     }
                     var choiceData = [choiceOne, choiceTwo, choiceThree, choiceFour];
                     this.barChartData = [choiceData];
-                }
-            };
-            BarGraphComponent = __decorate([
-                core_1.Component({
-                    selector: 'bar-graph',
-                    templateUrl: '../views/graphs/bar_graph.html',
-                    inputs: ['selectedQuestion'],
-                    directives: [ng2_charts_1.CHART_DIRECTIVES, common_1.NgClass, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
-                }),
-                __param(0, core_3.Inject(core_2.forwardRef(() => answer_component_1.AnswerQuestionComponent))), 
-                __metadata('design:paramtypes', [answer_component_1.AnswerQuestionComponent, http_service_1.HTTPService])
-            ], BarGraphComponent);
+                };
+                BarGraphComponent = __decorate([
+                    core_1.Component({
+                        selector: 'bar-graph',
+                        templateUrl: '../views/graphs/bar_graph.html',
+                        inputs: ['selectedQuestion'],
+                        directives: [ng2_charts_1.CHART_DIRECTIVES, common_1.NgClass, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES]
+                    }),
+                    __param(0, core_3.Inject(core_2.forwardRef(function () { return answer_component_1.AnswerQuestionComponent; }))), 
+                    __metadata('design:paramtypes', [answer_component_1.AnswerQuestionComponent, http_service_1.HTTPService])
+                ], BarGraphComponent);
+                return BarGraphComponent;
+            }());
             exports_1("BarGraphComponent", BarGraphComponent);
         }
     }

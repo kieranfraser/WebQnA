@@ -13,7 +13,7 @@
                                 <img class="img-circle" src="{{question.picture}}" alt="{{question.username}}" height="35px" width="35px">
                             </div>
                             <div class="col-xs-1 col-md-1" *ngIf="question.anonymous === 'true'">
-                                <h5><small>Anonymous</small></h5>
+                                <h5><small>Anon</small></h5>
                             </div>
                             <div class="col-xs-9 col-md-9">
                                 <div class="chat-box-left">
@@ -21,6 +21,15 @@
                                 </div>
                                 <div class="chat-box-name-left" *ngIf="question.anonymous === ''">
                                     <h4 style="text-align: left"><small> - {{question.username}}</small></h4>
+                                </div>
+                                <div>
+                                    <ul class="chosen-choices">
+                                        <li class="search-choice" *ngFor="#tag of question.tags">
+                                            <span class="tag label label-info">
+                                              <span>{{tag}}</span>
+                                            </span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="col-xs-2 col-md-2">

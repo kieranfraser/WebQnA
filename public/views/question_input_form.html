@@ -10,7 +10,7 @@
             <div class="form-row">
                 <label>
                     <span>Class</span>
-                    <select name="classes" [(ngModel)]="questionModel.classid" ng-disabled="all">
+                    <select name="classes" [(ngModel)]="questionModel.classid" required>
                         <option [value]="selectedClass">{{selectedClass}}</option><!--ng-selected="{{selectedClass}}"-->
                     </select>
                 </label>
@@ -19,7 +19,7 @@
             <div class="form-row">
                 <label>
                     <span>Question Summary</span>
-                    <input type="text" name="summary" [(ngModel)]="questionModel.summary">
+                    <input type="text" name="summary" [(ngModel)]="questionModel.summary" required>
                 </label>
             </div>
 
@@ -35,21 +35,21 @@
             <div class="form-row" *ngIf="questionModel.type === 'Free-text'">
                 <label>
                     <span>Question</span>
-                    <textarea name="question" [(ngModel)]="questionModel.question"></textarea>
+                    <textarea name="question" [(ngModel)]="questionModel.question" required></textarea>
                 </label>
             </div>
 
             <div class="form-row" *ngIf="questionModel.type === 'Multi-choice'">
                 <label>
                     <span>Choice 1:</span>
-                    <input type="text" name="choice1" [(ngModel)]="choiceOne">
+                    <input type="text" name="choice1" [(ngModel)]="choiceOne" required>
                 </label>
             </div>
 
             <div class="form-row" *ngIf="questionModel.type === 'Multi-choice'">
                 <label>
                     <span>Choice 2:</span>
-                    <input type="text" name="choice2" [(ngModel)]="choiceTwo">
+                    <input type="text" name="choice2" [(ngModel)]="choiceTwo" required>
                 </label>
             </div>
 
@@ -66,6 +66,8 @@
                     <input type="text" name="choice4" [(ngModel)]="choiceFour">
                 </label>
             </div>
+
+            <tag-input [tags]="questionTags"></tag-input>
 
             <div class="form-row">
                 <label>

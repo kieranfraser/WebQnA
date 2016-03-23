@@ -1,12 +1,15 @@
-<div>
-    <form class="form-basic">
+<div style="padding: 10px;">
+    <form class="form-basic" (ngSubmit)="addClass()">
         <div class="form-row">
             <label>
-                <span for="classname">Class Name:</span>
-                <input type="text" [(ngModel)]="className" class="form-control" id="classname">
+                <input placeholder="Class Name" type="text" [(ngModel)]="className" id="classname" required>
             </label>
+        </div>
+        <tag-input [tags]="tags"></tag-input>
+        <div class="form-row" style="text-align: center;">
+            <button class="btn btn-success" type="submit">Add Class</button>
         </div>
     </form>
 
-    <button type="button" class="btn btn-success" (click)="addClass()">Add Class</button>
+    <!--<button type="button" class="btn btn-success" (click)="addClass()">Add Class</button>-->
 </div>

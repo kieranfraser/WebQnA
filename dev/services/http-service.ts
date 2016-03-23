@@ -105,4 +105,10 @@ export class HTTPService {
             }).map( res => res.json());
     }
 
+    getQuestionsForTags(tag: string){
+        let queryString = '?tag='+tag;
+        return this.http.get('/api/tagquestions'+queryString)
+            .map(res => res.json());
+    }
+
 }

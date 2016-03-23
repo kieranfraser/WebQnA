@@ -60,7 +60,8 @@ gulp.task('copy:libs', ['clean'], function() {
             'node_modules/angular2-jwt/angular2-jwt.js',
             'node_modules/moment/moment.js',
             'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.min.js',
-            'node_modules/ng2-charts/**/*'
+            'node_modules/ng2-charts/**/*',
+            'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js'
         ])
         .pipe(gulp.dest('public/dist/lib'))
 });

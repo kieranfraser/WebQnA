@@ -2135,3 +2135,49 @@ span.stButton_gradient,
   -webkit-box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1) inset;
   border-radius: 100%;
   margin: 10px 0; }
+
+.chosen-choices {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 5px;
+  width: 100%;
+  height: auto !important;
+  height: 1%; }
+  .chosen-choices li {
+    float: left;
+    list-style: none; }
+    .chosen-choices li.search-choice span {
+      word-wrap: break-word; }
+
+.chosen-choices {
+  position: relative;
+  margin: 3px 5px 3px 0;
+  padding: 3px 20px 3px 5px;
+  max-width: 100%;
+  line-height: 13px;
+  cursor: default; }
+
+li.search-choice {
+  margin-bottom: 4%;
+  margin-right: 1%;
+  max-width: 100%; }
+
+.tag {
+  padding: .3em .4em .4em; }
+  .tag a {
+    color: #bbb;
+    cursor: pointer;
+    opacity: 0.6;
+    margin: 0 0 0 .3em; }
+    .tag a:hover {
+      opacity: 1.0; }
+    .tag a .glyphicon-white {
+      color: #fff;
+      margin-bottom: 2px; }
+  .tag .remove {
+    vertical-align: middle;
+    top: 0; }
+
+.label-info {
+  background-color: #1E8EE4; }

@@ -40,44 +40,46 @@ System.register(['angular2/core', 'angular2/common', 'ng2-bootstrap/ng2-bootstra
                 class_input_component_1 = class_input_component_1_1;
             }],
         execute: function() {
-            let ClassListComponent = class ClassListComponent {
-                constructor(_parent, httpService) {
+            ClassListComponent = (function () {
+                function ClassListComponent(_parent, httpService) {
                     this._parent = _parent;
                     this.httpService = httpService;
                     this.singleModel = '1';
                     this.radioModel = 'Middle';
                     this.isCollapsedClass = true;
                 }
-                ngOnInit() {
+                ClassListComponent.prototype.ngOnInit = function () {
                     this.auth = JSON.parse(localStorage.getItem('user')).auth;
-                }
-                save() {
+                };
+                ClassListComponent.prototype.save = function () {
                     var joinedList = [];
-                    for (var lecture of this.classes) {
+                    for (var _i = 0, _a = this.classes; _i < _a.length; _i++) {
+                        var lecture = _a[_i];
                         if (lecture['joined'] === true) {
                             joinedList.push(lecture['class']);
                         }
                     }
                     this.user = new user_1.User(JSON.parse(localStorage.getItem('profile')).user_id, joinedList, [], [], "", "");
                     var json = JSON.stringify(this.user);
-                    this.httpService.updateUserClasses(json).subscribe(data => console.log(JSON.stringify(data)), error => alert(error), () => console.log("User classes updated"));
+                    this.httpService.updateUserClasses(json).subscribe(function (data) { return console.log(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("User classes updated"); });
                     this._parent.getClassList();
                     this._parent.selectedClass = '';
-                }
-                refresh() {
+                };
+                ClassListComponent.prototype.refresh = function () {
                     this._parent.getClassList();
-                }
-            };
-            ClassListComponent = __decorate([
-                core_1.Component({
-                    selector: 'class-list',
-                    templateUrl: 'views/class_list_modal.html',
-                    directives: [ng2_bootstrap_1.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, class_input_component_1.ClassInputComponent, ng2_bootstrap_2.Collapse],
-                    inputs: ['classes'],
-                }),
-                __param(0, core_1.Inject(core_1.forwardRef(() => dashboard_component_1.DashboardComponent))), 
-                __metadata('design:paramtypes', [dashboard_component_1.DashboardComponent, http_service_1.HTTPService])
-            ], ClassListComponent);
+                };
+                ClassListComponent = __decorate([
+                    core_1.Component({
+                        selector: 'class-list',
+                        templateUrl: 'views/class_list_modal.html',
+                        directives: [ng2_bootstrap_1.BUTTON_DIRECTIVES, common_1.CORE_DIRECTIVES, common_1.FORM_DIRECTIVES, class_input_component_1.ClassInputComponent, ng2_bootstrap_2.Collapse],
+                        inputs: ['classes'],
+                    }),
+                    __param(0, core_1.Inject(core_1.forwardRef(function () { return dashboard_component_1.DashboardComponent; }))), 
+                    __metadata('design:paramtypes', [dashboard_component_1.DashboardComponent, http_service_1.HTTPService])
+                ], ClassListComponent);
+                return ClassListComponent;
+            }());
             exports_1("ClassListComponent", ClassListComponent);
         }
     }

@@ -27,8 +27,8 @@ System.register(['angular2/core', "./services/http-service", "./dashboard.compon
                 dashboard_component_1 = dashboard_component_1_1;
             }],
         execute: function() {
-            let LecturerAuthComponent = class LecturerAuthComponent {
-                constructor(_parent, httpService) {
+            LecturerAuthComponent = (function () {
+                function LecturerAuthComponent(_parent, httpService) {
                     this._parent = _parent;
                     this.httpService = httpService;
                     this.unsent = true;
@@ -36,25 +36,26 @@ System.register(['angular2/core', "./services/http-service", "./dashboard.compon
                 /**
                  * ToDo: don't allow lecturers send again or don't let them open this modal.
                  */
-                ngOnInit() {
+                LecturerAuthComponent.prototype.ngOnInit = function () {
                     this.unsent = true;
-                }
-                getAuthorised() {
+                };
+                LecturerAuthComponent.prototype.getAuthorised = function () {
                     console.log("Authorise user");
                     console.log(JSON.parse(localStorage.getItem('profile')));
                     var json = JSON.stringify(JSON.parse(localStorage.getItem('profile')));
-                    this.httpService.sendAuthEmail(json).subscribe(data => console.log(JSON.stringify(data)), error => alert(error), () => console.log("Email Sent!"));
+                    this.httpService.sendAuthEmail(json).subscribe(function (data) { return console.log(JSON.stringify(data)); }, function (error) { return alert(error); }, function () { return console.log("Email Sent!"); });
                     this.unsent = false;
-                }
-            };
-            LecturerAuthComponent = __decorate([
-                core_1.Component({
-                    selector: 'lecturer-auth',
-                    templateUrl: 'views/lecturer_auth_modal.html',
-                }),
-                __param(0, core_1.Inject(core_1.forwardRef(() => dashboard_component_1.DashboardComponent))), 
-                __metadata('design:paramtypes', [dashboard_component_1.DashboardComponent, http_service_1.HTTPService])
-            ], LecturerAuthComponent);
+                };
+                LecturerAuthComponent = __decorate([
+                    core_1.Component({
+                        selector: 'lecturer-auth',
+                        templateUrl: 'views/lecturer_auth_modal.html',
+                    }),
+                    __param(0, core_1.Inject(core_1.forwardRef(function () { return dashboard_component_1.DashboardComponent; }))), 
+                    __metadata('design:paramtypes', [dashboard_component_1.DashboardComponent, http_service_1.HTTPService])
+                ], LecturerAuthComponent);
+                return LecturerAuthComponent;
+            }());
             exports_1("LecturerAuthComponent", LecturerAuthComponent);
         }
     }
